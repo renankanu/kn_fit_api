@@ -26,6 +26,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "dotenv",
+      "rootUri": "file:///Users/renankanu/.pub-cache/hosted/pub.dartlang.org/dotenv-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "http_parser",
       "rootUri": "file:///Users/renankanu/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0",
       "packageUri": "lib/",
@@ -98,7 +104,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-03-24T20:24:30.540418Z",
+  "generated": "2022-03-24T20:28:00.243171Z",
   "generator": "pub",
   "generatorVersion": "2.14.2"
 }
