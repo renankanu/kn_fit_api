@@ -25,9 +25,9 @@ class AuthController {
     try {
       final body = await request.readAsString();
       final userModel = UserSaveInputModel.requestMapping(body);
-      await userService.createUser(userModel);
+      final user = await userService.createUser(userModel);
       return Response.ok(
-          jsonEncode({'message': 'cadastro realizado com sucesso'}));
+          jsonEncode({'message': 'cadastro realizado com sucesso ${user.id}'}));
     } on EmailAlreadyRegistered {
       return Response(400,
           body: jsonEncode(

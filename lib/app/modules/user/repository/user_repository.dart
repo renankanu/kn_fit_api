@@ -5,6 +5,7 @@ import 'package:kn_fit_api/app/core/helpers/helpers.dart';
 import 'package:kn_fit_api/app/models/user_model.dart';
 import 'package:kn_fit_api/app/modules/user/repository/i_user_repository.dart';
 import 'package:mysql1/mysql1.dart';
+import 'package:uuid/uuid.dart';
 
 @LazySingleton(as: IUserRepository)
 class UserRepository implements IUserRepository {
@@ -23,14 +24,15 @@ class UserRepository implements IUserRepository {
 
       if (isUserRegister.isEmpty) {
         final query = 'insert into user (id, email, password) values (?, ?, ?)';
+        final uuid = Uuid().v4();
 
         final result = await conn.query(query, [
-          'asdasda',
+          uuid,
           user.email,
           CryptoHelper.generatedSha256Hash(user.password!),
         ]);
 
-        return user.copyWith(id: '', password: '');
+        return user.copyWith(id: uuid, password: '');
       } else {
         throw EmailAlreadyRegistered();
       }
