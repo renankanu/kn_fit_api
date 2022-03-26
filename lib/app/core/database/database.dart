@@ -1,16 +1,22 @@
-import 'package:dotenv/dotenv.dart';
+import 'package:injectable/injectable.dart';
+import 'package:kn_fit_api/app/core/config/config.dart';
+import 'package:kn_fit_api/app/core/database/i_database_connection.dart';
 import 'package:mysql1/mysql1.dart';
 
-class Database {
-  Future<MySqlConnection> openConnection() async {
-    return MySqlConnection.connect(
-      ConnectionSettings(
-        host: env['databaseHost'] ?? 'localhost',
-        port: int.tryParse(env['databasePort']!) ?? 3306,
-        user: env['databaseUser'],
-        password: env['databasePassword'],
-        db: env['databaseName'],
-      ),
-    );
+@LazySingleton(as: IDatabaseConnection)
+class Database implements IDatabaseConnection {
+  final DatabaseConnectionConfiguration _configuration;
+
+  Database(this._configuration);
+
+  @override
+  Future<MySqlConnection> openConnection() {
+    return MySqlConnection.connect(ConnectionSettings(
+      host: _configuration.host,
+      port: _configuration.port,
+      user: _configuration.user,
+      password: _configuration.password,
+      db: _configuration.databaseName,
+    ));
   }
 }

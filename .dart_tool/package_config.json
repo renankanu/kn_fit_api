@@ -140,6 +140,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "get_it",
+      "rootUri": "file:///Users/renankanu/.pub-cache/hosted/pub.dartlang.org/get_it-7.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "glob",
       "rootUri": "file:///Users/renankanu/.pub-cache/hosted/pub.dartlang.org/glob-2.0.2",
       "packageUri": "lib/",
@@ -170,6 +176,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "injectable",
+      "rootUri": "file:///Users/renankanu/.pub-cache/hosted/pub.dartlang.org/injectable-1.5.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "injectable_generator",
+      "rootUri": "file:///Users/renankanu/.pub-cache/hosted/pub.dartlang.org/injectable_generator-1.5.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "io",
       "rootUri": "file:///Users/renankanu/.pub-cache/hosted/pub.dartlang.org/io-1.0.3",
       "packageUri": "lib/",
@@ -190,6 +208,12 @@
     {
       "name": "lints",
       "rootUri": "file:///Users/renankanu/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "logger",
+      "rootUri": "file:///Users/renankanu/.pub-cache/hosted/pub.dartlang.org/logger-1.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -362,7 +386,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-03-25T10:53:15.315771Z",
+  "generated": "2022-03-26T15:08:20.477865Z",
   "generator": "pub",
   "generatorVersion": "2.14.2"
 }
