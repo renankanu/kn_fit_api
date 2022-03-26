@@ -22,12 +22,10 @@ class UserRepository implements IUserRepository {
           await conn.query('select * from user where email = ? ', [user.email]);
 
       if (isUserRegister.isEmpty) {
-        final query = ''' 
-        insert user(email, tipo_cadastro, img_avatar, senha, fornecedor_id, social_id)
-        values(?,?,?,?,?,?)
-      ''';
+        final query = 'insert into user (id, email, password) values (?, ?, ?)';
 
         final result = await conn.query(query, [
+          'asdasda',
           user.email,
           CryptoHelper.generatedSha256Hash(user.password!),
         ]);
