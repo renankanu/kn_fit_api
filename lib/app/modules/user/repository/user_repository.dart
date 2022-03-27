@@ -1,7 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:kn_fit_api/app/core/core.dart';
 import 'package:kn_fit_api/app/core/database/i_database_connection.dart';
-import 'package:kn_fit_api/app/core/helpers/helpers.dart';
 import 'package:kn_fit_api/app/models/user_model.dart';
 import 'package:kn_fit_api/app/modules/user/repository/i_user_repository.dart';
 import 'package:mysql1/mysql1.dart';
@@ -26,7 +25,7 @@ class UserRepository implements IUserRepository {
         final query = 'insert into user (id, email, password) values (?, ?, ?)';
         final uuid = Uuid().v4();
 
-        final result = await conn.query(query, [
+        await conn.query(query, [
           uuid,
           user.email,
           CryptoHelper.generatedSha256Hash(user.password!),
