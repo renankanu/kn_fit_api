@@ -28,7 +28,7 @@ class UserRepository implements IUserRepository {
         await conn.query(query, [
           uuid,
           user.email,
-          CryptoHelper.generatedSha256Hash(user.password!),
+          CryptoHelper.generatedSha256Hash(user.password),
         ]);
 
         return user.copyWith(id: uuid, password: null);

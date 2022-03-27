@@ -3,14 +3,14 @@ import 'dart:convert';
 import 'package:kn_fit_api/app/models/models.dart';
 
 class UserModel extends BaseModel {
-  final String? name;
-  final String? email;
-  final String? password;
+  final String name;
+  final String email;
+  final String password;
 
   UserModel({
-    this.name,
-    this.email,
-    this.password,
+    required this.name,
+    required this.email,
+    required this.password,
     String? id,
     DateTime? createdAt,
     DateTime? updatedAt,

@@ -43,6 +43,15 @@ class AuthController {
         ).toJson(),
         headers: {'content-type': 'application/json'},
       );
+    } on RequiredFieldException catch (e, _) {
+      return Response(
+        400,
+        body: ResponseModel(
+          data: null,
+          message: 'Campo $e é obrigatório.',
+        ).toJson(),
+        headers: {'content-type': 'application/json'},
+      );
     } catch (error) {
       log.error('Erro ao cadastrar usuário', error);
       return Response.internalServerError();
