@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:kn_fit_api/app/core/core.dart';
 import 'package:kn_fit_api/app/models/models.dart';
 
 class UserModel extends BaseModel {
@@ -28,9 +29,10 @@ class UserModel extends BaseModel {
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       id: map['id'],
-      name: map['name'],
-      email: map['email'],
-      password: map['password'],
+      name: map['name'] ?? (throw RequiredFieldException(fieldName: 'name')),
+      email: map['email'] ?? (throw RequiredFieldException(fieldName: 'email')),
+      password: map['password'] ??
+          (throw RequiredFieldException(fieldName: 'password')),
     );
   }
 
