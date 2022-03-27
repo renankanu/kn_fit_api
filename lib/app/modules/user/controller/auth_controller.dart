@@ -25,8 +25,6 @@ class AuthController {
   Future<Response> saveUser(Request request) async {
     try {
       final body = await request.readAsString();
-      final test = UserModel.fromJson(body);
-      log.debug(test);
       final userModel = UserSaveInputModel.requestMapping(body);
       final user = await userService.createUser(userModel);
       return Response(

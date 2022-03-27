@@ -4,12 +4,12 @@ import 'package:kn_fit_api/app/core/core.dart';
 import 'package:kn_fit_api/app/models/models.dart';
 
 class UserModel extends BaseModel {
-  final String name;
+  final String fullName;
   final String email;
   final String password;
 
   UserModel({
-    required this.name,
+    required this.fullName,
     required this.email,
     required this.password,
     String? id,
@@ -21,7 +21,7 @@ class UserModel extends BaseModel {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'name': name,
+      'name': fullName,
       'email': email,
     };
   }
@@ -29,7 +29,8 @@ class UserModel extends BaseModel {
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       id: map['id'],
-      name: map['name'] ?? (throw RequiredFieldException(fieldName: 'name')),
+      fullName:
+          map['name'] ?? (throw RequiredFieldException(fieldName: 'name')),
       email: map['email'] ?? (throw RequiredFieldException(fieldName: 'email')),
       password: map['password'] ??
           (throw RequiredFieldException(fieldName: 'password')),
@@ -50,7 +51,7 @@ class UserModel extends BaseModel {
   }) {
     return UserModel(
       id: id ?? this.id,
-      name: name ?? this.name,
+      fullName: name ?? fullName,
       email: email ?? this.email,
       password: password ?? this.password,
     );
