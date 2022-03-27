@@ -48,7 +48,7 @@ class AuthController {
         400,
         body: ResponseModel(
           data: null,
-          message: 'Campo $e é obrigatório.',
+          message: e.toString(),
         ).toJson(),
         headers: {'content-type': 'application/json'},
       );
