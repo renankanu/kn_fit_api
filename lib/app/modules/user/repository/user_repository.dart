@@ -31,7 +31,7 @@ class UserRepository implements IUserRepository {
           CryptoHelper.generatedSha256Hash(user.password!),
         ]);
 
-        return user.copyWith(id: uuid, password: '');
+        return user.copyWith(id: uuid, password: null);
       } else {
         throw EmailAlreadyRegistered();
       }
