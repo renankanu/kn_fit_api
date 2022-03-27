@@ -1,33 +1,27 @@
 import 'dart:convert';
 
+import 'package:kn_fit_api/app/models/base_model.dart';
+
 class ResponseModel {
   ResponseModel({
-    required this.status,
     required this.message,
-    required this.internalMessage,
     this.data,
   });
 
-  final int status;
   final String message;
-  final String internalMessage;
-  final dynamic data;
+  final BaseModel? data;
 
   Map<String, dynamic> toMap() {
     return {
-      'status': status,
       'message': message,
-      'internalMessage': internalMessage,
-      'data': data,
+      'data': data?.toMap(),
     };
   }
 
   factory ResponseModel.fromMap(Map<String, dynamic> map) {
     return ResponseModel(
-      status: map['status'] ?? 0,
       message: map['message'] ?? '',
-      internalMessage: map['internalMessage'] ?? '',
-      data: map['data'],
+      data: map['data'] != null ? BaseModel.fromMap(map['data']) : null,
     );
   }
 
@@ -35,18 +29,4 @@ class ResponseModel {
 
   factory ResponseModel.fromJson(String source) =>
       ResponseModel.fromMap(json.decode(source));
-
-  ResponseModel copyWith({
-    int? status,
-    String? message,
-    String? internalMessage,
-    dynamic data,
-  }) {
-    return ResponseModel(
-      status: status ?? this.status,
-      message: message ?? this.message,
-      internalMessage: internalMessage ?? this.internalMessage,
-      data: data ?? this.data,
-    );
-  }
 }

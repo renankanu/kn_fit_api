@@ -1,21 +1,24 @@
 import 'dart:convert';
 
-class UserModel {
-  final String? id;
+import 'package:kn_fit_api/app/models/models.dart';
+
+class UserModel extends BaseModel {
   final String? name;
   final String? email;
   final String? password;
 
   UserModel({
-    this.id,
     this.name,
     this.email,
     this.password,
-  });
+    String? id,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) : super(id: id, createdAt: createdAt, updatedAt: updatedAt);
 
+  @override
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'name': name,
       'email': email,
       'password': password,
@@ -24,13 +27,13 @@ class UserModel {
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      id: map['id'] ?? '',
-      name: map['name'] ?? '',
-      email: map['email'] ?? '',
-      password: map['password'] ?? '',
+      name: map['name'],
+      email: map['email'],
+      password: map['password'],
     );
   }
 
+  @override
   String toJson() => json.encode(toMap());
 
   factory UserModel.fromJson(String source) =>

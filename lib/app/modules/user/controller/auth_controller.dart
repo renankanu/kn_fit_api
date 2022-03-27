@@ -29,20 +29,16 @@ class AuthController {
       return Response(
         201,
         body: ResponseModel(
-          status: 201,
           data: user,
-          internalMessage: '',
           message: 'Usuário criado com sucesso.',
         ).toJson(),
         headers: {'content-type': 'application/json'},
       );
-    } on EmailAlreadyRegistered catch (error) {
+    } on EmailAlreadyRegistered {
       return Response(
         400,
         body: ResponseModel(
-          status: 400,
           data: null,
-          internalMessage: error.toString(),
           message: 'Email já cadastrado.',
         ).toJson(),
         headers: {'content-type': 'application/json'},
