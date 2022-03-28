@@ -1,3 +1,4 @@
+import 'package:kn_fit_api/app/core/core.dart';
 import 'package:kn_fit_api/app/core/helpers/helpers.dart';
 
 class UserSaveInputModel extends RequestMapping {
@@ -15,8 +16,10 @@ class UserSaveInputModel extends RequestMapping {
 
   @override
   void map() {
-    fullName = data['fullName'];
-    email = data['email'];
-    password = data['password'];
+    fullName = data['fullName'] ??
+        (throw RequiredFieldException(fieldName: 'fullName'));
+    email = data['email'] ?? (throw RequiredFieldException(fieldName: 'email'));
+    password = data['password'] ??
+        (throw RequiredFieldException(fieldName: 'password'));
   }
 }
