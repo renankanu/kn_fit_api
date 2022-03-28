@@ -32,7 +32,7 @@ class AuthController {
         body: ResponseModel(
           data: user,
           message: 'Usuário criado com sucesso.',
-        ).toJson(),
+        ).toString(),
         headers: {'content-type': 'application/json'},
       );
     } on EmailAlreadyRegistered {
@@ -41,7 +41,7 @@ class AuthController {
         body: ResponseModel(
           data: null,
           message: 'Email já cadastrado.',
-        ).toJson(),
+        ).toString(),
         headers: {'content-type': 'application/json'},
       );
     } on RequiredFieldException catch (e, _) {
@@ -50,7 +50,7 @@ class AuthController {
         body: ResponseModel(
           data: null,
           message: e.toString(),
-        ).toJson(),
+        ).toString(),
         headers: {'content-type': 'application/json'},
       );
     } on FormatException catch (e, _) {
@@ -59,7 +59,7 @@ class AuthController {
         body: ResponseModel(
           data: null,
           message: 'Formato do json inválido.',
-        ).toJson(),
+        ).toString(),
         headers: {'content-type': 'application/json'},
       );
     } catch (error) {

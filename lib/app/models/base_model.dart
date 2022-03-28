@@ -1,5 +1,8 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'base_model.g.dart';
+
+@JsonSerializable()
 class BaseModel {
   final String? id;
   final DateTime? createdAt;
@@ -11,28 +14,8 @@ class BaseModel {
     this.updatedAt,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'createdAt': createdAt?.millisecondsSinceEpoch,
-      'updatedAt': updatedAt?.millisecondsSinceEpoch,
-    };
-  }
+  factory BaseModel.fromJson(Map<String, dynamic> json) =>
+      _$BaseModelFromJson(json);
 
-  factory BaseModel.fromMap(Map<String, dynamic> map) {
-    return BaseModel(
-      id: map['id'],
-      createdAt: map['createdAt'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['createdAt'])
-          : null,
-      updatedAt: map['updatedAt'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['updatedAt'])
-          : null,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory BaseModel.fromJson(String source) =>
-      BaseModel.fromMap(json.decode(source));
+  Map<String, dynamic> toJson() => _$BaseModelToJson(this);
 }

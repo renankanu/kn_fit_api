@@ -1,7 +1,11 @@
 import 'dart:convert';
 
+import 'package:json_annotation/json_annotation.dart';
 import 'package:kn_fit_api/app/models/base_model.dart';
 
+part 'response_model.g.dart';
+
+@JsonSerializable()
 class ResponseModel {
   ResponseModel({
     required this.message,
@@ -11,22 +15,11 @@ class ResponseModel {
   final String message;
   final BaseModel? data;
 
-  Map<String, dynamic> toMap() {
-    return {
-      'message': message,
-      'data': data?.toMap(),
-    };
-  }
+  factory ResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$ResponseModelFromJson(json);
 
-  factory ResponseModel.fromMap(Map<String, dynamic> map) {
-    return ResponseModel(
-      message: map['message'] ?? '',
-      data: map['data'] != null ? BaseModel.fromMap(map['data']) : null,
-    );
-  }
+  Map<String, dynamic> toJson() => _$ResponseModelToJson(this);
 
-  String toJson() => json.encode(toMap());
-
-  factory ResponseModel.fromJson(String source) =>
-      ResponseModel.fromMap(json.decode(source));
+  @override
+  String toString() => json.encode(toJson());
 }
