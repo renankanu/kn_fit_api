@@ -21,7 +21,7 @@ class UserModel extends BaseModel {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'name': fullName,
+      'fullName': fullName,
       'email': email,
     };
   }
@@ -29,8 +29,8 @@ class UserModel extends BaseModel {
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       id: map['id'],
-      fullName:
-          map['name'] ?? (throw RequiredFieldException(fieldName: 'name')),
+      fullName: map['fullName'] ??
+          (throw RequiredFieldException(fieldName: 'fullName')),
       email: map['email'] ?? (throw RequiredFieldException(fieldName: 'email')),
       password: map['password'] ??
           (throw RequiredFieldException(fieldName: 'password')),
@@ -45,13 +45,13 @@ class UserModel extends BaseModel {
 
   UserModel copyWith({
     String? id,
-    String? name,
+    String? fullName,
     String? email,
     String? password,
   }) {
     return UserModel(
       id: id ?? this.id,
-      fullName: name ?? fullName,
+      fullName: fullName ?? this.fullName,
       email: email ?? this.email,
       password: password ?? this.password,
     );
