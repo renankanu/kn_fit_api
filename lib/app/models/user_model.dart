@@ -24,12 +24,16 @@ class UserModel extends BaseModel {
     String? fullName,
     String? email,
     String? password,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) {
     return UserModel(
       id: id ?? this.id,
       fullName: fullName ?? this.fullName,
       email: email ?? this.email,
       password: password ?? this.password,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 

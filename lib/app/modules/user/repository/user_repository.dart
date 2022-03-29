@@ -14,7 +14,7 @@ class UserRepository implements IUserRepository {
   UserRepository({required this.connection, required this.log});
 
   @override
-  Future<UserModel> createUser(UserModel user) async {
+  Future<void> createUser(UserModel user) async {
     MySqlConnection? conn;
     try {
       conn = await connection.openConnection();
@@ -32,8 +32,6 @@ class UserRepository implements IUserRepository {
           user.email,
           CryptoHelper.generatedSha256Hash(user.password),
         ]);
-
-        return user.copyWith(id: uuid, password: null);
       } else {
         throw EmailAlreadyRegistered();
       }

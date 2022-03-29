@@ -27,11 +27,11 @@ class AuthController {
       action: () async {
         final body = await request.readAsString();
         final userModel = UserSaveInputModel.requestMapping(body);
-        final user = await userService.createUser(userModel);
+        await userService.createUser(userModel);
         return Response(
           201,
           body: ResponseModel(
-            data: user,
+            data: null,
             message: 'Usuário criado com sucesso.',
           ).toString(),
           headers: {'content-type': 'application/json'},

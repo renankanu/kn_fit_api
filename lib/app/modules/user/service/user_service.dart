@@ -16,7 +16,7 @@ class UserService implements IUserService {
   });
 
   @override
-  Future<UserModel> createUser(UserSaveInputModel user) {
+  Future<void> createUser(UserSaveInputModel user) {
     final userEntity = UserModel(
       fullName: user.fullName,
       email: user.email,
