@@ -1,5 +1,5 @@
-import 'package:kn_fit_api/app/core/core.dart';
 import 'package:kn_fit_api/app/core/helpers/helpers.dart';
+import 'package:kn_fit_api/app/core/helpers/valid_fields.dart';
 
 class UserSaveInputModel extends RequestMapping {
   late String fullName;
@@ -16,10 +16,13 @@ class UserSaveInputModel extends RequestMapping {
 
   @override
   void map() {
-    fullName = data['fullName'] ??
-        (throw RequiredFieldException(fieldName: 'fullName'));
-    email = data['email'] ?? (throw RequiredFieldException(fieldName: 'email'));
-    password = data['password'] ??
-        (throw RequiredFieldException(fieldName: 'password'));
+    ValidFields.nullChecker(
+      data,
+      requiredKeys: ['fullName', 'email', 'password'],
+      nonNullKeys: ['fullName', 'email', 'password'],
+    );
+    fullName = data['fullName'];
+    email = data['email'];
+    password = data['password'];
   }
 }

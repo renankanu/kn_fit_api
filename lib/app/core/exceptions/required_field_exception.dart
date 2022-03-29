@@ -1,12 +1,11 @@
 class RequiredFieldException implements Exception {
   ///
-  /// A field name that is required.
+  /// A fields name that is required.
   ///
-  String fieldName;
-  RequiredFieldException({
-    required this.fieldName,
-  });
+  final List<String> keysWithNullValues;
+  RequiredFieldException(this.keysWithNullValues);
 
   @override
-  String toString() => 'Campo obrigatório: $fieldName.';
+  String toString() =>
+      'Esses campos contem valores `null` ou vazio: $keysWithNullValues.';
 }
