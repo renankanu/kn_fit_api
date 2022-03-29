@@ -7,6 +7,7 @@ part 'user_model.g.dart';
 class UserModel extends BaseModel {
   final String fullName;
   final String email;
+  @JsonKey(toJson: toNull, includeIfNull: false)
   final String password;
 
   UserModel({
@@ -37,4 +38,6 @@ class UserModel extends BaseModel {
 
   @override
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
+
+  static toNull(_) => null;
 }

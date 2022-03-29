@@ -19,11 +19,21 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
           : DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
-      'id': instance.id,
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
-      'fullName': instance.fullName,
-      'email': instance.email,
-      'password': instance.password,
-    };
+Map<String, dynamic> _$UserModelToJson(UserModel instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'createdAt': instance.createdAt?.toIso8601String(),
+    'updatedAt': instance.updatedAt?.toIso8601String(),
+    'fullName': instance.fullName,
+    'email': instance.email,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('password', UserModel.toNull(instance.password));
+  return val;
+}
