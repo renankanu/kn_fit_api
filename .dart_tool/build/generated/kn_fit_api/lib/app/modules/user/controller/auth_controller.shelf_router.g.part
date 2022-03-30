@@ -5,5 +5,6 @@
 Router _$AuthControllerRouter(AuthController service) {
   final router = Router();
   router.add('POST', r'/register', service.saveUser);
+  router.add('POST', r'/login', service.login);
   return router;
 }

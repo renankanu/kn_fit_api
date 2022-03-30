@@ -20,11 +20,11 @@ class ApplicationConfig {
 
   void _loadDatabaseConfig() {
     final databaseConfig = DatabaseConnectionConfiguration(
-      host: env['DATABASE_HOST'] ?? env['databaseHost']!,
-      user: env['DATABASE_USER'] ?? env['databaseUser']!,
-      port: int.tryParse(env['  '] ?? env['databasePort']!) ?? 0,
-      password: env['DATABASE_PASSWORD'] ?? env['databasePassword']!,
-      databaseName: env['DATABASE_NAME'] ?? env['databaseName']!,
+      host: env['DATABASE_HOST']!,
+      user: env['DATABASE_USER']!,
+      port: int.tryParse(env['DATABASE_PORT']!) ?? 0,
+      password: env['DATABASE_PASSWORD']!,
+      databaseName: env['DATABASE_NAME']!,
     );
 
     GetIt.I.registerSingleton(databaseConfig);

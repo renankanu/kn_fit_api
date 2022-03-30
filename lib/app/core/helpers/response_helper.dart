@@ -31,6 +31,15 @@ class ResponseHelper {
         ).toString(),
         headers: {'content-type': 'application/json'},
       );
+    } on UserNotFoundException catch (e, _) {
+      return Response(
+        400,
+        body: ResponseModel(
+          data: null,
+          message: e.toString(),
+        ).toString(),
+        headers: {'content-type': 'application/json'},
+      );
     } on FormatException catch (e, _) {
       return Response(
         400,

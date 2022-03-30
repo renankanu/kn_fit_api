@@ -110,6 +110,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "dart_jsonwebtoken",
+      "rootUri": "file:///Users/renankanu/.pub-cache/hosted/pub.dartlang.org/dart_jsonwebtoken-2.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "dart_style",
       "rootUri": "file:///Users/renankanu/.pub-cache/hosted/pub.dartlang.org/dart_style-2.2.2",
       "packageUri": "lib/",
@@ -272,6 +278,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "pointycastle",
+      "rootUri": "file:///Users/renankanu/.pub-cache/hosted/pub.dartlang.org/pointycastle-3.5.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "pool",
       "rootUri": "file:///Users/renankanu/.pub-cache/hosted/pub.dartlang.org/pool-1.5.0",
       "packageUri": "lib/",
@@ -404,7 +416,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-03-29T12:23:20.841491Z",
+  "generated": "2022-03-29T22:32:00.189988Z",
   "generator": "pub",
   "generatorVersion": "2.14.2"
 }

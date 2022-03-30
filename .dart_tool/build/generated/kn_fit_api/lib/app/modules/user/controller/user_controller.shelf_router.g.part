@@ -1,9 +1,0 @@
-// **************************************************************************
-// ShelfRouterGenerator
-// **************************************************************************
-
-Router _$UserControllerRouter(UserController service) {
-  final router = Router();
-  router.add('POST', r'/', service.login);
-  return router;
-}

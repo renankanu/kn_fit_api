@@ -42,4 +42,38 @@ class UserRepository implements IUserRepository {
       await conn?.close();
     }
   }
+
+  @override
+  Future<UserModel> login(String email, String password) async {
+    MySqlConnection? conn;
+    try {
+      conn = await connection.openConnection();
+      final query = 'select * from user where email = ? and password = ?';
+      final result = await conn.query(query, [
+        email,
+        CryptoHelper.generatedSha256Hash(password),
+      ]);
+
+      if (result.isNotEmpty) {
+        final userSqlData = result.first;
+        final user = UserModel(
+          id: userSqlData['id'],
+          fullName: userSqlData['full_name'],
+          email: userSqlData['email'],
+          password: userSqlData['password'],
+          createdAt: userSqlData['created_at'],
+          updatedAt: userSqlData['updated_at'],
+        );
+        return user;
+      } else {
+        throw UserNotFoundException(message: 'Email ou senha inválidos');
+      }
+    } on MySqlException catch (e, s) {
+      log.error('Erro ao fazer login com o usuário', e, s);
+      throw DatabaseException(
+          message: 'Erro ao fazer login com o usuário', exception: e);
+    } finally {
+      await conn?.close();
+    }
+  }
 }
