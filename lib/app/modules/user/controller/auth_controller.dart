@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:injectable/injectable.dart';
 import 'package:kn_fit_api/app/core/core.dart';
@@ -55,11 +54,7 @@ class AuthController {
         );
 
         return Response.ok(
-          jsonEncode(
-            {
-              'access_token': JwtHelper.generateJWT(user.id!),
-            },
-          ),
+          JwtHelper.createTokenPair(user.id!).toString(),
           headers: {'content-type': 'application/json'},
         );
       },
