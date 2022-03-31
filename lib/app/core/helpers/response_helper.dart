@@ -1,3 +1,4 @@
+import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:kn_fit_api/app/core/exceptions/required_field_exception.dart';
 import 'package:kn_fit_api/app/models/models.dart';
 import 'package:shelf/shelf.dart';
@@ -46,6 +47,15 @@ class ResponseHelper {
         body: ResponseModel(
           data: null,
           message: 'Formato do json inválido.',
+        ).toString(),
+        headers: {'content-type': 'application/json'},
+      );
+    } on JWTError catch (e, _) {
+      return Response(
+        403,
+        body: ResponseModel(
+          data: null,
+          message: e.toString(),
         ).toString(),
         headers: {'content-type': 'application/json'},
       );
