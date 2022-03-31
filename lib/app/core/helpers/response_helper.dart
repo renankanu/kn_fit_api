@@ -7,7 +7,7 @@ import '../core.dart';
 class ResponseHelper {
   ResponseHelper._();
 
-  static Future<Response> load({
+  static Future<Response> makeResponse({
     required Future<Response> Function() action,
     required ILogger log,
   }) async {

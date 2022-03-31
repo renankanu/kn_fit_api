@@ -25,7 +25,7 @@ class AuthController {
 
   @Route.post('/register')
   Future<Response> saveUser(Request request) async {
-    return ResponseHelper.load(
+    return ResponseHelper.makeResponse(
       action: () async {
         final body = await request.readAsString();
         final userModel = UserSaveInputModel.requestMapping(body);
@@ -45,7 +45,7 @@ class AuthController {
 
   @Route.post('/login')
   Future<Response> login(Request request) async {
-    return ResponseHelper.load(
+    return ResponseHelper.makeResponse(
       action: () async {
         final loginViewModel = LoginViewModel(await request.readAsString());
         final user = await userService.login(
