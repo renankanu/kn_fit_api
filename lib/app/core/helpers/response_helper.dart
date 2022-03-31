@@ -9,11 +9,11 @@ class ResponseHelper {
   ResponseHelper._();
 
   static Future<Response> makeResponse({
-    required Future<Response> Function() action,
+    required Future<Response> Function() handlerResponse,
     required ILogger log,
   }) async {
     try {
-      return await action();
+      return await handlerResponse();
     } on EmailAlreadyRegistered {
       return Response(
         400,
