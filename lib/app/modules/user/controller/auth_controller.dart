@@ -30,13 +30,12 @@ class AuthController {
         final body = await request.readAsString();
         final userModel = UserSaveInputModel.requestMapping(body);
         await userService.createUser(userModel);
-        return Response(
+        return ResponseHelper.baseResponse(
           201,
-          body: ResponseModel(
+          responseModel: ResponseModel(
             data: null,
             message: 'Usuário criado com sucesso.',
-          ).toString(),
-          headers: {'content-type': 'application/json'},
+          ),
         );
       },
       log: log,

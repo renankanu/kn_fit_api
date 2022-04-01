@@ -1,7 +1,7 @@
-import 'dart:convert';
-
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:dotenv/dotenv.dart';
+import 'package:kn_fit_api/app/core/helpers/response_helper.dart';
+import 'package:kn_fit_api/app/models/response_model.dart';
 import 'package:shelf/shelf.dart' hide Middleware;
 
 import '../../core.dart';
@@ -12,8 +12,8 @@ class SecurityMiddleware extends Middleware {
   final ILogger log;
   final skipUrl = <SecuritySkipUrl>[
     SecuritySkipUrl(url: '/user/register', method: 'POST'),
+    SecuritySkipUrl(url: '/user/login', method: 'POST'),
     SecuritySkipUrl(url: '/auth/', method: 'POST'),
-    SecuritySkipUrl(url: '/health', method: 'GET'),
   ];
 
   SecurityMiddleware(this.log);
@@ -46,10 +46,9 @@ class SecurityMiddleware extends Middleware {
       //   claims.validate();
       // }
 
-      final claimsMap = claims.payload();
+      final claimsMap = claims.payload as Map<String, dynamic>;
 
-      final userId = claimsMap['sub'];
-      final supplierId = claimsMap['supplier'];
+      final userId = claimsMap['ref'];
 
       if (userId == null) {
         throw JWTError('Usuário não encontrado.');
@@ -58,16 +57,33 @@ class SecurityMiddleware extends Middleware {
       final securityHeaders = {
         'user': userId,
         'access_token': authorizationToken,
-        'supplier': supplierId != null ? '$supplierId' : null
       };
 
       return innerHandler(request.change(headers: securityHeaders));
-    } on JWTError catch (e, s) {
-      log.error('Erro ao validar token JWT', e, s);
-      return Response.forbidden(jsonEncode({}));
-    } catch (e, s) {
-      log.error('Internal Server Error', e, s);
-      return Response.forbidden(jsonEncode({}));
+    } on JWTUndefinedError catch (_) {
+      return ResponseHelper.baseResponse(
+        401,
+        responseModel: ResponseModel(
+          data: null,
+          message: 'Token inválido.',
+        ),
+      );
+    } on JWTError catch (e, _) {
+      return ResponseHelper.baseResponse(
+        403,
+        responseModel: ResponseModel(
+          data: null,
+          message: e.toString(),
+        ),
+      );
+    } catch (e, _) {
+      return ResponseHelper.baseResponse(
+        403,
+        responseModel: ResponseModel(
+          data: null,
+          message: e.toString(),
+        ),
+      );
     }
   }
 }

@@ -29,8 +29,13 @@ void main(List<String> args) async {
   }
 
   final router = Router();
-  router.get('/health',
-      (shelf.Request request) => shelf.Response.ok(jsonEncode({'up': 'true'})));
+  router.get(
+    '/health',
+    (shelf.Request request) => shelf.Response.ok(
+      jsonEncode({'up': 'true'}),
+      headers: {'content-type': 'application/json'},
+    ),
+  );
 
   final appConfig = ApplicationConfig();
   await appConfig.loadConfigApplication(router);
