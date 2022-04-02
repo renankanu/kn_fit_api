@@ -8,34 +8,34 @@ import '../../../core/core.dart';
 import '../../../core/helpers/jwt_helper.dart';
 import '../../../core/helpers/response_helper.dart';
 import '../../../models/models.dart';
-import '../service/i_user_service.dart';
+import '../service/i_student_service.dart';
 import '../view_models/login_view_model.dart';
-import '../view_models/user_save_input_model.dart';
+import '../view_models/student_save_input_model.dart';
 
-part 'auth_controller.g.dart';
+part 'student_controller.g.dart';
 
 @Injectable()
-class AuthController {
-  IUserService userService;
+class StudentController {
+  IStudentService studentService;
   ILogger log;
 
-  AuthController({
-    required this.userService,
+  StudentController({
+    required this.studentService,
     required this.log,
   });
 
   @Route.post('/register')
-  Future<Response> saveUser(Request request) async {
+  Future<Response> saveStudent(Request request) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
         final body = await request.readAsString();
-        final userModel = UserSaveInputModel.requestMapping(body);
-        await userService.createUser(userModel);
+        final studentModel = StudentSaveInputModel.requestMapping(body);
+        await studentService.createStudent(studentModel);
         return ResponseHelper.baseResponse(
           201,
           responseModel: ResponseModel(
             data: null,
-            message: 'Usuário criado com sucesso.',
+            message: 'Aluno criado com sucesso.',
           ),
         );
       },
@@ -48,18 +48,18 @@ class AuthController {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
         final loginViewModel = LoginViewModel(await request.readAsString());
-        final user = await userService.login(
+        final student = await studentService.login(
           loginViewModel.email,
           loginViewModel.password,
         );
 
         return Response.ok(
-          JwtHelper.createTokenPair(user.id!).toString(),
+          JwtHelper.createTokenPair(student.id!).toString(),
         );
       },
       log: log,
     );
   }
 
-  Router get router => _$AuthControllerRouter(this);
+  Router get router => _$StudentControllerRouter(this);
 }

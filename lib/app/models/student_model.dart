@@ -2,16 +2,16 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'models.dart';
 
-part 'user_model.g.dart';
+part 'student_model.g.dart';
 
 @JsonSerializable()
-class UserModel extends BaseModel {
+class StudentModel extends BaseModel {
   final String fullName;
   final String email;
   @JsonKey(toJson: toNull, includeIfNull: false)
   final String password;
 
-  UserModel({
+  StudentModel({
     required this.fullName,
     required this.email,
     required this.password,
@@ -20,7 +20,7 @@ class UserModel extends BaseModel {
     DateTime? updatedAt,
   }) : super(id: id, createdAt: createdAt, updatedAt: updatedAt);
 
-  UserModel copyWith({
+  StudentModel copyWith({
     int? id,
     String? fullName,
     String? email,
@@ -28,7 +28,7 @@ class UserModel extends BaseModel {
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
-    return UserModel(
+    return StudentModel(
       id: id ?? this.id,
       fullName: fullName ?? this.fullName,
       email: email ?? this.email,
@@ -38,11 +38,11 @@ class UserModel extends BaseModel {
     );
   }
 
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json);
+  factory StudentModel.fromJson(Map<String, dynamic> json) =>
+      _$StudentModelFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$UserModelToJson(this);
+  Map<String, dynamic> toJson() => _$StudentModelToJson(this);
 
   static String? toNull(_) => null;
 }

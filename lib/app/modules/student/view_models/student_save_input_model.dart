@@ -1,18 +1,18 @@
 import '../../../core/helpers/helpers.dart';
 import '../../../core/helpers/valid_fields.dart';
 
-class UserSaveInputModel extends RequestMapping {
+class StudentSaveInputModel extends RequestMapping {
   late String fullName;
   late String email;
   late String password;
 
-  UserSaveInputModel({
+  StudentSaveInputModel({
     required this.fullName,
     required this.email,
     required this.password,
   }) : super.empty();
 
-  UserSaveInputModel.requestMapping(String dataRequest) : super(dataRequest);
+  StudentSaveInputModel.requestMapping(String dataRequest) : super(dataRequest);
 
   @override
   void map() {

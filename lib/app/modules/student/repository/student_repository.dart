@@ -4,52 +4,52 @@ import 'package:uuid/uuid.dart';
 
 import '../../../core/core.dart';
 import '../../../core/database/i_database_connection.dart';
-import '../../../models/user_model.dart';
-import 'i_user_repository.dart';
+import '../../../models/student_model.dart';
+import 'i_student_repository.dart';
 
-@LazySingleton(as: IUserRepository)
-class UserRepository implements IUserRepository {
+@LazySingleton(as: IStudentRepository)
+class StudentRepository implements IStudentRepository {
   final IDatabaseConnection connection;
   final ILogger log;
 
-  UserRepository({required this.connection, required this.log});
+  StudentRepository({required this.connection, required this.log});
 
   @override
-  Future<void> createUser(UserModel user) async {
+  Future<void> createStudent(StudentModel student) async {
     MySqlConnection? conn;
     try {
       conn = await connection.openConnection();
-      final isUserRegister =
-          await conn.query('select * from user where email = ? ', [user.email]);
+      final isUserRegister = await conn
+          .query('select * from student where email = ? ', [student.email]);
 
       if (isUserRegister.isEmpty) {
         const query =
-            'insert into user (id, full_name, email, password) values (?, ?, ?, ?)';
+            'insert into student (id, full_name, email, password) values (?, ?, ?, ?)';
         final uuid = const Uuid().v4();
 
         await conn.query(query, [
           uuid,
-          user.fullName,
-          user.email,
-          CryptoHelper.generatedSha256Hash(user.password),
+          student.fullName,
+          student.email,
+          CryptoHelper.generatedSha256Hash(student.password),
         ]);
       } else {
         throw EmailAlreadyRegistered();
       }
     } on MySqlException catch (e, s) {
-      log.error('Erro ao criar usuário', e, s);
-      throw DatabaseException(message: 'Erro ao criar usuário', exception: e);
+      log.error('Erro ao criar o Aluno', e, s);
+      throw DatabaseException(message: 'Erro ao criar o Aluno', exception: e);
     } finally {
       await conn?.close();
     }
   }
 
   @override
-  Future<UserModel> login(String email, String password) async {
+  Future<StudentModel> login(String email, String password) async {
     MySqlConnection? conn;
     try {
       conn = await connection.openConnection();
-      const query = 'select * from user where email = ? and password = ?';
+      const query = 'select * from student where email = ? and password = ?';
       final result = await conn.query(query, [
         email,
         CryptoHelper.generatedSha256Hash(password),
@@ -57,7 +57,7 @@ class UserRepository implements IUserRepository {
 
       if (result.isNotEmpty) {
         final userSqlData = result.first;
-        final user = UserModel(
+        final student = StudentModel(
           id: userSqlData['id'],
           fullName: userSqlData['full_name'],
           email: userSqlData['email'],
@@ -65,7 +65,7 @@ class UserRepository implements IUserRepository {
           createdAt: userSqlData['created_at'],
           updatedAt: userSqlData['updated_at'],
         );
-        return user;
+        return student;
       } else {
         throw UserNotFoundException(message: 'Email ou senha inválidos');
       }

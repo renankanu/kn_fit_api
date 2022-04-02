@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_model.dart';
+part of 'student_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
+StudentModel _$StudentModelFromJson(Map<String, dynamic> json) => StudentModel(
       fullName: json['fullName'] as String,
       email: json['email'] as String,
       password: json['password'] as String,
@@ -19,7 +19,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
           : DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$UserModelToJson(UserModel instance) {
+Map<String, dynamic> _$StudentModelToJson(StudentModel instance) {
   final val = <String, dynamic>{
     'id': instance.id,
     'createdAt': instance.createdAt?.toIso8601String(),
@@ -34,6 +34,6 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) {
     }
   }
 
-  writeNotNull('password', UserModel.toNull(instance.password));
+  writeNotNull('password', StudentModel.toNull(instance.password));
   return val;
 }
