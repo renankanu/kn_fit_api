@@ -11,9 +11,10 @@ import 'security_skip_url.dart';
 class SecurityMiddleware extends BaseMiddleware {
   final ILogger log;
   final skipUrl = <SecuritySkipUrl>[
-    SecuritySkipUrl(url: '/user/register', method: 'POST'),
+    SecuritySkipUrl(url: '/student/register', method: 'POST'),
     SecuritySkipUrl(url: '/user/login', method: 'POST'),
     SecuritySkipUrl(url: '/health', method: 'GET'),
+    SecuritySkipUrl(url: '/personal-training/register', method: 'POST'),
   ];
 
   SecurityMiddleware(this.log);

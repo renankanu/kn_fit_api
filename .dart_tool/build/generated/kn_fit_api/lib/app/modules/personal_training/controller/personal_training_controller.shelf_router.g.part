@@ -1,0 +1,9 @@
+// **************************************************************************
+// ShelfRouterGenerator
+// **************************************************************************
+
+Router _$PersonalTrainingControllerRouter(PersonalTrainingController service) {
+  final router = Router();
+  router.add('POST', r'/register', service.savePersonalTraining);
+  return router;
+}

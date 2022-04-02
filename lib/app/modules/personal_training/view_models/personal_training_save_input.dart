@@ -1,4 +1,4 @@
-import 'package:kn_fit_api/app/core/core.dart';
+import '../../../core/core.dart';
 
 class PersonalTrainingSaveInput extends RequestMapping {
   late String fullName;

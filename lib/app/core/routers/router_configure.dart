@@ -1,3 +1,4 @@
+import 'package:kn_fit_api/app/modules/personal_training/personal_training_router.dart';
 import 'package:shelf_router/shelf_router.dart';
 
 import '../../modules/student/student_router.dart';
@@ -7,6 +8,7 @@ class RouterConfigure {
   final Router _router;
   final List<IRouter> _routers = [
     StudentRouter(),
+    PersonalTrainingRouter(),
   ];
 
   RouterConfigure(this._router);

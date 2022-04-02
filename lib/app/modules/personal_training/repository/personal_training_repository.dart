@@ -1,9 +1,9 @@
 import 'package:injectable/injectable.dart';
-import 'package:kn_fit_api/app/core/core.dart';
-import 'package:kn_fit_api/app/core/database/i_database_connection.dart';
 import 'package:mysql1/mysql1.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../core/core.dart';
+import '../../../core/database/i_database_connection.dart';
 import '../../../models/personal_training_model.dart';
 import 'i_personal_training_repository.dart';
 

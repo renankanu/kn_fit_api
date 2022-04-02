@@ -10,7 +10,7 @@ class JwtHelper {
   static final String _secret = env['JWT_SECRET']!;
 
   static String generateJWT(
-    String userId, {
+    int userId, {
     Duration expiry = const Duration(hours: 1),
   }) {
     final jwt = JWT(
@@ -29,7 +29,7 @@ class JwtHelper {
     return token;
   }
 
-  static TokenPair createTokenPair(String userId) {
+  static TokenPair createTokenPair(int userId) {
     final token = generateJWT(userId);
 
     const refreshTokenExpiry = Duration(seconds: 60);
