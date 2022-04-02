@@ -49,8 +49,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       log: get<_i8.ILogger>()));
   gh.factory<_i16.PersonalTrainingController>(() =>
       _i16.PersonalTrainingController(
-          personalTrainingService: get<_i10.PersonalTrainingService>(),
-          log: get<_i11.ILogger>()));
+          personalTrainingService: get<_i9.IPersonalTrainingService>(),
+          log: get<_i8.ILogger>()));
   gh.factory<_i17.StudentController>(() => _i17.StudentController(
       studentService: get<_i14.IStudentService>(), log: get<_i8.ILogger>()));
   return get;

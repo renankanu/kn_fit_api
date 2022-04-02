@@ -1,6 +1,6 @@
-import 'package:kn_fit_api/app/modules/personal_training/personal_training_router.dart';
 import 'package:shelf_router/shelf_router.dart';
 
+import '../../modules/personal_training/personal_training_router.dart';
 import '../../modules/student/student_router.dart';
 import 'i_router.dart';
 
