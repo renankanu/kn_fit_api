@@ -15,13 +15,13 @@ class UserModel extends BaseModel {
     required this.fullName,
     required this.email,
     required this.password,
-    String? id,
+    int? id,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) : super(id: id, createdAt: createdAt, updatedAt: updatedAt);
 
   UserModel copyWith({
-    String? id,
+    int? id,
     String? fullName,
     String? email,
     String? password,

@@ -7,7 +7,7 @@ part of 'base_model.dart';
 // **************************************************************************
 
 BaseModel _$BaseModelFromJson(Map<String, dynamic> json) => BaseModel(
-      id: json['id'] as String?,
+      id: json['id'] as int?,
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),

@@ -10,7 +10,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       fullName: json['fullName'] as String,
       email: json['email'] as String,
       password: json['password'] as String,
-      id: json['id'] as String?,
+      id: json['id'] as int?,
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),

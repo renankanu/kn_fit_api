@@ -1,11 +1,19 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'personal_training_model.dart';
+
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
+PersonalTrainingModel _$PersonalTrainingModelFromJson(
+        Map<String, dynamic> json) =>
+    PersonalTrainingModel(
       fullName: json['fullName'] as String,
       email: json['email'] as String,
       password: json['password'] as String,
+      crefType: json['crefType'] as String,
+      crefNumber: json['crefNumber'] as String,
       id: json['id'] as int?,
       createdAt: json['createdAt'] == null
           ? null
@@ -15,7 +23,8 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
           : DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$UserModelToJson(UserModel instance) {
+Map<String, dynamic> _$PersonalTrainingModelToJson(
+    PersonalTrainingModel instance) {
   final val = <String, dynamic>{
     'id': instance.id,
     'createdAt': instance.createdAt?.toIso8601String(),
@@ -30,6 +39,8 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) {
     }
   }
 
-  writeNotNull('password', UserModel.toNull(instance.password));
+  writeNotNull('password', PersonalTrainingModel.toNull(instance.password));
+  val['crefType'] = instance.crefType;
+  val['crefNumber'] = instance.crefNumber;
   return val;
 }
