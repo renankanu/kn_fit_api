@@ -10,7 +10,6 @@ import 'package:shelf/shelf.dart' as shelf;
 import 'package:shelf/shelf_io.dart' as io;
 import 'package:shelf_router/shelf_router.dart';
 
-// For Google Cloud Run, set _hostname to '0.0.0.0'.
 const _hostname = 'localhost';
 void main(List<String> args) async {
   var parser = ArgParser()..addOption('port', abbr: 'p');
@@ -18,7 +17,6 @@ void main(List<String> args) async {
 
   load();
 
-  // For Google Cloud Run, we respect the PORT environment variable
   var portStr = result['port'] ?? Platform.environment['PORT'] ?? '8080';
   var port = int.tryParse(portStr);
 
