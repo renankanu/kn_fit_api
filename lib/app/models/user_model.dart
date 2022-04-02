@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:kn_fit_api/app/models/models.dart';
+
+import 'models.dart';
 
 part 'user_model.g.dart';
 
@@ -43,5 +44,5 @@ class UserModel extends BaseModel {
   @override
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
-  static toNull(_) => null;
+  static String? toNull(_) => null;
 }

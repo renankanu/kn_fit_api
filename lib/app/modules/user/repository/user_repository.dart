@@ -1,10 +1,11 @@
 import 'package:injectable/injectable.dart';
-import 'package:kn_fit_api/app/core/core.dart';
-import 'package:kn_fit_api/app/core/database/i_database_connection.dart';
-import 'package:kn_fit_api/app/models/user_model.dart';
-import 'package:kn_fit_api/app/modules/user/repository/i_user_repository.dart';
 import 'package:mysql1/mysql1.dart';
 import 'package:uuid/uuid.dart';
+
+import '../../../core/core.dart';
+import '../../../core/database/i_database_connection.dart';
+import '../../../models/user_model.dart';
+import 'i_user_repository.dart';
 
 @LazySingleton(as: IUserRepository)
 class UserRepository implements IUserRepository {
@@ -22,9 +23,9 @@ class UserRepository implements IUserRepository {
           await conn.query('select * from user where email = ? ', [user.email]);
 
       if (isUserRegister.isEmpty) {
-        final query =
+        const query =
             'insert into user (id, full_name, email, password) values (?, ?, ?, ?)';
-        final uuid = Uuid().v4();
+        final uuid = const Uuid().v4();
 
         await conn.query(query, [
           uuid,
@@ -48,7 +49,7 @@ class UserRepository implements IUserRepository {
     MySqlConnection? conn;
     try {
       conn = await connection.openConnection();
-      final query = 'select * from user where email = ? and password = ?';
+      const query = 'select * from user where email = ? and password = ?';
       final result = await conn.query(query, [
         email,
         CryptoHelper.generatedSha256Hash(password),
@@ -71,7 +72,9 @@ class UserRepository implements IUserRepository {
     } on MySqlException catch (e, s) {
       log.error('Erro ao fazer login com o usuário', e, s);
       throw DatabaseException(
-          message: 'Erro ao fazer login com o usuário', exception: e);
+        message: 'Erro ao fazer login com o usuário',
+        exception: e,
+      );
     } finally {
       await conn?.close();
     }

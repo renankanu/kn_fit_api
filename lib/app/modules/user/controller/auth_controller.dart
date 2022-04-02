@@ -1,15 +1,16 @@
 import 'dart:async';
 
 import 'package:injectable/injectable.dart';
-import 'package:kn_fit_api/app/core/core.dart';
-import 'package:kn_fit_api/app/core/helpers/jwt_helper.dart';
-import 'package:kn_fit_api/app/core/helpers/response_helper.dart';
-import 'package:kn_fit_api/app/models/models.dart';
-import 'package:kn_fit_api/app/modules/user/service/i_user_service.dart';
-import 'package:kn_fit_api/app/modules/user/view_models/login_view_model.dart';
-import 'package:kn_fit_api/app/modules/user/view_models/user_save_input_model.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
+
+import '../../../core/core.dart';
+import '../../../core/helpers/jwt_helper.dart';
+import '../../../core/helpers/response_helper.dart';
+import '../../../models/models.dart';
+import '../service/i_user_service.dart';
+import '../view_models/login_view_model.dart';
+import '../view_models/user_save_input_model.dart';
 
 part 'auth_controller.g.dart';
 

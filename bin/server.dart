@@ -13,14 +13,14 @@ import 'package:shelf/shelf_io.dart' as io;
 import 'package:shelf_router/shelf_router.dart';
 
 const _hostname = 'localhost';
-void main(List<String> args) async {
-  var parser = ArgParser()..addOption('port', abbr: 'p');
-  var result = parser.parse(args);
+Future<void> main(List<String> args) async {
+  final parser = ArgParser()..addOption('port', abbr: 'p');
+  final result = parser.parse(args);
 
   load();
 
-  var portStr = result['port'] ?? Platform.environment['PORT'] ?? '8080';
-  var port = int.tryParse(portStr);
+  final portStr = result['port'] ?? Platform.environment['PORT'] ?? '8080';
+  final port = int.tryParse(portStr);
 
   if (port == null) {
     stdout.writeln('Could not parse port value "$portStr" into a number.');
@@ -39,15 +39,15 @@ void main(List<String> args) async {
   final appConfig = ApplicationConfig();
   await appConfig.loadConfigApplication(router);
 
-  var handler = const shelf.Pipeline()
+  final handler = const shelf.Pipeline()
       .addMiddleware(CorsMiddlewares().handler)
       .addMiddleware(
         DefaultContentType('application/json;charset=utf-8').handler,
       )
-      .addMiddleware(shelf.logRequests())
       .addMiddleware(SecurityMiddleware(getIt.get()).handler)
+      .addMiddleware(shelf.logRequests())
       .addHandler(router);
 
-  var server = await io.serve(handler, _hostname, port);
+  final server = await io.serve(handler, _hostname, port);
   print('Serving at http://${server.address.host}:${server.port}');
 }

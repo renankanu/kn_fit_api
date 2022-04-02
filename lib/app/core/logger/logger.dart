@@ -7,10 +7,12 @@ class Logger implements ILogger {
 
   Logger() {
     var release = true;
-    assert(() {
-      release = false;
-      return true;
-    }());
+    assert(
+      () {
+        release = false;
+        return true;
+      }(),
+    );
     _logger = log.Logger(
       filter: release ? log.ProductionFilter() : log.DevelopmentFilter(),
     );

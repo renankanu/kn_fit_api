@@ -1,5 +1,5 @@
-import 'package:kn_fit_api/app/core/helpers/helpers.dart';
-import 'package:kn_fit_api/app/core/helpers/valid_fields.dart';
+import '../../../core/helpers/helpers.dart';
+import '../../../core/helpers/valid_fields.dart';
 
 class LoginViewModel extends RequestMapping {
   late String email;
@@ -14,7 +14,7 @@ class LoginViewModel extends RequestMapping {
       requiredKeys: ['email', 'password'],
       nonNullKeys: ['email', 'password'],
     );
-    email = data['email'];
-    password = data['password'];
+    email = data['email'] as String;
+    password = data['password'] as String;
   }
 }

@@ -1,4 +1,4 @@
-import 'package:kn_fit_api/app/core/exceptions/required_field_exception.dart';
+import '../exceptions/required_field_exception.dart';
 
 class ValidFields {
   ValidFields._();

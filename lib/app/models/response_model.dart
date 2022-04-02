@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:kn_fit_api/app/models/base_model.dart';
+
+import 'base_model.dart';
 
 part 'response_model.g.dart';
 

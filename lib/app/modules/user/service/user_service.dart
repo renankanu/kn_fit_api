@@ -1,9 +1,10 @@
 import 'package:injectable/injectable.dart';
-import 'package:kn_fit_api/app/core/core.dart';
-import 'package:kn_fit_api/app/models/user_model.dart';
-import 'package:kn_fit_api/app/modules/user/repository/i_user_repository.dart';
-import 'package:kn_fit_api/app/modules/user/service/i_user_service.dart';
-import 'package:kn_fit_api/app/modules/user/view_models/user_save_input_model.dart';
+
+import '../../../core/core.dart';
+import '../../../models/user_model.dart';
+import '../repository/i_user_repository.dart';
+import '../view_models/user_save_input_model.dart';
+import 'i_user_service.dart';
 
 @LazySingleton(as: IUserService)
 class UserService implements IUserService {

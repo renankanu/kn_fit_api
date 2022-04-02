@@ -1,9 +1,9 @@
 import 'package:dotenv/dotenv.dart' show load, env;
 import 'package:get_it/get_it.dart';
-import 'package:kn_fit_api/app/core/routers/router_configure.dart';
 import 'package:shelf_router/shelf_router.dart';
 
 import '../core.dart';
+import '../routers/router_configure.dart';
 import 'database_connection_configuration.dart';
 import 'service_locator_config.dart';
 

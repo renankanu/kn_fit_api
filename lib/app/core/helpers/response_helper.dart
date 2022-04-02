@@ -1,8 +1,8 @@
-import 'package:kn_fit_api/app/core/exceptions/required_field_exception.dart';
-import 'package:kn_fit_api/app/models/models.dart';
 import 'package:shelf/shelf.dart';
 
+import '../../models/models.dart';
 import '../core.dart';
+import '../exceptions/required_field_exception.dart';
 
 class ResponseHelper {
   ResponseHelper._();

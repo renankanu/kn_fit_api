@@ -1,8 +1,7 @@
-
 class SecuritySkipUrl {
   String url;
   String method;
-  
+
   SecuritySkipUrl({
     required this.url,
     required this.method,
@@ -10,11 +9,13 @@ class SecuritySkipUrl {
 
   @override
   bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-  
+    if (identical(this, other)) {
+      return true;
+    }
+
     return other is SecuritySkipUrl &&
-      other.url == url &&
-      other.method == method;
+        other.url == url &&
+        other.method == method;
   }
 
   @override

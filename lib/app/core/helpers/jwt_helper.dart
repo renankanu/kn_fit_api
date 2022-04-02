@@ -1,7 +1,8 @@
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:dotenv/dotenv.dart';
-import 'package:kn_fit_api/app/models/models.dart';
 import 'package:uuid/uuid.dart';
+
+import '../../models/models.dart';
 
 class JwtHelper {
   JwtHelper._();
@@ -18,7 +19,7 @@ class JwtHelper {
         'iat': DateTime.now().millisecondsSinceEpoch,
       },
       issuer: 'https://www.renankanu.com.br',
-      jwtId: Uuid().v4(),
+      jwtId: const Uuid().v4(),
     );
 
     final token = jwt.sign(
@@ -31,7 +32,7 @@ class JwtHelper {
   static TokenPair createTokenPair(String userId) {
     final token = generateJWT(userId);
 
-    final refreshTokenExpiry = Duration(seconds: 60);
+    const refreshTokenExpiry = Duration(seconds: 60);
     final refreshToken = generateJWT(
       userId,
       expiry: refreshTokenExpiry,

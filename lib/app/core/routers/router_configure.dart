@@ -1,6 +1,6 @@
-import 'package:kn_fit_api/app/modules/user/user_router.dart';
 import 'package:shelf_router/shelf_router.dart';
 
+import '../../modules/user/user_router.dart';
 import 'i_router.dart';
 
 class RouterConfigure {

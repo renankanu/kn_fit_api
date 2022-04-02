@@ -1,10 +1,10 @@
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:dotenv/dotenv.dart';
-import 'package:kn_fit_api/app/core/helpers/response_helper.dart';
-import 'package:kn_fit_api/app/models/response_model.dart';
 import 'package:shelf/shelf.dart';
 
+import '../../../models/response_model.dart';
 import '../../core.dart';
+import '../../helpers/response_helper.dart';
 import '../base_middleware.dart';
 import 'security_skip_url.dart';
 
@@ -21,8 +21,9 @@ class SecurityMiddleware extends BaseMiddleware {
   @override
   Future<Response> execute(Request request) async {
     try {
-      if (skipUrl.contains(SecuritySkipUrl(
-          url: '/${request.url.path}', method: request.method))) {
+      if (skipUrl.contains(
+        SecuritySkipUrl(url: '/${request.url.path}', method: request.method),
+      )) {
         return innerHandler(request);
       }
 
