@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:shelf/shelf.dart' hide Middleware;
+import 'package:shelf/shelf.dart';
 
-import '../middleware.dart';
+import '../base_middleware.dart';
 
-class CorsMiddlewares extends Middleware {
+class CorsMiddlewares extends BaseMiddleware {
   final Map<String, String> headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',

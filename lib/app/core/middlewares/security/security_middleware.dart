@@ -2,13 +2,13 @@ import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:dotenv/dotenv.dart';
 import 'package:kn_fit_api/app/core/helpers/response_helper.dart';
 import 'package:kn_fit_api/app/models/response_model.dart';
-import 'package:shelf/shelf.dart' hide Middleware;
+import 'package:shelf/shelf.dart';
 
 import '../../core.dart';
-import '../middleware.dart';
+import '../base_middleware.dart';
 import 'security_skip_url.dart';
 
-class SecurityMiddleware extends Middleware {
+class SecurityMiddleware extends BaseMiddleware {
   final ILogger log;
   final skipUrl = <SecuritySkipUrl>[
     SecuritySkipUrl(url: '/user/register', method: 'POST'),

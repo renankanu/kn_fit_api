@@ -1,6 +1,6 @@
 import 'package:shelf/shelf.dart';
 
-abstract class Middleware {
+abstract class BaseMiddleware {
   late Handler innerHandler;
 
   Handler handler(Handler innerHandler) {

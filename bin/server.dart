@@ -5,6 +5,7 @@ import 'package:args/args.dart';
 import 'package:dotenv/dotenv.dart';
 import 'package:kn_fit_api/app/core/config/application_config.dart';
 import 'package:kn_fit_api/app/core/config/service_locator_config.dart';
+import 'package:kn_fit_api/app/core/middlewares/cors/cors_middlewares.dart';
 import 'package:kn_fit_api/app/core/middlewares/security/security_middleware.dart';
 import 'package:shelf/shelf.dart' as shelf;
 import 'package:shelf/shelf_io.dart' as io;
@@ -39,6 +40,7 @@ void main(List<String> args) async {
   await appConfig.loadConfigApplication(router);
 
   var handler = const shelf.Pipeline()
+      .addMiddleware(CorsMiddlewares().handler)
       .addMiddleware(shelf.logRequests())
       .addMiddleware(SecurityMiddleware(getIt.get()).handler)
       .addHandler(router);
