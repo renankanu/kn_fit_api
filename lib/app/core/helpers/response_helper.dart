@@ -20,7 +20,6 @@ class ResponseHelper {
           data: null,
           message: 'Email já cadastrado.',
         ).toString(),
-        headers: {'content-type': 'application/json'},
       );
     } on RequiredFieldException catch (e, _) {
       return ResponseHelper.baseResponse(
@@ -59,7 +58,6 @@ class ResponseHelper {
     return Response(
       status,
       body: responseModel.toString(),
-      headers: {'content-type': 'application/json'},
     );
   }
 }

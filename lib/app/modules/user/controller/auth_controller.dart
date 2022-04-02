@@ -54,7 +54,6 @@ class AuthController {
 
         return Response.ok(
           JwtHelper.createTokenPair(user.id!).toString(),
-          headers: {'content-type': 'application/json'},
         );
       },
       log: log,

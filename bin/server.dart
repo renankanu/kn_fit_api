@@ -6,6 +6,7 @@ import 'package:dotenv/dotenv.dart';
 import 'package:kn_fit_api/app/core/config/application_config.dart';
 import 'package:kn_fit_api/app/core/config/service_locator_config.dart';
 import 'package:kn_fit_api/app/core/middlewares/cors/cors_middlewares.dart';
+import 'package:kn_fit_api/app/core/middlewares/default_content_type/default_content_type.dart';
 import 'package:kn_fit_api/app/core/middlewares/security/security_middleware.dart';
 import 'package:shelf/shelf.dart' as shelf;
 import 'package:shelf/shelf_io.dart' as io;
@@ -32,7 +33,6 @@ void main(List<String> args) async {
     '/health',
     (shelf.Request request) => shelf.Response.ok(
       jsonEncode({'up': 'true'}),
-      headers: {'content-type': 'application/json'},
     ),
   );
 
@@ -41,6 +41,9 @@ void main(List<String> args) async {
 
   var handler = const shelf.Pipeline()
       .addMiddleware(CorsMiddlewares().handler)
+      .addMiddleware(
+        DefaultContentType('application/json;charset=utf-8').handler,
+      )
       .addMiddleware(shelf.logRequests())
       .addMiddleware(SecurityMiddleware(getIt.get()).handler)
       .addHandler(router);
