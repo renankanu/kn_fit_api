@@ -22,6 +22,7 @@ class StudentService implements IStudentService {
       fullName: student.fullName,
       email: student.email,
       password: student.password,
+      personalTrainingId: student.personalTrainingId,
     );
 
     return studentRepository.createStudent(studentEntity);

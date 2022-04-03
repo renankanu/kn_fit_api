@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:mysql1/mysql1.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../../core/core.dart';
 import '../../../core/database/i_database_connection.dart';
@@ -24,14 +23,13 @@ class StudentRepository implements IStudentRepository {
 
       if (isUserRegister.isEmpty) {
         const query =
-            'insert into student (id, full_name, email, password) values (?, ?, ?, ?)';
-        final uuid = const Uuid().v4();
+            'insert into student (full_name, email, password, personal_training_id) values (?, ?, ?, ?)';
 
         await conn.query(query, [
-          uuid,
           student.fullName,
           student.email,
           CryptoHelper.generatedSha256Hash(student.password),
+          student.personalTrainingId,
         ]);
       } else {
         throw EmailAlreadyRegistered();
@@ -62,6 +60,7 @@ class StudentRepository implements IStudentRepository {
           fullName: userSqlData['full_name'],
           email: userSqlData['email'],
           password: userSqlData['password'],
+          personalTrainingId: userSqlData['personal_training_id'],
           createdAt: userSqlData['created_at'],
           updatedAt: userSqlData['updated_at'],
         );

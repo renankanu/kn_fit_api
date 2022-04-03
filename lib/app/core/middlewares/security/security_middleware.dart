@@ -10,9 +10,10 @@ class SecurityMiddleware extends BaseMiddleware {
   final ILogger log;
   final skipUrl = <SecuritySkipUrl>[
     SecuritySkipUrl(url: '/student/register', method: 'POST'),
-    SecuritySkipUrl(url: '/user/login', method: 'POST'),
-    SecuritySkipUrl(url: '/health', method: 'GET'),
     SecuritySkipUrl(url: '/personal-training/register', method: 'POST'),
+    SecuritySkipUrl(url: '/student/login', method: 'POST'),
+    SecuritySkipUrl(url: '/personal-training/login', method: 'POST'),
+    SecuritySkipUrl(url: '/health', method: 'GET'),
   ];
 
   SecurityMiddleware(this.log);

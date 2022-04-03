@@ -10,6 +10,7 @@ StudentModel _$StudentModelFromJson(Map<String, dynamic> json) => StudentModel(
       fullName: json['fullName'] as String,
       email: json['email'] as String,
       password: json['password'] as String,
+      personalTrainingId: json['personalTrainingId'] as int,
       id: json['id'] as int?,
       createdAt: json['createdAt'] == null
           ? null
@@ -35,5 +36,6 @@ Map<String, dynamic> _$StudentModelToJson(StudentModel instance) {
   }
 
   writeNotNull('password', StudentModel.toNull(instance.password));
+  val['personalTrainingId'] = instance.personalTrainingId;
   return val;
 }
