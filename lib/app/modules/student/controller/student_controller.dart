@@ -67,5 +67,23 @@ class StudentController {
     );
   }
 
+  @Route.get('/info')
+  Future<Response> getStudentInfo(Request request) async {
+    return ResponseHelper.makeResponse(
+      handlerResponse: () async {
+        final user = int.parse(request.headers['user']!);
+        print(user);
+        return ResponseHelper.baseResponse(
+          200,
+          responseModel: ResponseModel(
+            data: null,
+            message: 'Aluno recuperado com sucesso.',
+          ),
+        );
+      },
+      log: log,
+    );
+  }
+
   Router get router => _$StudentControllerRouter(this);
 }
