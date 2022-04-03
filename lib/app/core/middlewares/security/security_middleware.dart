@@ -14,7 +14,6 @@ class SecurityMiddleware extends BaseMiddleware {
     SecuritySkipUrl(url: '/student/login', method: 'POST'),
     SecuritySkipUrl(url: '/personal-training/login', method: 'POST'),
     SecuritySkipUrl(url: '/health', method: 'GET'),
-    SecuritySkipUrl(url: '/personal-training/', method: 'GET'),
   ];
 
   SecurityMiddleware(this.log);
@@ -44,10 +43,6 @@ class SecurityMiddleware extends BaseMiddleware {
       final claims =
           JWT.verify(authorizationToken, SecretKey(env['JWT_SECRET']!));
 
-      // if (request.url.path != 'auth/refresh') {
-      //   claims.validate();
-      // }
-
       final claimsMap = claims.payload as Map<String, dynamic>;
 
       final userId = claimsMap['ref'];
@@ -55,9 +50,8 @@ class SecurityMiddleware extends BaseMiddleware {
       if (userId == null) {
         throw JWTError('Usuário não encontrado.');
       }
-
       final securityHeaders = {
-        'user': userId,
+        'user': userId.toString(),
         'access_token': authorizationToken,
       };
 

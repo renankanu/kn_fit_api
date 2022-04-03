@@ -45,10 +45,11 @@ class PersonalTrainingController {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
         final personalTrainings = await personalTrainingService.getAll();
+        final encodeJsonPersonalTraining = jsonEncode(personalTrainings);
         return ResponseHelper.baseResponse(
           200,
           responseModel: ResponseModel(
-            data: jsonDecode(personalTrainings.toString()),
+            data: jsonDecode(encodeJsonPersonalTraining),
             message: 'Personal Trainings recuperados com sucesso.',
           ),
         );

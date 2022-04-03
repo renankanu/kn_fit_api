@@ -5,9 +5,7 @@
 ResponseModel _$ResponseModelFromJson(Map<String, dynamic> json) =>
     ResponseModel(
       message: json['message'] as String,
-      data: json['data'] == null
-          ? null
-          : BaseModel.fromJson(json['data'] as Map<String, dynamic>),
+      data: json['data'],
     );
 
 Map<String, dynamic> _$ResponseModelToJson(ResponseModel instance) =>
