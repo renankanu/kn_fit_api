@@ -38,6 +38,6 @@ class JwtHelper {
       expiry: refreshTokenExpiry,
     );
 
-    return TokenPair(token, refreshToken);
+    return TokenPair(token: token, refreshToken: refreshToken);
   }
 }

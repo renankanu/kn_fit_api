@@ -25,13 +25,7 @@ PersonalTrainingModel _$PersonalTrainingModelFromJson(
 
 Map<String, dynamic> _$PersonalTrainingModelToJson(
     PersonalTrainingModel instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-    'createdAt': instance.createdAt?.toIso8601String(),
-    'updatedAt': instance.updatedAt?.toIso8601String(),
-    'fullName': instance.fullName,
-    'email': instance.email,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -39,6 +33,11 @@ Map<String, dynamic> _$PersonalTrainingModelToJson(
     }
   }
 
+  writeNotNull('id', instance.id);
+  writeNotNull('createdAt', instance.createdAt?.toIso8601String());
+  writeNotNull('updatedAt', instance.updatedAt?.toIso8601String());
+  val['fullName'] = instance.fullName;
+  val['email'] = instance.email;
   writeNotNull('password', PersonalTrainingModel.toNull(instance.password));
   val['crefType'] = instance.crefType;
   val['crefNumber'] = instance.crefNumber;

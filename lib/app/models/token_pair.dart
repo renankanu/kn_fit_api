@@ -1,16 +1,19 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
-class TokenPair {
-  TokenPair(this.token, this.refreshToken);
+import 'base_model.dart';
+
+part 'token_pair.g.dart';
+
+@JsonSerializable()
+class TokenPair extends BaseModel {
+  TokenPair({
+    required this.token,
+    required this.refreshToken,
+  });
 
   final String token;
   final String refreshToken;
 
-  Map<String, dynamic> toJson() => {
-        'token': token,
-        'refreshToken': refreshToken,
-      };
-
   @override
-  String toString() => json.encode(toJson());
+  Map<String, dynamic> toJson() => _$TokenPairToJson(this);
 }

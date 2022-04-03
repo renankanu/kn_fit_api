@@ -50,9 +50,12 @@ class StudentController {
           loginViewModel.email,
           loginViewModel.password,
         );
-
-        return Response.ok(
-          JwtHelper.createTokenPair(student.id!).toString(),
+        return ResponseHelper.baseResponse(
+          200,
+          responseModel: ResponseModel(
+            data: JwtHelper.createTokenPair(student.id!),
+            message: 'Login realizado com sucesso.',
+          ),
         );
       },
       log: log,

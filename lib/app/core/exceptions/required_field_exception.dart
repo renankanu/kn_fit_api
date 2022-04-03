@@ -7,5 +7,5 @@ class RequiredFieldException implements Exception {
 
   @override
   String toString() =>
-      'Esses campos contem valores `null` ou vazio: $keysWithNullValues.';
+      'Esses campos contem valores `null` ou inválidos: $keysWithNullValues.';
 }
