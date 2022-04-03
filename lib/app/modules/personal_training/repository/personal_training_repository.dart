@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:mysql1/mysql1.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../../core/core.dart';
 import '../../../core/database/i_database_connection.dart';
@@ -21,14 +20,14 @@ class PersonalTrainingRepository implements IPersonalTrainingRepository {
     try {
       conn = await connection.openConnection();
       const query =
-          'insert into personal_training (id, full_name, email, password) values (?, ?, ?, ?)';
-      final uuid = const Uuid().v4();
+          'insert into personal_training (full_name, email, password, cref_type, cref_number) values (?, ?, ?, ?, ?)';
 
       await conn.query(query, [
-        uuid,
         personalTraining.fullName,
         personalTraining.email,
         CryptoHelper.generatedSha256Hash(personalTraining.password),
+        personalTraining.crefType,
+        personalTraining.crefNumber,
       ]);
     } on MySqlException catch (e, s) {
       log.error('Erro ao criar o Personal Training', e, s);

@@ -45,8 +45,16 @@ class ResponseHelper {
           message: e.toString(),
         ),
       );
+    } on DatabaseException catch (e, _) {
+      return ResponseHelper.baseResponse(
+        500,
+        responseModel: ResponseModel(
+          data: null,
+          message: e.toString(),
+        ),
+      );
     } catch (error) {
-      log.error('Erro ao cadastrar usuário', error);
+      log.error('Erro', error);
       return Response.internalServerError();
     }
   }
