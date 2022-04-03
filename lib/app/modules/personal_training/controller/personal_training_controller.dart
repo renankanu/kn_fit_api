@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:injectable/injectable.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
@@ -31,6 +33,23 @@ class PersonalTrainingController {
           responseModel: ResponseModel(
             data: null,
             message: 'Personal Training criado com sucesso.',
+          ),
+        );
+      },
+      log: log,
+    );
+  }
+
+  @Route.get('/')
+  Future<Response> getAllPersonalTrainings(Request request) async {
+    return ResponseHelper.makeResponse(
+      handlerResponse: () async {
+        final personalTrainings = await personalTrainingService.getAll();
+        return ResponseHelper.baseResponse(
+          200,
+          responseModel: ResponseModel(
+            data: jsonDecode(personalTrainings.toString()),
+            message: 'Personal Trainings recuperados com sucesso.',
           ),
         );
       },

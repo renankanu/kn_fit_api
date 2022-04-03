@@ -5,7 +5,7 @@ class PersonalTrainingSaveInput extends RequestMapping {
   late String email;
   late String password;
   late String crefType;
-  late String crefNumber;
+  late int crefNumber;
 
   PersonalTrainingSaveInput({
     required this.fullName,
@@ -41,6 +41,6 @@ class PersonalTrainingSaveInput extends RequestMapping {
     email = data['email'] as String;
     password = data['password'] as String;
     crefType = data['crefType'] as String;
-    crefNumber = data['crefNumber'] as String;
+    crefNumber = data['crefNumber'] as int;
   }
 }

@@ -31,4 +31,9 @@ class PersonalTrainingService implements IPersonalTrainingService {
     return personalTrainingRepository
         .createPersonalTraining(personalTrainingEntity);
   }
+
+  @override
+  Future<List<PersonalTrainingModel>> getAll() {
+    return personalTrainingRepository.getAll();
+  }
 }

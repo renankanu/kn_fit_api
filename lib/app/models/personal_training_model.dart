@@ -11,7 +11,7 @@ class PersonalTrainingModel extends BaseModel {
   @JsonKey(toJson: toNull, includeIfNull: false)
   final String password;
   final String crefType;
-  final String crefNumber;
+  final int crefNumber;
 
   PersonalTrainingModel({
     required this.fullName,

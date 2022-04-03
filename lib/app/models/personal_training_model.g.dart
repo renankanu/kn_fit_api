@@ -13,7 +13,7 @@ PersonalTrainingModel _$PersonalTrainingModelFromJson(
       email: json['email'] as String,
       password: json['password'] as String,
       crefType: json['crefType'] as String,
-      crefNumber: json['crefNumber'] as String,
+      crefNumber: json['crefNumber'] as int,
       id: json['id'] as int?,
       createdAt: json['createdAt'] == null
           ? null
