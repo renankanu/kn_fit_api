@@ -10,12 +10,18 @@ class JwtHelper {
   static final String _secret = env['JWT_SECRET']!;
 
   static String generateJWT(
-    int userId, {
+    int refId, {
+    required String email,
+    required String fullName,
+    required String refType,
     Duration expiry = const Duration(hours: 1),
   }) {
     final jwt = JWT(
       {
-        'ref': userId,
+        'ref': refId,
+        'email': email,
+        'fullName': fullName,
+        'type': refType,
         'iat': DateTime.now().millisecondsSinceEpoch,
       },
       issuer: 'https://www.renankanu.com.br',
@@ -29,12 +35,24 @@ class JwtHelper {
     return token;
   }
 
-  static TokenPair createTokenPair(int userId) {
-    final token = generateJWT(userId);
-
+  static TokenPair createTokenPair(
+    int userId,
+    String email,
+    String fullName,
+    String refType,
+  ) {
+    final token = generateJWT(
+      userId,
+      email: email,
+      fullName: fullName,
+      refType: refType,
+    );
     const refreshTokenExpiry = Duration(seconds: 60);
     final refreshToken = generateJWT(
       userId,
+      email: email,
+      fullName: fullName,
+      refType: refType,
       expiry: refreshTokenExpiry,
     );
 
