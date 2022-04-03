@@ -1,5 +1,4 @@
 import '../../../core/helpers/helpers.dart';
-import '../../../core/helpers/valid_fields.dart';
 
 class StudentSaveInputModel extends RequestMapping {
   late String fullName;
