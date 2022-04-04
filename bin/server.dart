@@ -7,7 +7,7 @@ import 'package:kn_fit_api/app/core/middlewares/cors/cors_middlewares.dart';
 import 'package:kn_fit_api/app/core/middlewares/default_content_type/default_content_type.dart';
 import 'package:kn_fit_api/app/core/middlewares/security/security_middleware.dart';
 import 'package:kn_fit_api/app/infra/custom_server.dart';
-import 'package:shelf/shelf.dart' as shelf;
+import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
 Future<void> main() async {
@@ -16,7 +16,7 @@ Future<void> main() async {
   final router = Router();
   router.get(
     '/health',
-    (shelf.Request request) => shelf.Response.ok(
+    (Request request) => Response.ok(
       jsonEncode({'up': 'true'}),
     ),
   );
@@ -24,11 +24,11 @@ Future<void> main() async {
   final appConfig = ApplicationConfig();
   await appConfig.loadConfigApplication(router);
 
-  final handler = const shelf.Pipeline()
+  final handler = const Pipeline()
       .addMiddleware(CorsMiddlewares().handler)
       .addMiddleware(DefaultContentType().middleware)
       .addMiddleware(SecurityMiddleware(getIt.get()).handler)
-      .addMiddleware(shelf.logRequests())
+      .addMiddleware(logRequests())
       .addHandler(router);
 
   await CustomServer.initialize(
