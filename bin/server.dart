@@ -26,9 +26,7 @@ Future<void> main() async {
 
   final handler = const shelf.Pipeline()
       .addMiddleware(CorsMiddlewares().handler)
-      .addMiddleware(
-        DefaultContentType('application/json;charset=utf-8').handler,
-      )
+      .addMiddleware(DefaultContentType().middleware)
       .addMiddleware(SecurityMiddleware(getIt.get()).handler)
       .addMiddleware(shelf.logRequests())
       .addHandler(router);
