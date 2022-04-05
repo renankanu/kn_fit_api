@@ -7,14 +7,14 @@ class BaseModel {
   @JsonKey(includeIfNull: false)
   final int? id;
   @JsonKey(includeIfNull: false)
-  final DateTime? createdAt;
+  final DateTime? createTime;
   @JsonKey(includeIfNull: false)
-  final DateTime? updatedAt;
+  final DateTime? updateTime;
 
   BaseModel({
     this.id,
-    this.createdAt,
-    this.updatedAt,
+    this.createTime,
+    this.updateTime,
   });
 
   factory BaseModel.fromJson(Map<String, dynamic> json) =>

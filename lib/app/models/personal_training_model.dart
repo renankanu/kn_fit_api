@@ -20,9 +20,9 @@ class PersonalTrainingModel extends BaseModel {
     required this.crefType,
     required this.crefNumber,
     int? id,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  }) : super(id: id, createdAt: createdAt, updatedAt: updatedAt);
+    DateTime? createTime,
+    DateTime? updateTime,
+  }) : super(id: id, createTime: createTime, updateTime: updateTime);
 
   factory PersonalTrainingModel.fromJson(Map<String, dynamic> json) =>
       _$PersonalTrainingModelFromJson(json);

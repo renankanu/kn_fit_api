@@ -55,8 +55,8 @@ class PersonalTrainingRepository implements IPersonalTrainingRepository {
           password: row['password'],
           crefType: row['cref_type'],
           crefNumber: row['cref_number'],
-          createdAt: row['create_time'],
-          updatedAt: row['update_time'],
+          createTime: row['create_time'],
+          updateTime: row['update_time'],
         );
       }).toList();
     } on MySqlException catch (e, s) {

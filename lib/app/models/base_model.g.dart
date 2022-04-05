@@ -8,12 +8,12 @@ part of 'base_model.dart';
 
 BaseModel _$BaseModelFromJson(Map<String, dynamic> json) => BaseModel(
       id: json['id'] as int?,
-      createdAt: json['createdAt'] == null
+      createTime: json['createTime'] == null
           ? null
-          : DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
+          : DateTime.parse(json['createTime'] as String),
+      updateTime: json['updateTime'] == null
           ? null
-          : DateTime.parse(json['updatedAt'] as String),
+          : DateTime.parse(json['updateTime'] as String),
     );
 
 Map<String, dynamic> _$BaseModelToJson(BaseModel instance) {
@@ -26,7 +26,7 @@ Map<String, dynamic> _$BaseModelToJson(BaseModel instance) {
   }
 
   writeNotNull('id', instance.id);
-  writeNotNull('createdAt', instance.createdAt?.toIso8601String());
-  writeNotNull('updatedAt', instance.updatedAt?.toIso8601String());
+  writeNotNull('createTime', instance.createTime?.toIso8601String());
+  writeNotNull('updateTime', instance.updateTime?.toIso8601String());
   return val;
 }

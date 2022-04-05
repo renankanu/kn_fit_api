@@ -32,4 +32,8 @@ class StudentService implements IStudentService {
   Future<StudentModel> login(String email, String password) {
     return studentRepository.login(email, password);
   }
+
+  @override
+  Future<StudentModel> getStudentById(int id) =>
+      studentRepository.getStudentById(id);
 }

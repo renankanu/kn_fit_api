@@ -18,9 +18,9 @@ class StudentModel extends BaseModel {
     required this.password,
     required this.personalTrainingId,
     int? id,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  }) : super(id: id, createdAt: createdAt, updatedAt: updatedAt);
+    DateTime? createTime,
+    DateTime? updateTime,
+  }) : super(id: id, createTime: createTime, updateTime: updateTime);
 
   StudentModel copyWith({
     int? id,
@@ -28,8 +28,8 @@ class StudentModel extends BaseModel {
     String? email,
     String? password,
     int? personalTrainingId,
-    DateTime? createdAt,
-    DateTime? updatedAt,
+    DateTime? createTime,
+    DateTime? updateTime,
   }) {
     return StudentModel(
       id: id ?? this.id,
@@ -37,8 +37,8 @@ class StudentModel extends BaseModel {
       email: email ?? this.email,
       password: password ?? this.password,
       personalTrainingId: personalTrainingId ?? this.personalTrainingId,
-      createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
+      createTime: createTime ?? this.createTime,
+      updateTime: updateTime ?? this.updateTime,
     );
   }
 

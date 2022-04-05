@@ -71,12 +71,12 @@ class StudentController {
   Future<Response> getStudentInfo(Request request) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
-        final user = int.parse(request.headers['user']!);
-        print(user);
+        final userId = int.parse(request.headers['user']!);
+        final student = await studentService.getStudentById(userId);
         return ResponseHelper.baseResponse(
           200,
           responseModel: ResponseModel(
-            data: null,
+            data: student.toJson(),
             message: 'Aluno recuperado com sucesso.',
           ),
         );
