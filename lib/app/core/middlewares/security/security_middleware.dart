@@ -27,59 +27,54 @@ class SecurityMiddleware extends BaseMiddleware {
         return innerHandler(request);
       }
 
-      final authHeader = request.headers['Authorization'];
+      final authorizationHeader = request.headers['Authorization'];
+      String? authorizationToken;
+      int? userId;
 
-      if (authHeader == null || authHeader.isEmpty) {
-        throw JWTError('Token não informado.');
+      if (authorizationHeader == null) {
+        return responseErrorJWT(JWTError('Authorization header is required'));
       }
 
-      final authHeaderContent = authHeader.split(' ');
-
-      if (authHeaderContent[0] != 'Bearer') {
-        throw JWTError('Token inválido.');
+      if (authorizationHeader.startsWith('Bearer ')) {
+        final token = authorizationHeader.substring(7);
+        final claims = JWT.verify(token, SecretKey(env['JWT_SECRET']!));
+        final claimsMap = claims.payload as Map<String, dynamic>;
+        userId = claimsMap['ref'] as int;
       }
-
-      final authorizationToken = authHeaderContent[1];
-      final claims =
-          JWT.verify(authorizationToken, SecretKey(env['JWT_SECRET']!));
-
-      final claimsMap = claims.payload as Map<String, dynamic>;
-
-      final userId = claimsMap['ref'];
-
-      if (userId == null) {
-        throw JWTError('Usuário não encontrado.');
-      }
-      final securityHeaders = {
-        'user': userId.toString(),
-        'access_token': authorizationToken,
-      };
-
-      return innerHandler(request.change(headers: securityHeaders));
-    } on JWTUndefinedError catch (_) {
-      return ResponseHelper.baseResponse(
-        401,
-        responseModel: ResponseModel(
-          data: null,
-          message: 'Token inválido.',
+      return innerHandler(
+        request.change(
+          headers: {
+            'user': userId.toString(),
+            'access_token': authorizationToken,
+          },
         ),
       );
-    } on JWTError catch (e, _) {
+    } on JWTInvalidError catch (error) {
+      return responseErrorJWT(error);
+    } on JWTExpiredError catch (error) {
+      return responseErrorJWT(error);
+    } on JWTNotActiveError catch (error) {
+      return responseErrorJWT(error);
+    } on JWTUndefinedError catch (error) {
+      return responseErrorJWT(error);
+    } catch (error) {
       return ResponseHelper.baseResponse(
         403,
         responseModel: ResponseModel(
           data: null,
-          message: e.toString(),
-        ),
-      );
-    } catch (e, _) {
-      return ResponseHelper.baseResponse(
-        403,
-        responseModel: ResponseModel(
-          data: null,
-          message: e.toString(),
+          message: error.toString(),
         ),
       );
     }
+  }
+
+  Response responseErrorJWT(JWTError error) {
+    return ResponseHelper.baseResponse(
+      403,
+      responseModel: ResponseModel(
+        data: null,
+        message: error.toString(),
+      ),
+    );
   }
 }
