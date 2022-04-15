@@ -80,40 +80,6 @@ class StudentRepository implements IStudentRepository {
   }
 
   @override
-  Future<StudentModel> getStudentById(int id) async {
-    MySqlConnection? conn;
-    try {
-      conn = await connection.openConnection();
-      const query = 'select * from student where id = ?';
-      final result = await conn.query(query, [id]);
-
-      if (result.isNotEmpty) {
-        final userSqlData = result.first;
-        final student = StudentModel(
-          id: userSqlData['id'],
-          fullName: userSqlData['full_name'],
-          email: userSqlData['email'],
-          password: userSqlData['password'],
-          personalTrainingId: userSqlData['personal_training_id'],
-          createTime: userSqlData['create_time'],
-          updateTime: userSqlData['update_time'],
-        );
-        return student;
-      } else {
-        throw UserNotFoundException(message: 'Usuário não encontrado');
-      }
-    } on MySqlException catch (e, s) {
-      log.error('Erro ao buscar o usuário', e, s);
-      throw DatabaseException(
-        message: 'Erro ao buscar o usuário',
-        exception: e,
-      );
-    } finally {
-      await conn?.close();
-    }
-  }
-
-  @override
   Future<List<StudentModel>> getAll() async {
     MySqlConnection? conn;
     try {
