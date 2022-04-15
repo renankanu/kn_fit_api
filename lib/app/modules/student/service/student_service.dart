@@ -34,6 +34,8 @@ class StudentService implements IStudentService {
   }
 
   @override
-  Future<StudentModel> getStudentById(int id) =>
-      studentRepository.getStudentById(id);
+  Future<List<StudentModel>> getAll() => studentRepository.getAll();
+
+  @override
+  Future<StudentModel> getInfo(int id) => studentRepository.getInfo(id);
 }

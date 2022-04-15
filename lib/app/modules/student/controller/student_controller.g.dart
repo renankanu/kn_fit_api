@@ -11,5 +11,6 @@ Router _$StudentControllerRouter(StudentController service) {
   router.add('POST', r'/register', service.saveStudent);
   router.add('POST', r'/login', service.login);
   router.add('GET', r'/info', service.getStudentInfo);
+  router.add('GET', r'/all', service.getAllStudents);
   return router;
 }

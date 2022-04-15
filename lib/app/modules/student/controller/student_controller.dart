@@ -72,12 +72,29 @@ class StudentController {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
         final userId = int.parse(request.headers['user']!);
-        final student = await studentService.getStudentById(userId);
+        final student = await studentService.getInfo(userId);
         return ResponseHelper.baseResponse(
           200,
           responseModel: ResponseModel(
             data: student.toJson(),
             message: 'Aluno recuperado com sucesso.',
+          ),
+        );
+      },
+      log: log,
+    );
+  }
+
+  @Route.get('/all')
+  Future<Response> getAllStudents(Request request) async {
+    return ResponseHelper.makeResponse(
+      handlerResponse: () async {
+        final students = await studentService.getAll();
+        return ResponseHelper.baseResponse(
+          200,
+          responseModel: ResponseModel(
+            data: students.map((student) => student.toJson()).toList(),
+            message: 'Alunos recuperados com sucesso.',
           ),
         );
       },
