@@ -36,4 +36,9 @@ class PersonalTrainingService implements IPersonalTrainingService {
   Future<List<PersonalTrainingModel>> getAll() {
     return personalTrainingRepository.getAll();
   }
+
+  @override
+  Future<PersonalTrainingModel> login(String email, String password) {
+    return personalTrainingRepository.login(email, password);
+  }
 }

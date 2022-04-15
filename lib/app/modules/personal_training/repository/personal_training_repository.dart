@@ -12,6 +12,7 @@ class PersonalTrainingRepository implements IPersonalTrainingRepository {
   final ILogger log;
 
   PersonalTrainingRepository({required this.connection, required this.log});
+
   @override
   Future<void> createPersonalTraining(
     PersonalTrainingModel personalTraining,
@@ -63,6 +64,45 @@ class PersonalTrainingRepository implements IPersonalTrainingRepository {
       log.error('Erro ao buscar todos os Personal Trainings', e, s);
       throw DatabaseException(
         message: 'Erro ao buscar todos os Personal Trainings',
+        exception: e,
+      );
+    } finally {
+      await conn?.close();
+    }
+  }
+
+  @override
+  Future<PersonalTrainingModel> login(String email, String password) async {
+    MySqlConnection? conn;
+    try {
+      conn = await connection.openConnection();
+      const query =
+          'select * from personal_training where email = ? and password = ?';
+      final result = await conn.query(query, [
+        email,
+        CryptoHelper.generatedSha256Hash(password),
+      ]);
+
+      if (result.isNotEmpty) {
+        final userSqlData = result.first;
+        final personalTraining = PersonalTrainingModel(
+          id: userSqlData['id'],
+          fullName: userSqlData['full_name'],
+          email: userSqlData['email'],
+          password: userSqlData['password'],
+          crefType: userSqlData['cref_type'],
+          crefNumber: userSqlData['cref_number'],
+          createTime: userSqlData['create_time'],
+          updateTime: userSqlData['update_time'],
+        );
+        return personalTraining;
+      } else {
+        throw UserNotFoundException(message: 'Email ou senha inválidos');
+      }
+    } on MySqlException catch (e, s) {
+      log.error('Erro ao fazer login com o Personal Training', e, s);
+      throw DatabaseException(
+        message: 'Erro ao fazer login com o Personal Training',
         exception: e,
       );
     } finally {

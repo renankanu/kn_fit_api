@@ -6,6 +6,7 @@ import 'package:shelf_router/shelf_router.dart';
 
 import '../../../core/core.dart';
 import '../../../models/models.dart';
+import '../../student/view_models/login_view_model.dart';
 import '../service/i_personal_training_service.dart';
 import '../view_models/personal_training_save_input.dart';
 
@@ -33,6 +34,32 @@ class PersonalTrainingController {
           responseModel: ResponseModel(
             data: null,
             message: 'Personal Training criado com sucesso.',
+          ),
+        );
+      },
+      log: log,
+    );
+  }
+
+  @Route.post('/login')
+  Future<Response> login(Request request) async {
+    return ResponseHelper.makeResponse(
+      handlerResponse: () async {
+        final loginViewModel = LoginViewModel(await request.readAsString());
+        final personalTraining = await personalTrainingService.login(
+          loginViewModel.email,
+          loginViewModel.password,
+        );
+        return ResponseHelper.baseResponse(
+          200,
+          responseModel: ResponseModel(
+            data: JwtHelper.createTokenPair(
+              personalTraining.id!,
+              personalTraining.email,
+              personalTraining.fullName,
+              'personal_training',
+            ),
+            message: 'Login realizado com sucesso.',
           ),
         );
       },
