@@ -57,7 +57,7 @@ class PersonalTrainingController {
               personalTraining.id!,
               personalTraining.email,
               personalTraining.fullName,
-              'personal_training',
+              TokenType.personalTraining,
             ),
             message: 'Login realizado com sucesso.',
           ),
@@ -90,6 +90,17 @@ class PersonalTrainingController {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
         final id = int.parse(request.headers['user']!);
+        final tokenType =
+            TokenTypeUtils.fromString(request.headers['referring_to']!);
+        if (tokenType != TokenType.personalTraining) {
+          return ResponseHelper.baseResponse(
+            401,
+            responseModel: ResponseModel(
+              data: null,
+              message: 'Token inválido.',
+            ),
+          );
+        }
         final personalTraining = await personalTrainingService.getInfo(id);
         final encodeJsonPersonalTraining = jsonEncode(personalTraining);
         return ResponseHelper.baseResponse(

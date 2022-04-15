@@ -2,7 +2,7 @@ import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:dotenv/dotenv.dart';
 import 'package:shelf/shelf.dart';
 
-import '../../../models/response_model.dart';
+import '../../../models/models.dart';
 import '../../core.dart';
 import '../base_middleware.dart';
 
@@ -30,6 +30,7 @@ class SecurityMiddleware extends BaseMiddleware {
       final authorizationHeader = request.headers['Authorization'];
       String? authorizationToken;
       int? userId;
+      String? tokenType;
 
       if (authorizationHeader == null) {
         return responseErrorJWT(JWTError('Authorization header is required'));
@@ -40,11 +41,13 @@ class SecurityMiddleware extends BaseMiddleware {
         final claims = JWT.verify(token, SecretKey(env['JWT_SECRET']!));
         final claimsMap = claims.payload as Map<String, dynamic>;
         userId = claimsMap['ref'] as int;
+        tokenType = claimsMap['referringTo'] as String;
       }
       return innerHandler(
         request.change(
           headers: {
             'user': userId.toString(),
+            'referring_to': tokenType.toString(),
             'access_token': authorizationToken,
           },
         ),

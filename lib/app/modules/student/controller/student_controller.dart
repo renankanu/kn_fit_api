@@ -57,7 +57,7 @@ class StudentController {
               student.id!,
               student.email,
               student.fullName,
-              'student',
+              TokenType.student,
             ),
             message: 'Login realizado com sucesso.',
           ),
@@ -72,6 +72,17 @@ class StudentController {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
         final userId = int.parse(request.headers['user']!);
+        final tokenType =
+            TokenTypeUtils.fromString(request.headers['referring_to']!);
+        if (tokenType != TokenType.student) {
+          return ResponseHelper.baseResponse(
+            401,
+            responseModel: ResponseModel(
+              data: null,
+              message: 'Token inválido.',
+            ),
+          );
+        }
         final student = await studentService.getInfo(userId);
         return ResponseHelper.baseResponse(
           200,

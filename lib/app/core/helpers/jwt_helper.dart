@@ -21,7 +21,7 @@ class JwtHelper {
         'ref': refId,
         'email': email,
         'fullName': fullName,
-        'type': tokenType,
+        'referringTo': tokenType.name,
         'iat': DateTime.now().millisecondsSinceEpoch,
       },
       issuer: 'https://www.renankanu.com.br',
