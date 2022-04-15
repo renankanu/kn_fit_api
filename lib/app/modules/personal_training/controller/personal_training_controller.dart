@@ -85,5 +85,24 @@ class PersonalTrainingController {
     );
   }
 
+  @Route.get('/info')
+  Future<Response> getPersonalTrainingInfo(Request request) async {
+    return ResponseHelper.makeResponse(
+      handlerResponse: () async {
+        final id = int.parse(request.headers['user']!);
+        final personalTraining = await personalTrainingService.getInfo(id);
+        final encodeJsonPersonalTraining = jsonEncode(personalTraining);
+        return ResponseHelper.baseResponse(
+          200,
+          responseModel: ResponseModel(
+            data: jsonDecode(encodeJsonPersonalTraining),
+            message: 'Personal Training recuperado com sucesso.',
+          ),
+        );
+      },
+      log: log,
+    );
+  }
+
   Router get router => _$PersonalTrainingControllerRouter(this);
 }

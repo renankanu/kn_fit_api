@@ -11,5 +11,6 @@ Router _$PersonalTrainingControllerRouter(PersonalTrainingController service) {
   router.add('POST', r'/register', service.savePersonalTraining);
   router.add('POST', r'/login', service.login);
   router.add('GET', r'/', service.getAllPersonalTrainings);
+  router.add('GET', r'/info', service.getPersonalTrainingInfo);
   return router;
 }

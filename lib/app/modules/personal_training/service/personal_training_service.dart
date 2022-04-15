@@ -41,4 +41,9 @@ class PersonalTrainingService implements IPersonalTrainingService {
   Future<PersonalTrainingModel> login(String email, String password) {
     return personalTrainingRepository.login(email, password);
   }
+
+  @override
+  Future<PersonalTrainingModel> getInfo(int id) {
+    return personalTrainingRepository.getInfo(id);
+  }
 }

@@ -109,4 +109,39 @@ class PersonalTrainingRepository implements IPersonalTrainingRepository {
       await conn?.close();
     }
   }
+
+  @override
+  Future<PersonalTrainingModel> getInfo(int id) async {
+    MySqlConnection? conn;
+    try {
+      conn = await connection.openConnection();
+      const query = 'select * from personal_training where id = ?';
+      final result = await conn.query(query, [id]);
+
+      if (result.isNotEmpty) {
+        final userSqlData = result.first;
+        final personalTraining = PersonalTrainingModel(
+          id: userSqlData['id'],
+          fullName: userSqlData['full_name'],
+          email: userSqlData['email'],
+          password: userSqlData['password'],
+          crefType: userSqlData['cref_type'],
+          crefNumber: userSqlData['cref_number'],
+          createTime: userSqlData['create_time'],
+          updateTime: userSqlData['update_time'],
+        );
+        return personalTraining;
+      } else {
+        throw UserNotFoundException(message: 'Usuário não encontrado');
+      }
+    } on MySqlException catch (e, s) {
+      log.error('Erro ao buscar o Personal Training', e, s);
+      throw DatabaseException(
+        message: 'Erro ao buscar o Personal Training',
+        exception: e,
+      );
+    } finally {
+      await conn?.close();
+    }
+  }
 }

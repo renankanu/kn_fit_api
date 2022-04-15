@@ -7,4 +7,5 @@ abstract class IPersonalTrainingService {
   );
   Future<PersonalTrainingModel> login(String email, String password);
   Future<List<PersonalTrainingModel>> getAll();
+  Future<PersonalTrainingModel> getInfo(int id);
 }

@@ -13,7 +13,7 @@ class JwtHelper {
     int refId, {
     required String email,
     required String fullName,
-    required String refType,
+    required TokenType tokenType,
     Duration expiry = const Duration(hours: 1),
   }) {
     final jwt = JWT(
@@ -21,7 +21,7 @@ class JwtHelper {
         'ref': refId,
         'email': email,
         'fullName': fullName,
-        'type': refType,
+        'type': tokenType,
         'iat': DateTime.now().millisecondsSinceEpoch,
       },
       issuer: 'https://www.renankanu.com.br',
@@ -39,20 +39,20 @@ class JwtHelper {
     int userId,
     String email,
     String fullName,
-    String refType,
+    TokenType tokenType,
   ) {
     final token = generateJWT(
       userId,
       email: email,
       fullName: fullName,
-      refType: refType,
+      tokenType: tokenType,
     );
     const refreshTokenExpiry = Duration(seconds: 60);
     final refreshToken = generateJWT(
       userId,
       email: email,
       fullName: fullName,
-      refType: refType,
+      tokenType: tokenType,
       expiry: refreshTokenExpiry,
     );
 

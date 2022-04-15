@@ -50,25 +50,19 @@ class SecurityMiddleware extends BaseMiddleware {
         ),
       );
     } on JWTInvalidError catch (error) {
-      return responseErrorJWT(error);
+      return responseErrorJWT<JWTInvalidError>(error);
     } on JWTExpiredError catch (error) {
-      return responseErrorJWT(error);
+      return responseErrorJWT<JWTExpiredError>(error);
     } on JWTNotActiveError catch (error) {
-      return responseErrorJWT(error);
+      return responseErrorJWT<JWTNotActiveError>(error);
     } on JWTUndefinedError catch (error) {
-      return responseErrorJWT(error);
+      return responseErrorJWT<JWTUndefinedError>(error);
     } catch (error) {
-      return ResponseHelper.baseResponse(
-        403,
-        responseModel: ResponseModel(
-          data: null,
-          message: error.toString(),
-        ),
-      );
+      return responseErrorJWT<Object>(error);
     }
   }
 
-  Response responseErrorJWT(JWTError error) {
+  Response responseErrorJWT<T>(T error) {
     return ResponseHelper.baseResponse(
       403,
       responseModel: ResponseModel(
