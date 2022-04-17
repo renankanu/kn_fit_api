@@ -47,7 +47,19 @@ class ExerciseRepository implements IExerciseRepository {
       conn = await connection.openConnection();
       const query = 'select * from exercise';
       final results = await conn.query(query);
-      return results.map((row) => ExerciseModel.fromJson(row)).toList();
+      return results
+          .map(
+            (row) => ExerciseModel(
+              id: row['id'],
+              name: row['name'],
+              description: row['description'],
+              imageUrl: row['image_url'],
+              videoUrl: row['video_url'],
+              createTime: row['create_time'],
+              updateTime: row['update_time'],
+            ),
+          )
+          .toList();
     } on MySqlException catch (e, s) {
       log.error('Erro ao buscar todos os Exercícios', e, s);
       throw DatabaseException(
@@ -66,7 +78,22 @@ class ExerciseRepository implements IExerciseRepository {
       conn = await connection.openConnection();
       const query = 'select * from exercise where id = ?';
       final results = await conn.query(query, [id]);
-      return ExerciseModel.fromJson(results.first);
+      if (results.isNotEmpty) {
+        final exerciseSqlData = results.first;
+        return ExerciseModel(
+          id: exerciseSqlData['id'],
+          name: exerciseSqlData['name'],
+          description: exerciseSqlData['description'],
+          imageUrl: exerciseSqlData['image_url'],
+          videoUrl: exerciseSqlData['video_url'],
+          createTime: exerciseSqlData['create_time'],
+          updateTime: exerciseSqlData['update_time'],
+        );
+      } else {
+        throw UserNotFoundException(
+          message: 'Exercício não encontrado',
+        );
+      }
     } on MySqlException catch (e, s) {
       log.error('Erro ao buscar o Exercício', e, s);
       throw DatabaseException(
