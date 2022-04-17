@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
+import '../core/helpers/helpers.dart';
 import 'base_model.dart';
 
 part 'exercise_model.g.dart';
@@ -50,6 +51,22 @@ class ExerciseModel extends BaseModel {
   Map<String, dynamic> toJson() => _$ExerciseModelToJson(this);
 
   factory ExerciseModel.requestMapping(String body) {
-    return ExerciseModel.fromJson(json.decode(body));
+    final json = jsonDecode(body) as Map<String, dynamic>;
+    ValidFields.nullChecker(
+      json,
+      requiredKeys: [
+        'name',
+        'description',
+        'imageUrl',
+        'videoUrl',
+      ],
+      nonNullKeys: [
+        'name',
+        'description',
+        'imageUrl',
+        'videoUrl',
+      ],
+    );
+    return ExerciseModel.fromJson(json);
   }
 }
