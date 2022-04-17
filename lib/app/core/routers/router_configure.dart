@@ -1,5 +1,6 @@
 import 'package:shelf_router/shelf_router.dart';
 
+import '../../modules/exercise/exercise_router.dart';
 import '../../modules/personal_training/personal_training_router.dart';
 import '../../modules/student/student_router.dart';
 import 'i_router.dart';
@@ -9,6 +10,7 @@ class RouterConfigure {
   final List<IRouter> _routers = [
     StudentRouter(),
     PersonalTrainingRouter(),
+    ExerciseRouter(),
   ];
 
   RouterConfigure(this._router);

@@ -8,10 +8,10 @@ part of 'exercise_model.dart';
 
 ExerciseModel _$ExerciseModelFromJson(Map<String, dynamic> json) =>
     ExerciseModel(
-      name: json['name'] as String,
-      description: json['description'] as String,
-      imageUrl: json['imageUrl'] as String,
-      videoUrl: json['videoUrl'] as String,
+      name: json['name'] as String?,
+      description: json['description'] as String?,
+      imageUrl: json['imageUrl'] as String?,
+      videoUrl: json['videoUrl'] as String?,
       id: json['id'] as int?,
       createTime: json['createTime'] == null
           ? null

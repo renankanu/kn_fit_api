@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 import 'base_model.dart';
@@ -46,4 +48,8 @@ class ExerciseModel extends BaseModel {
 
   @override
   Map<String, dynamic> toJson() => _$ExerciseModelToJson(this);
+
+  factory ExerciseModel.requestMapping(String body) {
+    return ExerciseModel.fromJson(json.decode(body));
+  }
 }

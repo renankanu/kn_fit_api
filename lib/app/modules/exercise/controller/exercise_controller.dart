@@ -1,0 +1,76 @@
+import 'package:injectable/injectable.dart';
+import 'package:shelf/shelf.dart';
+import 'package:shelf_router/shelf_router.dart';
+
+import '../../../core/core.dart';
+import '../../../models/models.dart';
+import '../service/i_exercise_service.dart';
+
+part 'exercise_controller.g.dart';
+
+@Injectable()
+class ExerciseController {
+  final IExerciseService exerciseService;
+  final ILogger log;
+
+  ExerciseController({
+    required this.exerciseService,
+    required this.log,
+  });
+
+  @Route.post('/register')
+  Future<Response> saveExercise(Request request) async {
+    return ResponseHelper.makeResponse(
+      handlerResponse: () async {
+        final body = await request.readAsString();
+        final exercise = ExerciseModel.requestMapping(body);
+        await exerciseService.createExercise(exercise);
+        return ResponseHelper.baseResponse(
+          201,
+          responseModel: ResponseModel(
+            data: null,
+            message: 'Exercise criado com sucesso.',
+          ),
+        );
+      },
+      log: log,
+    );
+  }
+
+  @Route.get('/')
+  Future<Response> getAll(Request request) async {
+    return ResponseHelper.makeResponse(
+      handlerResponse: () async {
+        final exercises = await exerciseService.getAll();
+        return ResponseHelper.baseResponse(
+          200,
+          responseModel: ResponseModel(
+            data: exercises,
+            message: 'Exercises retornados com sucesso.',
+          ),
+        );
+      },
+      log: log,
+    );
+  }
+
+  @Route.get('/{id}')
+  Future<Response> getDetail(Request request) async {
+    return ResponseHelper.makeResponse(
+      handlerResponse: () async {
+        final id = int.parse(request.url.pathSegments.last);
+        final exercise = await exerciseService.getDetail(id);
+        return ResponseHelper.baseResponse(
+          200,
+          responseModel: ResponseModel(
+            data: exercise,
+            message: 'Exercise retornado com sucesso.',
+          ),
+        );
+      },
+      log: log,
+    );
+  }
+
+  Router get router => _$ExerciseControllerRouter(this);
+}

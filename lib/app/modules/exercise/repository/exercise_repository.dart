@@ -19,15 +19,13 @@ class ExerciseRepository implements IExerciseRepository {
     try {
       conn = await connection.openConnection();
       const query =
-          'insert into exercise (name, description, image_url, video_url, create_time, update_time) values (?, ?, ?, ?, ?, ?)';
+          'insert into exercise (name, description, image_url, video_url) values (?, ?, ?, ?)';
 
       await conn.query(query, [
         exercise.name,
         exercise.description,
         exercise.imageUrl,
         exercise.videoUrl,
-        exercise.createTime,
-        exercise.updateTime,
       ]);
     } on MySqlException catch (e, s) {
       log.error('Erro ao criar o Exercício', e, s);

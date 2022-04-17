@@ -1,6 +1,5 @@
 import 'package:get_it/get_it.dart';
-// ignore: implementation_imports
-import 'package:shelf_router/src/router.dart';
+import 'package:shelf_router/shelf_router.dart';
 
 import '../../core/routers/i_router.dart';
 import 'controller/personal_training_controller.dart';
