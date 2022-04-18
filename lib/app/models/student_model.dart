@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
+import '../core/core.dart';
 import 'models.dart';
 
 part 'student_model.g.dart';
@@ -49,4 +52,24 @@ class StudentModel extends BaseModel {
   Map<String, dynamic> toJson() => _$StudentModelToJson(this);
 
   static String? toNull(_) => null;
+
+  factory StudentModel.requestMapping(String body) {
+    final json = jsonDecode(body) as Map<String, dynamic>;
+    ValidFields.nullChecker(
+      json,
+      requiredKeys: [
+        'fullName',
+        'email',
+        'password',
+        'personalTrainingId',
+      ],
+      nonNullKeys: [
+        'fullName',
+        'email',
+        'password',
+        'personalTrainingId',
+      ],
+    );
+    return StudentModel.fromJson(json);
+  }
 }

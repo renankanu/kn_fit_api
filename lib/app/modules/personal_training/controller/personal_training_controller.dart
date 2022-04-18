@@ -6,9 +6,7 @@ import 'package:shelf_router/shelf_router.dart';
 
 import '../../../core/core.dart';
 import '../../../models/models.dart';
-import '../../student/view_models/login_view_model.dart';
 import '../service/i_personal_training_service.dart';
-import '../view_models/personal_training_save_input.dart';
 
 part 'personal_training_controller.g.dart';
 
@@ -27,7 +25,7 @@ class PersonalTrainingController {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
         final body = await request.readAsString();
-        final personalTraining = PersonalTrainingSaveInput.requestMapping(body);
+        final personalTraining = PersonalTrainingModel.requestMapping(body);
         await personalTrainingService.createPersonalTraining(personalTraining);
         return ResponseHelper.baseResponse(
           201,
@@ -45,7 +43,8 @@ class PersonalTrainingController {
   Future<Response> login(Request request) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
-        final loginViewModel = LoginViewModel(await request.readAsString());
+        final loginViewModel =
+            LoginModel.requestMapping(await request.readAsString());
         final personalTraining = await personalTrainingService.login(
           loginViewModel.email,
           loginViewModel.password,

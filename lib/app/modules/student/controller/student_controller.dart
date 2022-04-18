@@ -7,8 +7,6 @@ import 'package:shelf_router/shelf_router.dart';
 import '../../../core/core.dart';
 import '../../../models/models.dart';
 import '../service/i_student_service.dart';
-import '../view_models/login_view_model.dart';
-import '../view_models/student_save_input_model.dart';
 
 part 'student_controller.g.dart';
 
@@ -27,7 +25,7 @@ class StudentController {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
         final body = await request.readAsString();
-        final studentModel = StudentSaveInputModel.requestMapping(body);
+        final studentModel = StudentModel.requestMapping(body);
         await studentService.createStudent(studentModel);
         return ResponseHelper.baseResponse(
           201,
@@ -45,7 +43,8 @@ class StudentController {
   Future<Response> login(Request request) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
-        final loginViewModel = LoginViewModel(await request.readAsString());
+        final loginViewModel =
+            LoginModel.requestMapping(await request.readAsString());
         final student = await studentService.login(
           loginViewModel.email,
           loginViewModel.password,
