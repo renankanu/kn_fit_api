@@ -33,7 +33,7 @@ class SecurityMiddleware extends BaseMiddleware {
       String? tokenType;
 
       if (authorizationHeader == null) {
-        return responseErrorJWT(JWTError('Authorization header is required'));
+        return responseErrorJWT('Header de Autorização é obrigatório');
       }
 
       if (authorizationHeader.startsWith('Bearer ')) {
@@ -52,25 +52,27 @@ class SecurityMiddleware extends BaseMiddleware {
           },
         ),
       );
-    } on JWTInvalidError catch (error) {
-      return responseErrorJWT<JWTInvalidError>(error);
-    } on JWTExpiredError catch (error) {
-      return responseErrorJWT<JWTExpiredError>(error);
-    } on JWTNotActiveError catch (error) {
-      return responseErrorJWT<JWTNotActiveError>(error);
-    } on JWTUndefinedError catch (error) {
-      return responseErrorJWT<JWTUndefinedError>(error);
+    } on JWTInvalidError {
+      return responseErrorJWT<JWTInvalidError>('Token inválido');
+    } on JWTExpiredError {
+      return responseErrorJWT<JWTExpiredError>('Token expirado');
+    } on JWTNotActiveError {
+      return responseErrorJWT<JWTNotActiveError>('Token não ativo');
+    } on JWTUndefinedError {
+      return responseErrorJWT<JWTUndefinedError>('Token não definido');
     } catch (error) {
-      return responseErrorJWT<Object>(error);
+      return responseErrorJWT<Object>('Token erro desconhecido');
     }
   }
 
-  Response responseErrorJWT<T>(T error) {
+  Response responseErrorJWT<T>(
+    String errorMessage,
+  ) {
     return ResponseHelper.baseResponse(
       403,
       responseModel: ResponseModel(
         data: null,
-        message: error.toString(),
+        message: errorMessage,
       ),
     );
   }
