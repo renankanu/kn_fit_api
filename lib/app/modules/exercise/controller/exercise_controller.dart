@@ -22,6 +22,17 @@ class ExerciseController {
   Future<Response> saveExercise(Request request) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
+        final tokenType =
+            TokenTypeUtils.fromString(request.headers['referring_to']!);
+        if (tokenType == TokenType.student) {
+          return ResponseHelper.baseResponse(
+            403,
+            responseModel: ResponseModel(
+              data: null,
+              message: 'Acesso negado.',
+            ),
+          );
+        }
         final body = await request.readAsString();
         final exercise = ExerciseModel.requestMapping(body);
         await exerciseService.createExercise(exercise);
