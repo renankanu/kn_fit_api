@@ -65,8 +65,8 @@ class ExerciseController {
     );
   }
 
-  @Route.get('/{id}')
-  Future<Response> getDetail(Request request) async {
+  @Route.get('/<id|[0-9]+>')
+  Future<Response> getDetail(Request request, String id) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
         final id = int.parse(request.url.pathSegments.last);
