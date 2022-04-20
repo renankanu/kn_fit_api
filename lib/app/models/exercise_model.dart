@@ -13,12 +13,14 @@ class ExerciseModel extends BaseModel {
   final String? description;
   final String? imageUrl;
   final String? videoUrl;
+  final int? muscleGroupId;
 
   ExerciseModel({
     this.name,
     this.description,
     this.imageUrl,
     this.videoUrl,
+    this.muscleGroupId,
     int? id,
     DateTime? createTime,
     DateTime? updateTime,
@@ -54,18 +56,8 @@ class ExerciseModel extends BaseModel {
     final json = jsonDecode(body) as Map<String, dynamic>;
     ValidFields.nullChecker(
       json,
-      requiredKeys: [
-        'name',
-        'description',
-        'imageUrl',
-        'videoUrl',
-      ],
-      nonNullKeys: [
-        'name',
-        'description',
-        'imageUrl',
-        'videoUrl',
-      ],
+      requiredKeys: ['name', 'description', 'muscleGroupId'],
+      nonNullKeys: ['name', 'description', 'muscleGroupId'],
     );
     return ExerciseModel.fromJson(json);
   }

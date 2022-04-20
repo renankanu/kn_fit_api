@@ -12,6 +12,7 @@ ExerciseModel _$ExerciseModelFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String?,
       imageUrl: json['imageUrl'] as String?,
       videoUrl: json['videoUrl'] as String?,
+      muscleGroupId: json['muscleGroupId'] as int?,
       id: json['id'] as int?,
       createTime: json['createTime'] == null
           ? null
@@ -37,5 +38,6 @@ Map<String, dynamic> _$ExerciseModelToJson(ExerciseModel instance) {
   val['description'] = instance.description;
   val['imageUrl'] = instance.imageUrl;
   val['videoUrl'] = instance.videoUrl;
+  val['muscleGroupId'] = instance.muscleGroupId;
   return val;
 }
