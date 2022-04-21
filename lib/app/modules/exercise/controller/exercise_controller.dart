@@ -18,7 +18,7 @@ class ExerciseController {
     required this.log,
   });
 
-  @Route.post('/register')
+  @Route.post('/')
   Future<Response> saveExercise(Request request) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {

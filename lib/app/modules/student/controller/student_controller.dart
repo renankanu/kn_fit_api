@@ -20,7 +20,7 @@ class StudentController {
     required this.log,
   });
 
-  @Route.post('/register')
+  @Route.post('/')
   Future<Response> saveStudent(Request request) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
@@ -95,7 +95,7 @@ class StudentController {
     );
   }
 
-  @Route.get('/all')
+  @Route.get('/')
   Future<Response> getAllStudents(Request request) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {

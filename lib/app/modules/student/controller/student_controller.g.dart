@@ -8,9 +8,9 @@ part of 'student_controller.dart';
 
 Router _$StudentControllerRouter(StudentController service) {
   final router = Router();
-  router.add('POST', r'/register', service.saveStudent);
+  router.add('POST', r'/', service.saveStudent);
   router.add('POST', r'/login', service.login);
   router.add('GET', r'/info', service.getStudentInfo);
-  router.add('GET', r'/all', service.getAllStudents);
+  router.add('GET', r'/', service.getAllStudents);
   return router;
 }

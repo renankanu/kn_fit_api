@@ -20,7 +20,7 @@ class PersonalTrainingController {
   final IPersonalTrainingService personalTrainingService;
   final ILogger log;
 
-  @Route.post('/register')
+  @Route.post('/')
   Future<Response> savePersonalTraining(Request request) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
