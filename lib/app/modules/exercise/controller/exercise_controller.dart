@@ -69,8 +69,24 @@ class ExerciseController {
   Future<Response> getDetail(Request request, String id) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
-        final id = int.parse(request.url.pathSegments.last);
-        final exercise = await exerciseService.getDetail(id);
+        final exercise = await exerciseService.getDetail(int.parse(id));
+        return ResponseHelper.baseResponse(
+          200,
+          responseModel: ResponseModel(
+            data: exercise,
+            message: 'Exercise retornado com sucesso.',
+          ),
+        );
+      },
+      log: log,
+    );
+  }
+
+  @Route.get('/muscleGroup/<id|[0-9]+>')
+  Future<Response> getByMuscleGroup(Request request, String id) async {
+    return ResponseHelper.makeResponse(
+      handlerResponse: () async {
+        final exercise = await exerciseService.getByMuscleGroup(int.parse(id));
         return ResponseHelper.baseResponse(
           200,
           responseModel: ResponseModel(
