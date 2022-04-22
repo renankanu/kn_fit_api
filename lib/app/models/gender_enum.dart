@@ -1,4 +1,16 @@
-enum Gender { female, male, other }
+import 'package:json_annotation/json_annotation.dart';
+
+part 'gender_enum.g.dart';
+
+@JsonEnum(alwaysCreate: true)
+enum Gender {
+  @JsonValue(1)
+  female,
+  @JsonValue(2)
+  male,
+  @JsonValue(3)
+  other,
+}
 
 extension GenderExtension on Gender {
   String get name {

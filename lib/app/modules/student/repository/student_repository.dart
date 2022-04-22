@@ -13,13 +13,26 @@ class StudentRepository implements IStudentRepository {
 
   StudentRepository({required this.connection, required this.log});
 
+  String baseQuerySelect = '''
+SELECT id,
+  avatar,
+  full_name,
+  email,
+  called_by,
+  gender+0 as gender,
+  password,
+  create_time,
+  update_time,
+  personal_training_id
+FROM student''';
+
   @override
   Future<void> createStudent(StudentModel student) async {
     MySqlConnection? conn;
     try {
       conn = await connection.openConnection();
       final isUserRegister = await conn
-          .query('select * from student where email = ? ', [student.email]);
+          .query('$baseQuerySelect where email = ? ', [student.email]);
 
       if (isUserRegister.isEmpty) {
         const query =
@@ -50,7 +63,7 @@ class StudentRepository implements IStudentRepository {
     MySqlConnection? conn;
     try {
       conn = await connection.openConnection();
-      const query = 'select * from student where email = ? and password = ?';
+      final query = '$baseQuerySelect where email = ? and password = ?';
       final result = await conn.query(query, [
         email,
         CryptoHelper.generatedSha256Hash(password),
@@ -79,24 +92,12 @@ class StudentRepository implements IStudentRepository {
     MySqlConnection? conn;
     try {
       conn = await connection.openConnection();
-      const query = 'select * from student';
+      final query = baseQuerySelect;
       final result = await conn.query(query);
 
       if (result.isNotEmpty) {
         final students = result.map((userSqlData) {
-          final student = StudentModel(
-            id: userSqlData['id'],
-            avatar: userSqlData['avatar'],
-            fullName: userSqlData['full_name'],
-            email: userSqlData['email'],
-            calledBy: userSqlData['called_by'],
-            gender: userSqlData['gender'],
-            password: userSqlData['password'],
-            personalTrainingId: userSqlData['personal_training_id'],
-            createTime: userSqlData['create_time'],
-            updateTime: userSqlData['update_time'],
-          );
-          return student;
+          return StudentModel.fromDataBase(userSqlData.fields);
         }).toList();
         return students;
       } else {
@@ -118,7 +119,7 @@ class StudentRepository implements IStudentRepository {
     MySqlConnection? conn;
     try {
       conn = await connection.openConnection();
-      const query = 'select * from student where id = ?';
+      final query = '$baseQuerySelect where id = ?';
       final result = await conn.query(query, [id]);
 
       if (result.isNotEmpty) {
@@ -143,7 +144,7 @@ class StudentRepository implements IStudentRepository {
     MySqlConnection? conn;
     try {
       conn = await connection.openConnection();
-      const query = 'select * from student where email = ?';
+      final query = '$baseQuerySelect where email = ?';
       final result = await conn.query(query, [email]);
 
       if (result.isNotEmpty) {

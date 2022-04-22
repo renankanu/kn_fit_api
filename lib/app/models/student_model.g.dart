@@ -46,7 +46,7 @@ Map<String, dynamic> _$StudentModelToJson(StudentModel instance) {
 }
 
 const _$GenderEnumMap = {
-  Gender.female: 'female',
-  Gender.male: 'male',
-  Gender.other: 'other',
+  Gender.female: 1,
+  Gender.male: 2,
+  Gender.other: 3,
 };
