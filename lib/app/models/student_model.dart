@@ -37,6 +37,21 @@ class StudentModel extends BaseModel {
   @override
   Map<String, dynamic> toJson() => _$StudentModelToJson(this);
 
+  factory StudentModel.fromDataBase(Map<String, dynamic> dataBaseFields) {
+    return StudentModel(
+      id: dataBaseFields['id'] as int,
+      avatar: dataBaseFields['avatar'] as String?,
+      fullName: dataBaseFields['full_name'] as String,
+      email: dataBaseFields['email'] as String,
+      calledBy: dataBaseFields['called_by'] as String?,
+      gender: $enumDecode(_$GenderEnumMap, dataBaseFields['gender']),
+      password: dataBaseFields['password'] as String,
+      personalTrainingId: dataBaseFields['personal_training_id'] as int,
+      createTime: dataBaseFields['create_time'],
+      updateTime: dataBaseFields['update_time'],
+    );
+  }
+
   factory StudentModel.requestMapping(String body) {
     final json = jsonDecode(body) as Map<String, dynamic>;
     ValidFields.nullChecker(

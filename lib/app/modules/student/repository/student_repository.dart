@@ -58,18 +58,7 @@ class StudentRepository implements IStudentRepository {
 
       if (result.isNotEmpty) {
         final userSqlData = result.first;
-        final student = StudentModel(
-          id: userSqlData['id'],
-          avatar: userSqlData['avatar'],
-          fullName: userSqlData['full_name'],
-          email: userSqlData['email'],
-          calledBy: userSqlData['called_by'],
-          gender: (userSqlData['gender'] as String).enumType,
-          password: userSqlData['password'],
-          personalTrainingId: userSqlData['personal_training_id'],
-          createTime: userSqlData['created_at'],
-          updateTime: userSqlData['updated_at'],
-        );
+        final student = StudentModel.fromDataBase(userSqlData.fields);
         return student;
       } else {
         throw UserNotFoundException(message: 'Email ou senha inválidos');
