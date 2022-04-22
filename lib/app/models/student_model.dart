@@ -9,15 +9,21 @@ part 'student_model.g.dart';
 
 @JsonSerializable()
 class StudentModel extends BaseModel {
+  final String? avatar;
   final String fullName;
   final String email;
-  @JsonKey(toJson: toNull, includeIfNull: false)
+  final String? calledBy;
+  final Gender gender;
+  @JsonKey(toJson: null, includeIfNull: false)
   final String password;
   final int personalTrainingId;
 
   StudentModel({
+    this.avatar,
     required this.fullName,
     required this.email,
+    this.calledBy,
+    required this.gender,
     required this.password,
     required this.personalTrainingId,
     int? id,
@@ -25,33 +31,11 @@ class StudentModel extends BaseModel {
     DateTime? updateTime,
   }) : super(id: id, createTime: createTime, updateTime: updateTime);
 
-  StudentModel copyWith({
-    int? id,
-    String? fullName,
-    String? email,
-    String? password,
-    int? personalTrainingId,
-    DateTime? createTime,
-    DateTime? updateTime,
-  }) {
-    return StudentModel(
-      id: id ?? this.id,
-      fullName: fullName ?? this.fullName,
-      email: email ?? this.email,
-      password: password ?? this.password,
-      personalTrainingId: personalTrainingId ?? this.personalTrainingId,
-      createTime: createTime ?? this.createTime,
-      updateTime: updateTime ?? this.updateTime,
-    );
-  }
-
   factory StudentModel.fromJson(Map<String, dynamic> json) =>
       _$StudentModelFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$StudentModelToJson(this);
-
-  static String? toNull(_) => null;
 
   factory StudentModel.requestMapping(String body) {
     final json = jsonDecode(body) as Map<String, dynamic>;
@@ -61,15 +45,37 @@ class StudentModel extends BaseModel {
         'fullName',
         'email',
         'password',
+        'gender',
         'personalTrainingId',
       ],
       nonNullKeys: [
         'fullName',
         'email',
         'password',
+        'gender',
         'personalTrainingId',
       ],
     );
     return StudentModel.fromJson(json);
+  }
+
+  StudentModel copyWith({
+    String? avatar,
+    String? fullName,
+    String? email,
+    String? calledBy,
+    Gender? gender,
+    String? password,
+    int? personalTrainingId,
+  }) {
+    return StudentModel(
+      avatar: avatar ?? this.avatar,
+      fullName: fullName ?? this.fullName,
+      email: email ?? this.email,
+      calledBy: calledBy ?? this.calledBy,
+      gender: gender ?? this.gender,
+      password: password ?? this.password,
+      personalTrainingId: personalTrainingId ?? this.personalTrainingId,
+    );
   }
 }

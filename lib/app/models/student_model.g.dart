@@ -7,8 +7,11 @@ part of 'student_model.dart';
 // **************************************************************************
 
 StudentModel _$StudentModelFromJson(Map<String, dynamic> json) => StudentModel(
+      avatar: json['avatar'] as String?,
       fullName: json['fullName'] as String,
       email: json['email'] as String,
+      calledBy: json['calledBy'] as String?,
+      gender: $enumDecode(_$GenderEnumMap, json['gender']),
       password: json['password'] as String,
       personalTrainingId: json['personalTrainingId'] as int,
       id: json['id'] as int?,
@@ -32,9 +35,18 @@ Map<String, dynamic> _$StudentModelToJson(StudentModel instance) {
   writeNotNull('id', instance.id);
   writeNotNull('createTime', instance.createTime?.toIso8601String());
   writeNotNull('updateTime', instance.updateTime?.toIso8601String());
+  val['avatar'] = instance.avatar;
   val['fullName'] = instance.fullName;
   val['email'] = instance.email;
-  writeNotNull('password', StudentModel.toNull(instance.password));
+  val['calledBy'] = instance.calledBy;
+  val['gender'] = _$GenderEnumMap[instance.gender];
+  val['password'] = instance.password;
   val['personalTrainingId'] = instance.personalTrainingId;
   return val;
 }
+
+const _$GenderEnumMap = {
+  Gender.female: 'female',
+  Gender.male: 'male',
+  Gender.other: 'other',
+};
