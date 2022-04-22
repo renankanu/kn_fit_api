@@ -10,15 +10,12 @@ part 'student_model.g.dart';
 @JsonSerializable()
 class StudentModel extends BaseModel {
   final String? avatar;
-  @JsonKey(name: 'full_name')
   final String fullName;
   final String email;
-  @JsonKey(name: 'called_by')
   final String? calledBy;
   final Gender gender;
   @JsonKey(toJson: null, includeIfNull: false)
   final String password;
-  @JsonKey(name: 'personal_training_id')
   final int personalTrainingId;
 
   StudentModel({
@@ -59,15 +56,7 @@ class StudentModel extends BaseModel {
         'personalTrainingId',
       ],
     );
-    return StudentModel(
-      avatar: json['avatar'] as String?,
-      fullName: json['fullName'] as String,
-      email: json['email'] as String,
-      calledBy: json['calledBy'] as String?,
-      gender: $enumDecode(_$GenderEnumMap, json['gender']),
-      password: json['password'] as String,
-      personalTrainingId: json['personalTrainingId'] as int,
-    );
+    return StudentModel.fromJson(json);
   }
 
   StudentModel copyWith({

@@ -8,12 +8,12 @@ part of 'student_model.dart';
 
 StudentModel _$StudentModelFromJson(Map<String, dynamic> json) => StudentModel(
       avatar: json['avatar'] as String?,
-      fullName: json['full_name'] as String,
+      fullName: json['fullName'] as String,
       email: json['email'] as String,
-      calledBy: json['called_by'] as String?,
+      calledBy: json['calledBy'] as String?,
       gender: $enumDecode(_$GenderEnumMap, json['gender']),
       password: json['password'] as String,
-      personalTrainingId: json['personal_training_id'] as int,
+      personalTrainingId: json['personalTrainingId'] as int,
       id: json['id'] as int?,
       createTime: json['create_time'] == null
           ? null
@@ -36,12 +36,12 @@ Map<String, dynamic> _$StudentModelToJson(StudentModel instance) {
   writeNotNull('create_time', instance.createTime?.toIso8601String());
   writeNotNull('update_time', instance.updateTime?.toIso8601String());
   val['avatar'] = instance.avatar;
-  val['full_name'] = instance.fullName;
+  val['fullName'] = instance.fullName;
   val['email'] = instance.email;
-  val['called_by'] = instance.calledBy;
+  val['calledBy'] = instance.calledBy;
   val['gender'] = _$GenderEnumMap[instance.gender];
   val['password'] = instance.password;
-  val['personal_training_id'] = instance.personalTrainingId;
+  val['personalTrainingId'] = instance.personalTrainingId;
   return val;
 }
 
