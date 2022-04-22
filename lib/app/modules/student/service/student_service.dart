@@ -30,4 +30,12 @@ class StudentService implements IStudentService {
 
   @override
   Future<StudentModel> getInfo(int id) => studentRepository.getInfo(id);
+
+  @override
+  Future<StudentModel> getInfoByEmail(String email) =>
+      studentRepository.getInfoByEmail(email);
+
+  @override
+  Future<void> updateStudent(StudentModel student) =>
+      studentRepository.updateStudent(student);
 }

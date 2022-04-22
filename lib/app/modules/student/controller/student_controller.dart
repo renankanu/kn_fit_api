@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:injectable/injectable.dart';
 import 'package:shelf/shelf.dart';
@@ -105,6 +106,29 @@ class StudentController {
           responseModel: ResponseModel(
             data: students.map((student) => student.toJson()).toList(),
             message: 'Alunos recuperados com sucesso.',
+          ),
+        );
+      },
+      log: log,
+    );
+  }
+
+  @Route('PATCH', '/<id|[0-9]+>')
+  Future<Response> updateStudent(Request request, String id) async {
+    return ResponseHelper.makeResponse(
+      handlerResponse: () async {
+        int.parse(id);
+        final body = await request.readAsString();
+        final json = jsonDecode(body) as Map<String, dynamic>;
+        final studentModel = StudentModel.fromJson(json);
+        final localStudent = await studentService.getInfo(int.parse(id));
+        final student = StudentModel.requestMapping(body);
+        await studentService.updateStudent(student);
+        return ResponseHelper.baseResponse(
+          200,
+          responseModel: ResponseModel(
+            data: null,
+            message: 'Aluno atualizado com sucesso.',
           ),
         );
       },
