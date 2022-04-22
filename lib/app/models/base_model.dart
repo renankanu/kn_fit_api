@@ -21,4 +21,6 @@ class BaseModel {
       _$BaseModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$BaseModelToJson(this);
+
+  static dynamic toNull(_) => null;
 }

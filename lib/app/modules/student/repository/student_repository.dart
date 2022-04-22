@@ -123,7 +123,7 @@ class StudentRepository implements IStudentRepository {
 
       if (result.isNotEmpty) {
         final userSqlData = result.first;
-        return StudentModel.fromJson(userSqlData.fields);
+        return StudentModel.fromDataBase(userSqlData.fields);
       } else {
         throw UserNotFoundException(message: 'Usuário não encontrado');
       }
