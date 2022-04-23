@@ -18,6 +18,10 @@ async
 2.12
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.8.2/
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.8.2/lib/
+buffer
+2.12
+file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/buffer-1.1.1/
+file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/buffer-1.1.1/lib/
 build
 2.14
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/build-2.2.1/
@@ -58,6 +62,10 @@ checked_yaml
 2.12
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/checked_yaml-2.0.1/
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/checked_yaml-2.0.1/lib/
+clock
+2.12
+file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/clock-1.1.0/
+file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/clock-1.1.0/lib/
 code_builder
 2.12
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/code_builder-4.1.0/
@@ -110,6 +118,10 @@ graphs
 2.12
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/graphs-2.1.0/
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/graphs-2.1.0/lib/
+http
+2.14
+file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.4/
+file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.4/lib/
 http_methods
 2.12
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/http_methods-1.1.0/
@@ -130,6 +142,10 @@ injectable_generator
 2.12
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/injectable_generator-1.5.3/
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/injectable_generator-1.5.3/lib/
+intl
+2.12
+file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0/
+file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0/lib/
 io
 2.12
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/io-1.0.3/
@@ -170,6 +186,10 @@ mime
 2.12
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/mime-1.0.1/
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/mime-1.0.1/lib/
+minio
+2.12
+file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/minio-3.5.0/
+file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/minio-3.5.0/lib/
 mysql1
 2.12
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/mysql1-0.19.2/
@@ -186,6 +206,10 @@ pedantic
 2.12
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.1/
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.1/lib/
+petitparser
+2.16
+file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-5.0.0/
+file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-5.0.0/lib/
 pointycastle
 2.12
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/pointycastle-3.5.2/
@@ -270,6 +294,10 @@ web_socket_channel
 2.12
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/web_socket_channel-2.1.0/
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/web_socket_channel-2.1.0/lib/
+xml
+2.16
+file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/xml-5.4.1/
+file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/xml-5.4.1/lib/
 yaml
 2.12
 file:///Users/renankanu/development/flutter/.pub-cache/hosted/pub.dartlang.org/yaml-3.1.0/

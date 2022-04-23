@@ -7,7 +7,7 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../../modules/exercise/controller/exercise_controller.dart' as _i22;
+import '../../modules/exercise/controller/exercise_controller.dart' as _i23;
 import '../../modules/exercise/repository/exercise_repository.dart' as _i7;
 import '../../modules/exercise/repository/i_exercise_repository.dart' as _i6;
 import '../../modules/exercise/service/exercise_service.dart' as _i10;
@@ -27,6 +27,7 @@ import '../../modules/student/repository/i_student_repository.dart' as _i16;
 import '../../modules/student/repository/student_repository.dart' as _i17;
 import '../../modules/student/service/i_student_service.dart' as _i18;
 import '../../modules/student/service/student_service.dart' as _i19;
+import '../../modules/upload/upload_controller.dart' as _i22;
 import '../core.dart' as _i8;
 import '../database/database.dart' as _i4;
 import '../database/i_database_connection.dart' as _i3;
@@ -63,7 +64,9 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
           log: get<_i8.ILogger>()));
   gh.factory<_i21.StudentController>(() => _i21.StudentController(
       studentService: get<_i18.IStudentService>(), log: get<_i8.ILogger>()));
-  gh.factory<_i22.ExerciseController>(() => _i22.ExerciseController(
+  gh.factory<_i22.UploadController>(
+      () => _i22.UploadController(log: get<_i8.ILogger>()));
+  gh.factory<_i23.ExerciseController>(() => _i23.ExerciseController(
       exerciseService: get<_i9.IExerciseService>(), log: get<_i8.ILogger>()));
   return get;
 }
