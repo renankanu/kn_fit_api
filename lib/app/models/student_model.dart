@@ -75,22 +75,19 @@ class StudentModel extends BaseModel {
   }
 
   StudentModel copyWith({
-    String? avatar,
-    String? fullName,
-    String? email,
-    String? calledBy,
-    Gender? gender,
-    String? password,
-    int? personalTrainingId,
+    required Map<String, dynamic> json,
   }) {
     return StudentModel(
-      avatar: avatar ?? this.avatar,
-      fullName: fullName ?? this.fullName,
-      email: email ?? this.email,
-      calledBy: calledBy ?? this.calledBy,
-      gender: gender ?? this.gender,
-      password: password ?? this.password,
-      personalTrainingId: personalTrainingId ?? this.personalTrainingId,
+      avatar: json['avatar'] ?? avatar,
+      fullName: json['fullName'] ?? fullName,
+      email: json['email'] ?? email,
+      calledBy: json['calledBy'] ?? calledBy,
+      gender: json['gender'] != null
+          ? $enumDecode(_$GenderEnumMap, json['gender'])
+          : gender,
+      password: json['password'] ?? password,
+      personalTrainingId: json['personalTrainingId'] ?? personalTrainingId,
+      id: json['id'] ?? id,
     );
   }
 }
