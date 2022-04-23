@@ -100,6 +100,19 @@ class StudentController {
   Future<Response> getAllStudents(Request request) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
+        print(request.requestedUri.queryParameters);
+        if (request.requestedUri.queryParameters['email'] != null) {
+          final student = await studentService.getInfoByEmail(
+            request.requestedUri.queryParameters['email']!,
+          );
+          return ResponseHelper.baseResponse(
+            200,
+            responseModel: ResponseModel(
+              data: student.toJson(),
+              message: 'Alunos recuperados com sucesso.',
+            ),
+          );
+        }
         final students = await studentService.getAll();
         return ResponseHelper.baseResponse(
           200,
