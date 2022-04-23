@@ -52,5 +52,17 @@ class UploadController {
     );
   }
 
+  @Route.get('/')
+  Future<Response> getAvatar(Request request) async {
+    final image = await UploadImage.getObjectFromS3();
+    return Response(
+      200,
+      body: image,
+      headers: {
+        'content-type': 'image/jpeg',
+      },
+    );
+  }
+
   Router get router => _$UploadControllerRouter(this);
 }
