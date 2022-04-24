@@ -9,15 +9,10 @@ class MediaHelper {
   static Future<void> sendImageToS3(
     Uint8List data, {
     required String imageName,
-    String? imageExt = 'png',
+    required String imageExt,
   }) async {
     final bucket = env['AWS_BUCKET_NAME'];
-    final minio = Minio(
-      endPoint: env['AWS_ENDPOINT']!,
-      accessKey: env['AWS_ACCESS_KEY']!,
-      secretKey: env['AWS_SECRET_KEY']!,
-      region: env['AWS_REGION'],
-    );
+    final Minio minio = initS3();
     await minio.putObject(
       bucket!,
       '$imageName.$imageExt',
@@ -30,12 +25,7 @@ class MediaHelper {
     String? imageExt = 'png',
   }) async {
     final bucket = env['AWS_BUCKET_NAME'];
-    final minio = Minio(
-      endPoint: env['AWS_ENDPOINT']!,
-      accessKey: env['AWS_ACCESS_KEY']!,
-      secretKey: env['AWS_SECRET_KEY']!,
-      region: env['AWS_REGION'],
-    );
+    final minio = initS3();
     await minio.removeObject(
       bucket!,
       '$imageName.$imageExt',
@@ -44,12 +34,17 @@ class MediaHelper {
 
   static Future<MinioByteStream> getObjectFromS3(String imageName) async {
     final bucket = env['AWS_BUCKET_NAME'];
+    final minio = initS3();
+    return minio.getObject(bucket!, imageName);
+  }
+
+  static Minio initS3() {
     final minio = Minio(
       endPoint: env['AWS_ENDPOINT']!,
       accessKey: env['AWS_ACCESS_KEY']!,
       secretKey: env['AWS_SECRET_KEY']!,
       region: env['AWS_REGION'],
     );
-    return minio.getObject(bucket!, imageName);
+    return minio;
   }
 }

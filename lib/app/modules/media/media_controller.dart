@@ -30,7 +30,7 @@ class MediaController {
           );
         }
         final nameImage = DateTime.now().millisecondsSinceEpoch.toString();
-        String imageExt = 'jpg';
+        String imageExt = 'jpeg';
         await for (final part in request.parts) {
           imageExt = part.headers['content-type']!.split('/').last;
           print(imageExt);
