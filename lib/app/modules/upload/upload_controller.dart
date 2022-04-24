@@ -52,15 +52,19 @@ class UploadController {
     );
   }
 
-  @Route.get('/')
-  Future<Response> getAvatar(Request request) async {
-    final image = await UploadImage.getObjectFromS3();
-    return Response(
-      200,
-      body: image,
-      headers: {
-        'content-type': 'image/jpeg',
+  @Route.get('/image/<image>')
+  Future<Response> getAvatar(Request request, String image) async {
+    return ResponseHelper.makeResponse(
+      handlerResponse: () async {
+        final s3Object = await UploadImage.getObjectFromS3(image);
+        return Response.ok(
+          s3Object,
+          headers: {
+            'content-type': 'image/${image.split('.').last}',
+          },
+        );
       },
+      log: log,
     );
   }
 

@@ -9,6 +9,6 @@ part of 'upload_controller.dart';
 Router _$UploadControllerRouter(UploadController service) {
   final router = Router();
   router.add('POST', r'/', service.uploadAvatar);
-  router.add('GET', r'/', service.getAvatar);
+  router.add('GET', r'/image/<image>', service.getAvatar);
   return router;
 }

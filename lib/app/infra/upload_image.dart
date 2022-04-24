@@ -42,7 +42,7 @@ class UploadImage {
     );
   }
 
-  static Future<MinioByteStream> getObjectFromS3() async {
+  static Future<MinioByteStream> getObjectFromS3(String imageName) async {
     final bucket = env['AWS_BUCKET_NAME'];
     final minio = Minio(
       endPoint: env['AWS_ENDPOINT']!,
@@ -50,6 +50,6 @@ class UploadImage {
       secretKey: env['AWS_SECRET_KEY']!,
       region: env['AWS_REGION'],
     );
-    return minio.getObject(bucket!, '1650749915701.jpeg');
+    return minio.getObject(bucket!, imageName);
   }
 }
