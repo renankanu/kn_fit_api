@@ -33,7 +33,6 @@ class MediaController {
         String imageExt = 'jpeg';
         await for (final part in request.parts) {
           imageExt = part.headers['content-type']!.split('/').last;
-          print(imageExt);
           final data = await part.readBytes();
           await MediaHelper.sendImageToS3(
             data,
