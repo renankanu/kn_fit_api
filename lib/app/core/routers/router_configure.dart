@@ -1,9 +1,9 @@
 import 'package:shelf_router/shelf_router.dart';
 
 import '../../modules/exercise/exercise_router.dart';
+import '../../modules/media/media_router.dart';
 import '../../modules/personal_training/personal_training_router.dart';
 import '../../modules/student/student_router.dart';
-import '../../modules/upload/student_router.dart';
 import 'i_router.dart';
 
 class RouterConfigure {
@@ -12,7 +12,7 @@ class RouterConfigure {
     StudentRouter(),
     PersonalTrainingRouter(),
     ExerciseRouter(),
-    UploadRouter(),
+    MediaRouter(),
   ];
 
   RouterConfigure(this._router);

@@ -3,8 +3,8 @@ import 'dart:typed_data';
 import 'package:dotenv/dotenv.dart';
 import 'package:minio/minio.dart';
 
-class UploadImage {
-  UploadImage._();
+class MediaHelper {
+  MediaHelper._();
 
   static Future<void> sendImageToS3(
     Uint8List data, {

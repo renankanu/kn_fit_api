@@ -7,17 +7,17 @@ import '../../core/core.dart';
 import '../../infra/upload_image.dart';
 import '../../models/response_model.dart';
 
-part 'upload_controller.g.dart';
+part 'media_controller.g.dart';
 
 @Injectable()
-class UploadController {
+class MediaController {
   ILogger log;
 
-  UploadController({
+  MediaController({
     required this.log,
   });
 
-  @Route.post('/')
+  @Route.post('/image/upload')
   Future<Response> uploadAvatar(Request request) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
@@ -30,11 +30,12 @@ class UploadController {
           );
         }
         final nameImage = DateTime.now().millisecondsSinceEpoch.toString();
-        const imageExt = 'jpg';
+        String imageExt = 'jpg';
         await for (final part in request.parts) {
-          final imageExt = part.headers['content-type']!.split('/').last;
+          imageExt = part.headers['content-type']!.split('/').last;
+          print(imageExt);
           final data = await part.readBytes();
-          await UploadImage.sendImageToS3(
+          await MediaHelper.sendImageToS3(
             data,
             imageName: nameImage,
             imageExt: imageExt,
@@ -56,7 +57,7 @@ class UploadController {
   Future<Response> getAvatar(Request request, String image) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
-        final s3Object = await UploadImage.getObjectFromS3(image);
+        final s3Object = await MediaHelper.getObjectFromS3(image);
         return Response.ok(
           s3Object,
           headers: {
@@ -68,5 +69,5 @@ class UploadController {
     );
   }
 
-  Router get router => _$UploadControllerRouter(this);
+  Router get router => _$MediaControllerRouter(this);
 }
