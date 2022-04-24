@@ -20,16 +20,24 @@ class PersonalTrainingRepository implements IPersonalTrainingRepository {
     MySqlConnection? conn;
     try {
       conn = await connection.openConnection();
-      const query =
-          'insert into personal_training (full_name, email, password, cref_type, cref_number) values (?, ?, ?, ?, ?)';
-
-      await conn.query(query, [
-        personalTraining.fullName,
+      final isUserRegister = await conn
+          .query('SELECT id FROM personal_training where email = ? ', [
         personalTraining.email,
-        CryptoHelper.generatedSha256Hash(personalTraining.password),
-        personalTraining.crefType,
-        personalTraining.crefNumber,
       ]);
+      if (isUserRegister.isEmpty) {
+        const query =
+            'insert into personal_training (full_name, email, password, cref_type, cref_number) values (?, ?, ?, ?, ?)';
+
+        await conn.query(query, [
+          personalTraining.fullName,
+          personalTraining.email,
+          CryptoHelper.generatedSha256Hash(personalTraining.password),
+          personalTraining.crefType,
+          personalTraining.crefNumber,
+        ]);
+      } else {
+        throw EmailAlreadyRegistered();
+      }
     } on MySqlException catch (e, s) {
       log.error('Erro ao criar o Personal Training', e, s);
       throw DatabaseException(
