@@ -21,9 +21,13 @@ class SecurityMiddleware extends BaseMiddleware {
   @override
   Future<Response> execute(Request request) async {
     try {
-      if (skipUrl.contains(
+      final isSkipUrl = skipUrl.contains(
         SecuritySkipUrl(url: '/${request.url.path}', method: request.method),
-      )) {
+      );
+      final regexImagePath = RegExp(r'^[0-9]{13}.(gif|jpe?g|png)+$');
+      final isImagePath =
+          regexImagePath.hasMatch(request.url.path.split('/').last);
+      if (isSkipUrl || isImagePath) {
         return innerHandler(request);
       }
 

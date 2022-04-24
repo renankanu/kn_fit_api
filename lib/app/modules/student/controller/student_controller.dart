@@ -134,7 +134,7 @@ class StudentController {
         final body = await request.readAsString();
         final json = jsonDecode(body) as Map<String, dynamic>;
         final localStudent = await studentService.getInfo(int.parse(id));
-        final a = localStudent.copyWith(json: json);
+        final a = localStudent.copyWithFromJson(json: json);
         await studentService.updateStudent(a);
         return ResponseHelper.baseResponse(
           200,

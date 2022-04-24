@@ -1,3 +1,4 @@
+import 'package:dotenv/dotenv.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/core.dart';
@@ -17,6 +18,11 @@ class StudentService implements IStudentService {
 
   @override
   Future<void> createStudent(StudentModel student) {
+    if (student.avatar != null) {
+      student = student.copyWith(
+        avatar: 'http://${env['SERVER_IMAGE_ADDRESS']!}${student.avatar!}',
+      );
+    }
     return studentRepository.createStudent(student);
   }
 

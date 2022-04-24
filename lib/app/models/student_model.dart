@@ -74,7 +74,7 @@ class StudentModel extends BaseModel {
     return StudentModel.fromJson(json);
   }
 
-  StudentModel copyWith({
+  StudentModel copyWithFromJson({
     required Map<String, dynamic> json,
   }) {
     return StudentModel(
@@ -88,6 +88,26 @@ class StudentModel extends BaseModel {
       password: json['password'] ?? password,
       personalTrainingId: json['personalTrainingId'] ?? personalTrainingId,
       id: json['id'] ?? id,
+    );
+  }
+
+  StudentModel copyWith({
+    String? avatar,
+    String? fullName,
+    String? email,
+    String? calledBy,
+    Gender? gender,
+    String? password,
+    int? personalTrainingId,
+  }) {
+    return StudentModel(
+      avatar: avatar ?? this.avatar,
+      fullName: fullName ?? this.fullName,
+      email: email ?? this.email,
+      calledBy: calledBy ?? this.calledBy,
+      gender: gender ?? this.gender,
+      password: password ?? this.password,
+      personalTrainingId: personalTrainingId ?? this.personalTrainingId,
     );
   }
 }
