@@ -42,6 +42,12 @@ class StudentService implements IStudentService {
       studentRepository.getInfoByEmail(email);
 
   @override
-  Future<void> updateStudent(StudentModel student) =>
-      studentRepository.updateStudent(student);
+  Future<void> updateStudent(StudentModel student) {
+    if (student.avatar != null && !student.avatar!.contains('http')) {
+      student = student.copyWith(
+        avatar: 'http://${env['SERVER_IMAGE_ADDRESS']!}${student.avatar!}',
+      );
+    }
+    return studentRepository.updateStudent(student);
+  }
 }

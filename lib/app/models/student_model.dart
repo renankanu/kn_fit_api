@@ -92,6 +92,7 @@ class StudentModel extends BaseModel {
   }
 
   StudentModel copyWith({
+    int? id,
     String? avatar,
     String? fullName,
     String? email,
@@ -101,6 +102,7 @@ class StudentModel extends BaseModel {
     int? personalTrainingId,
   }) {
     return StudentModel(
+      id: id ?? this.id,
       avatar: avatar ?? this.avatar,
       fullName: fullName ?? this.fullName,
       email: email ?? this.email,

@@ -100,7 +100,6 @@ class StudentController {
   Future<Response> getAllStudents(Request request) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
-        print(request.requestedUri.queryParameters);
         if (request.requestedUri.queryParameters['email'] != null) {
           final student = await studentService.getInfoByEmail(
             request.requestedUri.queryParameters['email']!,
@@ -130,12 +129,10 @@ class StudentController {
   Future<Response> updateStudent(Request request, String id) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
-        int.parse(id);
-        final body = await request.readAsString();
-        final json = jsonDecode(body) as Map<String, dynamic>;
+        final json = jsonDecode(await request.readAsString());
         final localStudent = await studentService.getInfo(int.parse(id));
-        final a = localStudent.copyWithFromJson(json: json);
-        await studentService.updateStudent(a);
+        final studentUpdated = localStudent.copyWithFromJson(json: json);
+        await studentService.updateStudent(studentUpdated);
         return ResponseHelper.baseResponse(
           200,
           responseModel: ResponseModel(
