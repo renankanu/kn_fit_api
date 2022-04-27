@@ -9,6 +9,7 @@ part 'personal_training_model.g.dart';
 
 @JsonSerializable()
 class PersonalTrainingModel extends BaseModel {
+  final String? avatar;
   final String fullName;
   final String email;
   @JsonKey(toJson: toNull, includeIfNull: false)
@@ -17,6 +18,7 @@ class PersonalTrainingModel extends BaseModel {
   final int crefNumber;
 
   PersonalTrainingModel({
+    this.avatar,
     required this.fullName,
     required this.email,
     required this.password,
@@ -33,7 +35,21 @@ class PersonalTrainingModel extends BaseModel {
   @override
   Map<String, dynamic> toJson() => _$PersonalTrainingModelToJson(this);
 
-  static String? toNull(_) => null;
+  factory PersonalTrainingModel.fromDataBase(
+    Map<String, dynamic> dataBaseFields,
+  ) {
+    return PersonalTrainingModel(
+      id: dataBaseFields['id'] as int,
+      avatar: dataBaseFields['avatar'] as String?,
+      fullName: dataBaseFields['full_name'] as String,
+      email: dataBaseFields['email'] as String,
+      password: dataBaseFields['password'] as String,
+      crefType: dataBaseFields['cref_type'] as String,
+      crefNumber: dataBaseFields['cref_number'] as int,
+      createTime: dataBaseFields['create_time'],
+      updateTime: dataBaseFields['update_time'],
+    );
+  }
 
   factory PersonalTrainingModel.requestMapping(String body) {
     final json = jsonDecode(body) as Map<String, dynamic>;
