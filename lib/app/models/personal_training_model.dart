@@ -12,7 +12,7 @@ class PersonalTrainingModel extends BaseModel {
   final String? avatar;
   final String fullName;
   final String email;
-  @JsonKey(toJson: toNull, includeIfNull: false)
+  @JsonKey(toJson: BaseModel.toNull, includeIfNull: false)
   final String password;
   final String crefType;
   final int crefNumber;

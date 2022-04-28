@@ -14,7 +14,7 @@ class StudentModel extends BaseModel {
   final String email;
   final String? calledBy;
   final Gender gender;
-  @JsonKey(toJson: toNull, includeIfNull: false)
+  @JsonKey(toJson: BaseModel.toNull, includeIfNull: false)
   final String password;
   final int personalTrainingId;
 

@@ -62,7 +62,10 @@ class SecurityMiddleware extends BaseMiddleware {
       return responseErrorJWT<JWTExpiredError>('Token expirado');
     } on JWTNotActiveError {
       return responseErrorJWT<JWTNotActiveError>('Token não ativo');
-    } on JWTUndefinedError {
+    } on JWTUndefinedError catch (e) {
+      if (e.error is JWTExpiredError) {
+        return responseErrorJWT<JWTUndefinedError>('Token expirado');
+      }
       return responseErrorJWT<JWTUndefinedError>('Token não definido');
     } catch (error) {
       return responseErrorJWT<Object>('Token erro desconhecido');

@@ -9,6 +9,7 @@ part of 'personal_training_model.dart';
 PersonalTrainingModel _$PersonalTrainingModelFromJson(
         Map<String, dynamic> json) =>
     PersonalTrainingModel(
+      avatar: json['avatar'] as String?,
       fullName: json['fullName'] as String,
       email: json['email'] as String,
       password: json['password'] as String,
@@ -36,9 +37,10 @@ Map<String, dynamic> _$PersonalTrainingModelToJson(
   writeNotNull('id', instance.id);
   writeNotNull('create_time', instance.createTime?.toIso8601String());
   writeNotNull('update_time', instance.updateTime?.toIso8601String());
+  val['avatar'] = instance.avatar;
   val['fullName'] = instance.fullName;
   val['email'] = instance.email;
-  writeNotNull('password', PersonalTrainingModel.toNull(instance.password));
+  writeNotNull('password', BaseModel.toNull(instance.password));
   val['crefType'] = instance.crefType;
   val['crefNumber'] = instance.crefNumber;
   return val;

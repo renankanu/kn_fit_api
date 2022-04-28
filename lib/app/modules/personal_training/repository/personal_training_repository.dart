@@ -56,17 +56,8 @@ class PersonalTrainingRepository implements IPersonalTrainingRepository {
       conn = await connection.openConnection();
       const query = 'select * from personal_training';
       final results = await conn.query(query);
-      return results.map((row) {
-        return PersonalTrainingModel(
-          id: row['id'],
-          fullName: row['full_name'],
-          email: row['email'],
-          password: row['password'],
-          crefType: row['cref_type'],
-          crefNumber: row['cref_number'],
-          createTime: row['create_time'],
-          updateTime: row['update_time'],
-        );
+      return results.map((resultRow) {
+        return PersonalTrainingModel.fromDataBase(resultRow.fields);
       }).toList();
     } on MySqlException catch (e, s) {
       log.error('Erro ao buscar todos os Personal Trainings', e, s);
@@ -92,17 +83,9 @@ class PersonalTrainingRepository implements IPersonalTrainingRepository {
       ]);
 
       if (result.isNotEmpty) {
-        final userSqlData = result.first;
-        final personalTraining = PersonalTrainingModel(
-          id: userSqlData['id'],
-          fullName: userSqlData['full_name'],
-          email: userSqlData['email'],
-          password: userSqlData['password'],
-          crefType: userSqlData['cref_type'],
-          crefNumber: userSqlData['cref_number'],
-          createTime: userSqlData['create_time'],
-          updateTime: userSqlData['update_time'],
-        );
+        final resultRow = result.first;
+        final personalTraining =
+            PersonalTrainingModel.fromDataBase(resultRow.fields);
         return personalTraining;
       } else {
         throw UserNotFoundException(message: 'Email ou senha inválidos');
@@ -127,17 +110,9 @@ class PersonalTrainingRepository implements IPersonalTrainingRepository {
       final result = await conn.query(query, [id]);
 
       if (result.isNotEmpty) {
-        final userSqlData = result.first;
-        final personalTraining = PersonalTrainingModel(
-          id: userSqlData['id'],
-          fullName: userSqlData['full_name'],
-          email: userSqlData['email'],
-          password: userSqlData['password'],
-          crefType: userSqlData['cref_type'],
-          crefNumber: userSqlData['cref_number'],
-          createTime: userSqlData['create_time'],
-          updateTime: userSqlData['update_time'],
-        );
+        final resultRow = result.first;
+        final personalTraining =
+            PersonalTrainingModel.fromDataBase(resultRow.fields);
         return personalTraining;
       } else {
         throw UserNotFoundException(message: 'Usuário não encontrado');

@@ -70,8 +70,8 @@ FROM student''';
       ]);
 
       if (result.isNotEmpty) {
-        final userSqlData = result.first;
-        final student = StudentModel.fromDataBase(userSqlData.fields);
+        final resultRow = result.first;
+        final student = StudentModel.fromDataBase(resultRow.fields);
         return student;
       } else {
         throw UserNotFoundException(message: 'Email ou senha inválidos');
@@ -95,14 +95,10 @@ FROM student''';
       final query = baseQuerySelect;
       final result = await conn.query(query);
 
-      if (result.isNotEmpty) {
-        final students = result.map((userSqlData) {
-          return StudentModel.fromDataBase(userSqlData.fields);
-        }).toList();
-        return students;
-      } else {
-        throw UserNotFoundException(message: 'Usuário não encontrado');
-      }
+      final students = result.map((resultRow) {
+        return StudentModel.fromDataBase(resultRow.fields);
+      }).toList();
+      return students;
     } on MySqlException catch (e, s) {
       log.error('Erro ao buscar todos os usuários', e, s);
       throw DatabaseException(
@@ -123,8 +119,8 @@ FROM student''';
       final result = await conn.query(query, [id]);
 
       if (result.isNotEmpty) {
-        final userSqlData = result.first;
-        return StudentModel.fromDataBase(userSqlData.fields);
+        final resultRow = result.first;
+        return StudentModel.fromDataBase(resultRow.fields);
       } else {
         throw UserNotFoundException(message: 'Usuário não encontrado');
       }
@@ -148,8 +144,8 @@ FROM student''';
       final result = await conn.query(query, [email]);
 
       if (result.isNotEmpty) {
-        final userSqlData = result.first;
-        return StudentModel.fromDataBase(userSqlData.fields);
+        final resultRow = result.first;
+        return StudentModel.fromDataBase(resultRow.fields);
       } else {
         throw UserNotFoundException(message: 'Usuário não encontrado');
       }
