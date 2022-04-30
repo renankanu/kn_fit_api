@@ -36,4 +36,12 @@ class PersonalTrainingService implements IPersonalTrainingService {
   Future<PersonalTrainingModel> getInfo(int id) {
     return personalTrainingRepository.getInfo(id);
   }
+
+  @override
+  Future<PersonalTrainingModel> getInfoByEmail(String email) =>
+      personalTrainingRepository.getInfoByEmail(email);
+
+  @override
+  Future<void> updatePersonalTraining(PersonalTrainingModel personalTraining) =>
+      personalTrainingRepository.updatePersonalTraining(personalTraining);
 }

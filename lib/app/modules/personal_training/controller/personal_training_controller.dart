@@ -70,6 +70,18 @@ class PersonalTrainingController {
   Future<Response> getAllPersonalTrainings(Request request) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
+        if (request.requestedUri.queryParameters['email'] != null) {
+          final email = request.requestedUri.queryParameters['email']!;
+          final personalTrainings =
+              await personalTrainingService.getInfoByEmail(email);
+          return ResponseHelper.baseResponse(
+            200,
+            responseModel: ResponseModel(
+              data: personalTrainings,
+              message: 'Personal Training recuperados com sucesso.',
+            ),
+          );
+        }
         final personalTrainings = await personalTrainingService.getAll();
         final encodeJsonPersonalTraining = jsonEncode(personalTrainings);
         return ResponseHelper.baseResponse(
