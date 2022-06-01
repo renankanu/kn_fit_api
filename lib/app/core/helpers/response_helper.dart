@@ -1,3 +1,4 @@
+import 'package:minio/minio.dart';
 import 'package:shelf/shelf.dart';
 
 import '../../models/models.dart';
@@ -47,6 +48,14 @@ class ResponseHelper {
     } on DatabaseException catch (e, _) {
       return ResponseHelper.baseResponse(
         500,
+        responseModel: ResponseModel(
+          data: null,
+          message: e.toString(),
+        ),
+      );
+    } on MinioError catch (e, _) {
+      return ResponseHelper.baseResponse(
+        403,
         responseModel: ResponseModel(
           data: null,
           message: e.toString(),

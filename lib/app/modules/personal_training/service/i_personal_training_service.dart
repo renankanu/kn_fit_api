@@ -1,7 +1,10 @@
-import '../view_models/personal_training_save_input.dart';
+import '../../../models/models.dart';
 
 abstract class IPersonalTrainingService {
-  Future<void> createPersonalTraining(
-    PersonalTrainingSaveInput personalTraining,
-  );
+  Future<void> createPersonalTraining(PersonalTrainingModel personalTraining);
+  Future<PersonalTrainingModel> login(String email, String password);
+  Future<List<PersonalTrainingModel>> getAll();
+  Future<PersonalTrainingModel> getInfo(int id);
+  Future<PersonalTrainingModel> getInfoByEmail(String email);
+  Future<void> updatePersonalTraining(PersonalTrainingModel personalTraining);
 }

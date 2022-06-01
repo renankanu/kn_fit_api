@@ -2,17 +2,17 @@ import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:dotenv/dotenv.dart';
 import 'package:shelf/shelf.dart';
 
-import '../../../models/response_model.dart';
+import '../../../models/models.dart';
 import '../../core.dart';
 import '../base_middleware.dart';
 
 class SecurityMiddleware extends BaseMiddleware {
   final ILogger log;
   final skipUrl = <SecuritySkipUrl>[
-    SecuritySkipUrl(url: '/student/register', method: 'POST'),
-    SecuritySkipUrl(url: '/personal-training/register', method: 'POST'),
+    SecuritySkipUrl(url: '/student', method: 'POST'),
+    SecuritySkipUrl(url: '/personalTraining', method: 'POST'),
     SecuritySkipUrl(url: '/student/login', method: 'POST'),
-    SecuritySkipUrl(url: '/personal-training/login', method: 'POST'),
+    SecuritySkipUrl(url: '/personalTraining/login', method: 'POST'),
     SecuritySkipUrl(url: '/health', method: 'GET'),
   ];
 
@@ -21,70 +21,66 @@ class SecurityMiddleware extends BaseMiddleware {
   @override
   Future<Response> execute(Request request) async {
     try {
-      if (skipUrl.contains(
+      final isSkipUrl = skipUrl.contains(
         SecuritySkipUrl(url: '/${request.url.path}', method: request.method),
-      )) {
+      );
+      final regexImagePath = RegExp(r'^[0-9]{13}.(gif|jpe?g|png)+$');
+      final isImagePath =
+          regexImagePath.hasMatch(request.url.path.split('/').last);
+      if (isSkipUrl || isImagePath) {
         return innerHandler(request);
       }
 
-      final authHeader = request.headers['Authorization'];
+      final authorizationHeader = request.headers['Authorization'];
+      String? authorizationToken;
+      int? userId;
+      String? tokenType;
 
-      if (authHeader == null || authHeader.isEmpty) {
-        throw JWTError('Token não informado.');
+      if (authorizationHeader == null) {
+        return responseErrorJWT('Header de Autorização é obrigatório');
       }
 
-      final authHeaderContent = authHeader.split(' ');
-
-      if (authHeaderContent[0] != 'Bearer') {
-        throw JWTError('Token inválido.');
+      if (authorizationHeader.startsWith('Bearer ')) {
+        final token = authorizationHeader.substring(7);
+        final claims = JWT.verify(token, SecretKey(env['JWT_SECRET']!));
+        final claimsMap = claims.payload as Map<String, dynamic>;
+        userId = claimsMap['ref'] as int;
+        tokenType = claimsMap['referringTo'] as String;
       }
-
-      final authorizationToken = authHeaderContent[1];
-      final claims =
-          JWT.verify(authorizationToken, SecretKey(env['JWT_SECRET']!));
-
-      // if (request.url.path != 'auth/refresh') {
-      //   claims.validate();
-      // }
-
-      final claimsMap = claims.payload as Map<String, dynamic>;
-
-      final userId = claimsMap['ref'];
-
-      if (userId == null) {
-        throw JWTError('Usuário não encontrado.');
+      return innerHandler(
+        request.change(
+          headers: {
+            'user': userId.toString(),
+            'referring_to': tokenType.toString(),
+            'access_token': authorizationToken,
+          },
+        ),
+      );
+    } on JWTInvalidError {
+      return responseErrorJWT<JWTInvalidError>('Token inválido');
+    } on JWTExpiredError {
+      return responseErrorJWT<JWTExpiredError>('Token expirado');
+    } on JWTNotActiveError {
+      return responseErrorJWT<JWTNotActiveError>('Token não ativo');
+    } on JWTUndefinedError catch (e) {
+      if (e.error is JWTExpiredError) {
+        return responseErrorJWT<JWTUndefinedError>('Token expirado');
       }
-
-      final securityHeaders = {
-        'user': userId,
-        'access_token': authorizationToken,
-      };
-
-      return innerHandler(request.change(headers: securityHeaders));
-    } on JWTUndefinedError catch (_) {
-      return ResponseHelper.baseResponse(
-        401,
-        responseModel: ResponseModel(
-          data: null,
-          message: 'Token inválido.',
-        ),
-      );
-    } on JWTError catch (e, _) {
-      return ResponseHelper.baseResponse(
-        403,
-        responseModel: ResponseModel(
-          data: null,
-          message: e.toString(),
-        ),
-      );
-    } catch (e, _) {
-      return ResponseHelper.baseResponse(
-        403,
-        responseModel: ResponseModel(
-          data: null,
-          message: e.toString(),
-        ),
-      );
+      return responseErrorJWT<JWTUndefinedError>('Token não definido');
+    } catch (error) {
+      return responseErrorJWT<Object>('Token erro desconhecido');
     }
+  }
+
+  Response responseErrorJWT<T>(
+    String errorMessage,
+  ) {
+    return ResponseHelper.baseResponse(
+      403,
+      responseModel: ResponseModel(
+        data: null,
+        message: errorMessage,
+      ),
+    );
   }
 }

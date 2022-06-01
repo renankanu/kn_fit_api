@@ -9,29 +9,24 @@ part of 'personal_training_model.dart';
 PersonalTrainingModel _$PersonalTrainingModelFromJson(
         Map<String, dynamic> json) =>
     PersonalTrainingModel(
+      avatar: json['avatar'] as String?,
       fullName: json['fullName'] as String,
       email: json['email'] as String,
       password: json['password'] as String,
       crefType: json['crefType'] as String,
-      crefNumber: json['crefNumber'] as String,
+      crefNumber: json['crefNumber'] as int,
       id: json['id'] as int?,
-      createdAt: json['createdAt'] == null
+      createTime: json['create_time'] == null
           ? null
-          : DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
+          : DateTime.parse(json['create_time'] as String),
+      updateTime: json['update_time'] == null
           ? null
-          : DateTime.parse(json['updatedAt'] as String),
+          : DateTime.parse(json['update_time'] as String),
     );
 
 Map<String, dynamic> _$PersonalTrainingModelToJson(
     PersonalTrainingModel instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-    'createdAt': instance.createdAt?.toIso8601String(),
-    'updatedAt': instance.updatedAt?.toIso8601String(),
-    'fullName': instance.fullName,
-    'email': instance.email,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -39,7 +34,13 @@ Map<String, dynamic> _$PersonalTrainingModelToJson(
     }
   }
 
-  writeNotNull('password', PersonalTrainingModel.toNull(instance.password));
+  writeNotNull('id', instance.id);
+  writeNotNull('create_time', instance.createTime?.toIso8601String());
+  writeNotNull('update_time', instance.updateTime?.toIso8601String());
+  val['avatar'] = instance.avatar;
+  val['fullName'] = instance.fullName;
+  val['email'] = instance.email;
+  writeNotNull('password', BaseModel.toNull(instance.password));
   val['crefType'] = instance.crefType;
   val['crefNumber'] = instance.crefNumber;
   return val;

@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 import '../../../core/logger/i_logger.dart';
 import '../../../models/models.dart';
 import '../repository/i_personal_training_repository.dart';
-import '../view_models/personal_training_save_input.dart';
 import 'i_personal_training_service.dart';
 
 @LazySingleton(as: IPersonalTrainingService)
@@ -18,17 +17,31 @@ class PersonalTrainingService implements IPersonalTrainingService {
 
   @override
   Future<void> createPersonalTraining(
-    PersonalTrainingSaveInput personalTraining,
+    PersonalTrainingModel personalTraining,
   ) {
-    final personalTrainingEntity = PersonalTrainingModel(
-      fullName: personalTraining.fullName,
-      email: personalTraining.email,
-      password: personalTraining.password,
-      crefType: personalTraining.crefType,
-      crefNumber: personalTraining.crefNumber,
-    );
-
-    return personalTrainingRepository
-        .createPersonalTraining(personalTrainingEntity);
+    return personalTrainingRepository.createPersonalTraining(personalTraining);
   }
+
+  @override
+  Future<List<PersonalTrainingModel>> getAll() {
+    return personalTrainingRepository.getAll();
+  }
+
+  @override
+  Future<PersonalTrainingModel> login(String email, String password) {
+    return personalTrainingRepository.login(email, password);
+  }
+
+  @override
+  Future<PersonalTrainingModel> getInfo(int id) {
+    return personalTrainingRepository.getInfo(id);
+  }
+
+  @override
+  Future<PersonalTrainingModel> getInfoByEmail(String email) =>
+      personalTrainingRepository.getInfoByEmail(email);
+
+  @override
+  Future<void> updatePersonalTraining(PersonalTrainingModel personalTraining) =>
+      personalTrainingRepository.updatePersonalTraining(personalTraining);
 }

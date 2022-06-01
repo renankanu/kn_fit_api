@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'base_model.dart';
-
 part 'response_model.g.dart';
 
 @JsonSerializable()
@@ -14,7 +12,7 @@ class ResponseModel {
   });
 
   final String message;
-  final BaseModel? data;
+  final dynamic data;
 
   factory ResponseModel.fromJson(Map<String, dynamic> json) =>
       _$ResponseModelFromJson(json);
