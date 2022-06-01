@@ -3,6 +3,7 @@
         "cref",
         "jsonwebtoken",
         "knfit",
-        "middlewares"
+        "middlewares",
+        "Minio"
     ]
 }
