@@ -10,6 +10,6 @@ class PersonalTrainingRouter implements IRouter {
     final personalTrainingController =
         GetIt.I.get<PersonalTrainingController>();
 
-    router.mount('/personalTraining', personalTrainingController.router);
+    router.mount('/personal-training', personalTrainingController.router);
   }
 }
