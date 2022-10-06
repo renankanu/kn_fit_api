@@ -8,10 +8,12 @@ part 'response_model.g.dart';
 class ResponseModel {
   ResponseModel({
     required this.message,
+    this.systemMessage,
     this.data,
   });
 
   final String message;
+  final String? systemMessage;
   final dynamic data;
 
   factory ResponseModel.fromJson(Map<String, dynamic> json) =>

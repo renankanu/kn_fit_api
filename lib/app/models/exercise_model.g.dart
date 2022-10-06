@@ -14,12 +14,12 @@ ExerciseModel _$ExerciseModelFromJson(Map<String, dynamic> json) =>
       videoUrl: json['videoUrl'] as String?,
       muscleGroupId: json['muscleGroupId'] as int?,
       id: json['id'] as int?,
-      createTime: json['create_time'] == null
+      createTime: json['createTime'] == null
           ? null
-          : DateTime.parse(json['create_time'] as String),
-      updateTime: json['update_time'] == null
+          : DateTime.parse(json['createTime'] as String),
+      updateTime: json['updateTime'] == null
           ? null
-          : DateTime.parse(json['update_time'] as String),
+          : DateTime.parse(json['updateTime'] as String),
     );
 
 Map<String, dynamic> _$ExerciseModelToJson(ExerciseModel instance) {
@@ -32,8 +32,8 @@ Map<String, dynamic> _$ExerciseModelToJson(ExerciseModel instance) {
   }
 
   writeNotNull('id', instance.id);
-  writeNotNull('create_time', instance.createTime?.toIso8601String());
-  writeNotNull('update_time', instance.updateTime?.toIso8601String());
+  writeNotNull('createTime', instance.createTime?.toIso8601String());
+  writeNotNull('updateTime', instance.updateTime?.toIso8601String());
   val['name'] = instance.name;
   val['description'] = instance.description;
   val['imageUrl'] = instance.imageUrl;

@@ -40,7 +40,7 @@ class ExerciseController {
           201,
           responseModel: ResponseModel(
             data: null,
-            message: 'Exercise criado com sucesso.',
+            message: 'Exercício criado com sucesso.',
           ),
         );
       },
@@ -57,7 +57,7 @@ class ExerciseController {
           200,
           responseModel: ResponseModel(
             data: exercises,
-            message: 'Exercises retornados com sucesso.',
+            message: 'Exercícios retornados com sucesso.',
           ),
         );
       },
@@ -74,7 +74,7 @@ class ExerciseController {
           200,
           responseModel: ResponseModel(
             data: exercise,
-            message: 'Exercise retornado com sucesso.',
+            message: 'Exercício retornado com sucesso.',
           ),
         );
       },
@@ -91,7 +91,7 @@ class ExerciseController {
           200,
           responseModel: ResponseModel(
             data: exercise,
-            message: 'Exercise retornado com sucesso.',
+            message: 'Exercício retornado com sucesso.',
           ),
         );
       },

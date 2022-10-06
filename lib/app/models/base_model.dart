@@ -6,9 +6,9 @@ part 'base_model.g.dart';
 class BaseModel {
   @JsonKey(includeIfNull: false)
   final int? id;
-  @JsonKey(includeIfNull: false, name: 'create_time')
+  @JsonKey(includeIfNull: false)
   final DateTime? createTime;
-  @JsonKey(includeIfNull: false, name: 'update_time')
+  @JsonKey(includeIfNull: false)
   final DateTime? updateTime;
 
   BaseModel({
