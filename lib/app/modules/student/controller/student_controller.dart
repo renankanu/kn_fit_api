@@ -145,5 +145,19 @@ class StudentController {
     );
   }
 
+  @Route('DELETE', '/<id|[0-9]+>')
+  Future<Response> deleteStudent(Request request, String id) async {
+    return ResponseHelper.makeResponse(
+      handlerResponse: () async {
+        await studentService.deleteStudent(int.parse(id));
+        return ResponseHelper.baseResponse(
+          200,
+          responseModel: ResponseModel(message: 'Aluno removido com sucesso'),
+        );
+      },
+      log: log,
+    );
+  }
+
   Router get router => _$StudentControllerRouter(this);
 }
