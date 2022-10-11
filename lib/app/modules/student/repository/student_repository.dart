@@ -115,8 +115,7 @@ FROM student''';
     MySqlConnection? conn;
     try {
       conn = await connection.openConnection();
-      final query = '$baseQuerySelect where id = ?';
-      final result = await conn.query(query, [id]);
+      final result = await _hasStudentById(conn: conn, id: id);
 
       if (result.isNotEmpty) {
         final resultRow = result.first;
@@ -193,16 +192,25 @@ FROM student''';
     MySqlConnection? conn;
     try {
       conn = await connection.openConnection();
-      const query =
-          'delete from student WHERE (id = ?) and (personal_training_id = ?)';
-      await conn.query(query, [
-        id,
-        id,
-      ]);
+      final result = await _hasStudentById(conn: conn, id: id);
+      if (result.isEmpty) {
+        throw UserNotFoundException(message: 'Usuário não encontrado');
+      }
+      const query = 'delete from student WHERE (id = ?)';
+      await conn.query(query, [id]);
     } on MySqlException catch (e, s) {
       log.error('Erro ao atualizar o usuário', e, s);
     } finally {
       await conn?.close();
     }
+  }
+
+  Future<Results> _hasStudentById({
+    required MySqlConnection conn,
+    required int id,
+  }) async {
+    final query = '$baseQuerySelect where id = ?';
+    final result = await conn.query(query, [id]);
+    return result;
   }
 }
