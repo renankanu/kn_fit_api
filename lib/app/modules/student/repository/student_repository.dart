@@ -187,4 +187,22 @@ FROM student''';
       await conn?.close();
     }
   }
+
+  @override
+  Future<void> deleteStudent(int id) async {
+    MySqlConnection? conn;
+    try {
+      conn = await connection.openConnection();
+      const query =
+          'delete from student WHERE (id = ?) and (personal_training_id = ?)';
+      await conn.query(query, [
+        id,
+        id,
+      ]);
+    } on MySqlException catch (e, s) {
+      log.error('Erro ao atualizar o usuário', e, s);
+    } finally {
+      await conn?.close();
+    }
+  }
 }

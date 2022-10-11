@@ -7,4 +7,5 @@ abstract class IStudentRepository {
   Future<StudentModel> getInfo(int id);
   Future<StudentModel> getInfoByEmail(String email);
   Future<void> updateStudent(StudentModel student);
+  Future<void> deleteStudent(int id);
 }

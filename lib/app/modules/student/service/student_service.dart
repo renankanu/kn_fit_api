@@ -50,4 +50,9 @@ class StudentService implements IStudentService {
     }
     return studentRepository.updateStudent(student);
   }
+
+  @override
+  Future<void> deleteStudent(int id) {
+    return studentRepository.deleteStudent(id);
+  }
 }
