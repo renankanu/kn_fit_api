@@ -66,6 +66,36 @@ class PersonalTrainingController {
     );
   }
 
+  @Route.get('/info')
+  Future<Response> getPersonalTrainingInfo(Request request) async {
+    return ResponseHelper.makeResponse(
+      handlerResponse: () async {
+        final id = int.parse(request.headers['user']!);
+        final tokenType =
+            TokenTypeUtils.fromString(request.headers['referring_to']!);
+        if (tokenType != TokenType.personalTraining) {
+          return ResponseHelper.baseResponse(
+            401,
+            responseModel: ResponseModel(
+              data: null,
+              message: 'Token inválido.',
+            ),
+          );
+        }
+        final personalTraining = await personalTrainingService.getInfo(id);
+        final encodeJsonPersonalTraining = jsonEncode(personalTraining);
+        return ResponseHelper.baseResponse(
+          200,
+          responseModel: ResponseModel(
+            data: jsonDecode(encodeJsonPersonalTraining),
+            message: 'Personal Training recuperado com sucesso.',
+          ),
+        );
+      },
+      log: log,
+    );
+  }
+
   @Route.get('/')
   Future<Response> getAllPersonalTrainings(Request request) async {
     return ResponseHelper.makeResponse(
@@ -96,29 +126,23 @@ class PersonalTrainingController {
     );
   }
 
-  @Route.get('/info')
-  Future<Response> getPersonalTrainingInfo(Request request) async {
+  @Route('PATCH', '/')
+  Future<Response> updatePersonalTraining(Request request) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
         final id = int.parse(request.headers['user']!);
-        final tokenType =
-            TokenTypeUtils.fromString(request.headers['referring_to']!);
-        if (tokenType != TokenType.personalTraining) {
-          return ResponseHelper.baseResponse(
-            401,
-            responseModel: ResponseModel(
-              data: null,
-              message: 'Token inválido.',
-            ),
-          );
-        }
-        final personalTraining = await personalTrainingService.getInfo(id);
-        final encodeJsonPersonalTraining = jsonEncode(personalTraining);
+        final json = jsonDecode(await request.readAsString());
+        final actualPersonalTraining =
+            await personalTrainingService.getInfo(id);
+        final personalTrainingUpdated =
+            actualPersonalTraining.copyWithFromJson(json: json);
+        await personalTrainingService
+            .updatePersonalTraining(personalTrainingUpdated);
         return ResponseHelper.baseResponse(
           200,
           responseModel: ResponseModel(
-            data: jsonDecode(encodeJsonPersonalTraining),
-            message: 'Personal Training recuperado com sucesso.',
+            data: null,
+            message: 'Personal Training atualizado com sucesso.',
           ),
         );
       },

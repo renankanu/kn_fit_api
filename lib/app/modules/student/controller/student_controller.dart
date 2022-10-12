@@ -130,8 +130,8 @@ class StudentController {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
         final json = jsonDecode(await request.readAsString());
-        final localStudent = await studentService.getInfo(int.parse(id));
-        final studentUpdated = localStudent.copyWithFromJson(json: json);
+        final actualStudent = await studentService.getInfo(int.parse(id));
+        final studentUpdated = actualStudent.copyWithFromJson(json: json);
         await studentService.updateStudent(studentUpdated);
         return ResponseHelper.baseResponse(
           200,
