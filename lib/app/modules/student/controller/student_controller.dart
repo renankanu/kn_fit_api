@@ -145,11 +145,12 @@ class StudentController {
     );
   }
 
-  @Route('DELETE', '/<id|[0-9]+>')
-  Future<Response> deleteStudent(Request request, String id) async {
+  @Route.delete('/')
+  Future<Response> deleteStudent(Request request) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
-        await studentService.deleteStudent(int.parse(id));
+        final id = int.parse(request.headers['user']!);
+        await studentService.deleteStudent(id);
         return ResponseHelper.baseResponse(
           200,
           responseModel: ResponseModel(message: 'Aluno removido com sucesso'),
