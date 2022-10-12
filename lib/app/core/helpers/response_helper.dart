@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:minio/minio.dart';
 import 'package:shelf/shelf.dart';
 
@@ -43,6 +45,7 @@ class ResponseHelper {
         responseModel: ResponseModel(
           data: null,
           message: e.toString(),
+          systemMessage: e.toString(),
         ),
       );
     } on DatabaseException catch (e, _) {
@@ -50,7 +53,8 @@ class ResponseHelper {
         500,
         responseModel: ResponseModel(
           data: null,
-          message: e.toString(),
+          message: 'Erro com o banco de dados',
+          systemMessage: e.toString(),
         ),
       );
     } on MinioError catch (e, _) {
@@ -58,7 +62,17 @@ class ResponseHelper {
         403,
         responseModel: ResponseModel(
           data: null,
-          message: e.toString(),
+          message: 'Erro no servidor de imagem',
+          systemMessage: e.toString(),
+        ),
+      );
+    } on SocketException catch (e, _) {
+      return ResponseHelper.baseResponse(
+        500,
+        responseModel: ResponseModel(
+          data: null,
+          message: 'Erro no servidor',
+          systemMessage: e.toString(),
         ),
       );
     } catch (error) {

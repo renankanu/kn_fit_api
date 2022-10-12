@@ -165,12 +165,11 @@ class PersonalTrainingRepository implements IPersonalTrainingRepository {
     try {
       conn = await connection.openConnection();
       const query =
-          'update personal_training set avatar = ?, full_name = ?, email = ?, password = ?, cref_type = ?, cref_number = ? where id = ?';
+          'update personal_training set avatar = ?, full_name = ?, email = ?, cref_type = ?, cref_number = ? where id = ?';
       await conn.query(query, [
         personalTraining.avatar,
         personalTraining.fullName,
         personalTraining.email,
-        CryptoHelper.generatedSha256Hash(personalTraining.password),
         personalTraining.crefType,
         personalTraining.crefNumber,
         personalTraining.id,

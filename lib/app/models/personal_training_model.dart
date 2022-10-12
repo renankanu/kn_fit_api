@@ -72,4 +72,20 @@ class PersonalTrainingModel extends BaseModel {
     );
     return PersonalTrainingModel.fromJson(json);
   }
+
+  PersonalTrainingModel copyWithFromJson({
+    required Map<String, dynamic> json,
+  }) {
+    return PersonalTrainingModel(
+      id: json['id'] ?? id,
+      avatar: json['avatar'] ?? avatar,
+      fullName: json['fullName'] ?? fullName,
+      email: json['email'] ?? email,
+      password: json['password'] ?? password,
+      crefType: json['crefType'] ?? crefType,
+      crefNumber: json['crefNumber'] ?? crefNumber,
+      createTime: json['createTime'] ?? createTime,
+      updateTime: json['updateTime'] ?? updateTime,
+    );
+  }
 }

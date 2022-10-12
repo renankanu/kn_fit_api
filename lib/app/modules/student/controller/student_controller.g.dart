@@ -13,5 +13,6 @@ Router _$StudentControllerRouter(StudentController service) {
   router.add('GET', r'/info', service.getStudentInfo);
   router.add('GET', r'/', service.getAllStudents);
   router.add('PATCH', r'/<id|[0-9]+>', service.updateStudent);
+  router.add('DELETE', r'/', service.deleteStudent);
   return router;
 }

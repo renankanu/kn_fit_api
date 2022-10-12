@@ -130,8 +130,8 @@ class StudentController {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
         final json = jsonDecode(await request.readAsString());
-        final localStudent = await studentService.getInfo(int.parse(id));
-        final studentUpdated = localStudent.copyWithFromJson(json: json);
+        final actualStudent = await studentService.getInfo(int.parse(id));
+        final studentUpdated = actualStudent.copyWithFromJson(json: json);
         await studentService.updateStudent(studentUpdated);
         return ResponseHelper.baseResponse(
           200,
@@ -139,6 +139,21 @@ class StudentController {
             data: null,
             message: 'Aluno atualizado com sucesso.',
           ),
+        );
+      },
+      log: log,
+    );
+  }
+
+  @Route.delete('/')
+  Future<Response> deleteStudent(Request request) async {
+    return ResponseHelper.makeResponse(
+      handlerResponse: () async {
+        final id = int.parse(request.headers['user']!);
+        await studentService.deleteStudent(id);
+        return ResponseHelper.baseResponse(
+          200,
+          responseModel: ResponseModel(message: 'Aluno removido com sucesso'),
         );
       },
       log: log,
