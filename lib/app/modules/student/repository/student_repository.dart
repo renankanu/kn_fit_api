@@ -165,14 +165,13 @@ FROM student''';
     try {
       conn = await connection.openConnection();
       const query =
-          'update student set avatar = ?, full_name = ?, email = ?, called_by = ?, gender = ?, password = ?, personal_training_id = ? where id = ?';
+          'update student set avatar = ?, full_name = ?, email = ?, called_by = ?, gender = ?, personal_training_id = ? where id = ?';
       await conn.query(query, [
         student.avatar,
         student.fullName,
         student.email,
         student.calledBy,
         student.gender.value,
-        CryptoHelper.generatedSha256Hash(student.password),
         student.personalTrainingId,
         student.id,
       ]);
