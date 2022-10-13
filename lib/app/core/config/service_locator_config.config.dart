@@ -7,14 +7,16 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../../modules/exercise/controller/exercise_controller.dart' as _i23;
+import '../../modules/exercise/controller/exercise_controller.dart' as _i24;
 import '../../modules/exercise/repository/exercise_repository.dart' as _i7;
 import '../../modules/exercise/repository/i_exercise_repository.dart' as _i6;
 import '../../modules/exercise/service/exercise_service.dart' as _i10;
 import '../../modules/exercise/service/i_exercise_service.dart' as _i9;
 import '../../modules/media/media_controller.dart' as _i20;
-import '../../modules/personal_training/controller/personal_training_controller.dart'
+import '../../modules/muscular_group/controller/muscular_group_controller.dart'
     as _i21;
+import '../../modules/personal_training/controller/personal_training_controller.dart'
+    as _i22;
 import '../../modules/personal_training/repository/i_personal_training_repository.dart'
     as _i11;
 import '../../modules/personal_training/repository/personal_training_repository.dart'
@@ -23,7 +25,7 @@ import '../../modules/personal_training/service/i_personal_training_service.dart
     as _i13;
 import '../../modules/personal_training/service/personal_training_service.dart'
     as _i14;
-import '../../modules/student/controller/student_controller.dart' as _i22;
+import '../../modules/student/controller/student_controller.dart' as _i23;
 import '../../modules/student/repository/i_student_repository.dart' as _i16;
 import '../../modules/student/repository/student_repository.dart' as _i17;
 import '../../modules/student/service/i_student_service.dart' as _i18;
@@ -60,13 +62,15 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       log: get<_i8.ILogger>()));
   gh.factory<_i20.MediaController>(
       () => _i20.MediaController(log: get<_i8.ILogger>()));
-  gh.factory<_i21.PersonalTrainingController>(() =>
-      _i21.PersonalTrainingController(
+  gh.factory<_i21.MuscularGroupController>(
+      () => _i21.MuscularGroupController());
+  gh.factory<_i22.PersonalTrainingController>(() =>
+      _i22.PersonalTrainingController(
           personalTrainingService: get<_i13.IPersonalTrainingService>(),
           log: get<_i8.ILogger>()));
-  gh.factory<_i22.StudentController>(() => _i22.StudentController(
+  gh.factory<_i23.StudentController>(() => _i23.StudentController(
       studentService: get<_i18.IStudentService>(), log: get<_i8.ILogger>()));
-  gh.factory<_i23.ExerciseController>(() => _i23.ExerciseController(
+  gh.factory<_i24.ExerciseController>(() => _i24.ExerciseController(
       exerciseService: get<_i9.IExerciseService>(), log: get<_i8.ILogger>()));
   return get;
 }
