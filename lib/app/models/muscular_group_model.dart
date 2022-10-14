@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
+import '../core/core.dart';
 import 'models.dart';
 
 part 'muscular_group_model.g.dart';
@@ -17,4 +20,14 @@ class MuscularGroupModel extends BaseModel {
 
   @override
   Map<String, dynamic> toJson() => _$MuscularGroupModelToJson(this);
+
+  factory MuscularGroupModel.requestMapping(String body) {
+    final json = jsonDecode(body) as Map<String, dynamic>;
+    ValidFields.nullChecker(
+      json,
+      requiredKeys: ['name'],
+      nonNullKeys: ['name'],
+    );
+    return MuscularGroupModel.fromJson(json);
+  }
 }
