@@ -1,5 +1,5 @@
 import '../../../models/models.dart';
 
-abstract class IMuscularGroupService {
+abstract class IMuscularGroupRepository {
   Future<void> createMuscularGroup(MuscularGroupModel muscularGroup);
 }
