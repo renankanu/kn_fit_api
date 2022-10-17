@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:mysql1/mysql1.dart';
 
 import './i_muscular_group_repository.dart';
@@ -5,6 +6,7 @@ import '../../../core/core.dart';
 import '../../../core/database/i_database_connection.dart';
 import '../../../models/muscular_group_model.dart';
 
+@LazySingleton(as: IMuscularGroupRepository)
 class MuscularGroupRepository implements IMuscularGroupRepository {
   final IDatabaseConnection connection;
   final ILogger log;
