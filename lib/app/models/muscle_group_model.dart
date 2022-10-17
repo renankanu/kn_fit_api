@@ -5,30 +5,30 @@ import 'package:json_annotation/json_annotation.dart';
 import '../core/core.dart';
 import 'models.dart';
 
-part 'muscular_group_model.g.dart';
+part 'muscle_group_model.g.dart';
 
 @JsonSerializable()
-class MuscularGroupModel extends BaseModel {
+class MuscleGroupModel extends BaseModel {
   final String name;
 
-  MuscularGroupModel({
+  MuscleGroupModel({
     required this.name,
     int? id,
   }) : super(id: id);
 
-  factory MuscularGroupModel.fromJson(Map<String, dynamic> json) =>
-      _$MuscularGroupModelFromJson(json);
+  factory MuscleGroupModel.fromJson(Map<String, dynamic> json) =>
+      _$MuscleGroupModelFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$MuscularGroupModelToJson(this);
+  Map<String, dynamic> toJson() => _$MuscleGroupModelToJson(this);
 
-  factory MuscularGroupModel.requestMapping(String body) {
+  factory MuscleGroupModel.requestMapping(String body) {
     final json = jsonDecode(body) as Map<String, dynamic>;
     ValidFields.nullChecker(
       json,
       requiredKeys: ['name'],
       nonNullKeys: ['name'],
     );
-    return MuscularGroupModel.fromJson(json);
+    return MuscleGroupModel.fromJson(json);
   }
 }

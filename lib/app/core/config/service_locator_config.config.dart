@@ -13,16 +13,14 @@ import '../../modules/exercise/repository/i_exercise_repository.dart' as _i6;
 import '../../modules/exercise/service/exercise_service.dart' as _i10;
 import '../../modules/exercise/service/i_exercise_service.dart' as _i9;
 import '../../modules/media/media_controller.dart' as _i24;
-import '../../modules/muscular_group/controller/muscular_group_controller.dart'
+import '../../modules/muscle_group/controller/muscle_group_controller.dart'
     as _i25;
-import '../../modules/muscular_group/repository/i_muscular_group_repository.dart'
+import '../../modules/muscle_group/repository/i_muscle_group_repository.dart'
     as _i11;
-import '../../modules/muscular_group/repository/muscular_group_repository.dart'
+import '../../modules/muscle_group/repository/muscle_group_repository.dart'
     as _i12;
-import '../../modules/muscular_group/service/i_muscular_group_service.dart'
-    as _i13;
-import '../../modules/muscular_group/service/muscular_group_service.dart'
-    as _i14;
+import '../../modules/muscle_group/service/i_muscle_group_service.dart' as _i13;
+import '../../modules/muscle_group/service/muscle_group_service.dart' as _i14;
 import '../../modules/personal_training/controller/personal_training_controller.dart'
     as _i26;
 import '../../modules/personal_training/repository/i_personal_training_repository.dart'
@@ -56,11 +54,11 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i9.IExerciseService>(() => _i10.ExerciseService(
       exerciseRepository: get<_i6.IExerciseRepository>(),
       log: get<_i8.ILogger>()));
-  gh.lazySingleton<_i11.IMuscularGroupRepository>(() =>
-      _i12.MuscularGroupRepository(
+  gh.lazySingleton<_i11.IMuscleGroupRepository>(() =>
+      _i12.MuscleGroupRepository(
           connection: get<_i3.IDatabaseConnection>(), log: get<_i8.ILogger>()));
-  gh.lazySingleton<_i13.IMuscularGroupService>(() => _i14.MuscularGroupService(
-      muscularGroupRepository: get<_i11.IMuscularGroupRepository>(),
+  gh.lazySingleton<_i13.IMuscleGroupService>(() => _i14.MuscleGroupService(
+      muscleGroupRepository: get<_i11.IMuscleGroupRepository>(),
       log: get<_i15.ILogger>()));
   gh.lazySingleton<_i16.IPersonalTrainingRepository>(() =>
       _i17.PersonalTrainingRepository(
@@ -76,8 +74,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       log: get<_i8.ILogger>()));
   gh.factory<_i24.MediaController>(
       () => _i24.MediaController(log: get<_i8.ILogger>()));
-  gh.factory<_i25.MuscularGroupController>(() => _i25.MuscularGroupController(
-      muscularGroupService: get<_i13.IMuscularGroupService>(),
+  gh.factory<_i25.MuscleGroupController>(() => _i25.MuscleGroupController(
+      muscleGroupService: get<_i13.IMuscleGroupService>(),
       log: get<_i8.ILogger>()));
   gh.factory<_i26.PersonalTrainingController>(() =>
       _i26.PersonalTrainingController(

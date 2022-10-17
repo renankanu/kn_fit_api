@@ -1,18 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'muscular_group_model.dart';
+part of 'muscle_group_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MuscularGroupModel _$MuscularGroupModelFromJson(Map<String, dynamic> json) =>
-    MuscularGroupModel(
+MuscleGroupModel _$MuscleGroupModelFromJson(Map<String, dynamic> json) =>
+    MuscleGroupModel(
       name: json['name'] as String,
       id: json['id'] as int?,
     );
 
-Map<String, dynamic> _$MuscularGroupModelToJson(MuscularGroupModel instance) {
+Map<String, dynamic> _$MuscleGroupModelToJson(MuscleGroupModel instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {

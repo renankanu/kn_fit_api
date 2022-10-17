@@ -1,31 +1,31 @@
 import 'package:injectable/injectable.dart';
 import 'package:mysql1/mysql1.dart';
 
-import './i_muscular_group_repository.dart';
 import '../../../core/core.dart';
 import '../../../core/database/i_database_connection.dart';
-import '../../../models/muscular_group_model.dart';
+import '../../../models/muscle_group_model.dart';
+import 'i_muscle_group_repository.dart';
 
-@LazySingleton(as: IMuscularGroupRepository)
-class MuscularGroupRepository implements IMuscularGroupRepository {
+@LazySingleton(as: IMuscleGroupRepository)
+class MuscleGroupRepository implements IMuscleGroupRepository {
   final IDatabaseConnection connection;
   final ILogger log;
 
-  MuscularGroupRepository({
+  MuscleGroupRepository({
     required this.connection,
     required this.log,
   });
 
   @override
-  Future<void> create(MuscularGroupModel muscularGroup) async {
+  Future<void> create(MuscleGroupModel muscleGroup) async {
     MySqlConnection? conn;
     try {
       conn = await connection.openConnection();
-      const query = 'insert into muscular_group (name, ) values (?)';
+      const query = 'insert into muscle_group (name, ) values (?)';
       await conn.query(
         query,
         [
-          muscularGroup.name,
+          muscleGroup.name,
         ],
       );
     } on MySqlException catch (e, s) {
@@ -40,14 +40,14 @@ class MuscularGroupRepository implements IMuscularGroupRepository {
   }
 
   @override
-  Future<List<MuscularGroupModel>> getAll() async {
+  Future<List<MuscleGroupModel>> getAll() async {
     MySqlConnection? conn;
     try {
       conn = await connection.openConnection();
-      final result = await conn.query('select * from muscular_group');
+      final result = await conn.query('select * from muscle_group');
       return result
           .map(
-            (row) => MuscularGroupModel(
+            (row) => MuscleGroupModel(
               id: row['id'],
               name: row['name'],
             ),

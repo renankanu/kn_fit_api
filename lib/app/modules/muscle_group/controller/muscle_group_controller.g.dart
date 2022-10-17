@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'muscular_group_controller.dart';
+part of 'muscle_group_controller.dart';
 
 // **************************************************************************
 // ShelfRouterGenerator
 // **************************************************************************
 
-Router _$MuscularGroupControllerRouter(MuscularGroupController service) {
+Router _$MuscleGroupControllerRouter(MuscleGroupController service) {
   final router = Router();
   router.add('POST', r'/', service.create);
   router.add('GET', r'/', service.listAll);

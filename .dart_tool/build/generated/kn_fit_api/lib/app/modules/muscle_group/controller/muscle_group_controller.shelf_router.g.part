@@ -2,7 +2,7 @@
 // ShelfRouterGenerator
 // **************************************************************************
 
-Router _$MuscularGroupControllerRouter(MuscularGroupController service) {
+Router _$MuscleGroupControllerRouter(MuscleGroupController service) {
   final router = Router();
   router.add('POST', r'/', service.create);
   router.add('GET', r'/', service.listAll);

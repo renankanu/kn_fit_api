@@ -4,17 +4,17 @@ import 'package:shelf_router/shelf_router.dart';
 
 import '../../../core/core.dart';
 import '../../../models/models.dart';
-import '../service/i_muscular_group_service.dart';
+import '../service/i_muscle_group_service.dart';
 
-part 'muscular_group_controller.g.dart';
+part './muscle_group_controller.g.dart';
 
 @Injectable()
-class MuscularGroupController {
-  final IMuscularGroupService muscularGroupService;
+class MuscleGroupController {
+  final IMuscleGroupService muscleGroupService;
   final ILogger log;
 
-  MuscularGroupController({
-    required this.muscularGroupService,
+  MuscleGroupController({
+    required this.muscleGroupService,
     required this.log,
   });
 
@@ -23,8 +23,8 @@ class MuscularGroupController {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
         final body = await request.readAsString();
-        final muscularGroup = MuscularGroupModel.requestMapping(body);
-        await muscularGroupService.create(muscularGroup);
+        final muscleGroup = MuscleGroupModel.requestMapping(body);
+        await muscleGroupService.create(muscleGroup);
         return ResponseHelper.baseResponse(
           201,
           responseModel: ResponseModel(
@@ -41,11 +41,11 @@ class MuscularGroupController {
   Future<Response> listAll(Request request) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
-        final muscularGroups = await muscularGroupService.getAll();
+        final muscleGroups = await muscleGroupService.getAll();
         return ResponseHelper.baseResponse(
           200,
           responseModel: ResponseModel(
-            data: muscularGroups,
+            data: muscleGroups,
             message: 'Grupos Musculares buscados com sucesso',
           ),
         );
@@ -54,5 +54,5 @@ class MuscularGroupController {
     );
   }
 
-  Router get router => _$MuscularGroupControllerRouter(this);
+  Router get router => _$MuscleGroupControllerRouter(this);
 }
