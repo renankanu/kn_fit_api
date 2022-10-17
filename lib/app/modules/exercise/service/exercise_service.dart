@@ -24,8 +24,4 @@ class ExerciseService implements IExerciseService {
 
   @override
   Future<ExerciseModel> getDetail(int id) => exerciseRepository.getDetail(id);
-
-  @override
-  Future<List<ExerciseModel>> getByMuscleGroup(int id) =>
-      exerciseRepository.getByMuscleGroup(id);
 }

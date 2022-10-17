@@ -7,6 +7,5 @@ Router _$ExerciseControllerRouter(ExerciseController service) {
   router.add('POST', r'/', service.saveExercise);
   router.add('GET', r'/', service.getAll);
   router.add('GET', r'/<id|[0-9]+>', service.getDetail);
-  router.add('GET', r'/muscleGroup/<id|[0-9]+>', service.getByMuscleGroup);
   return router;
 }

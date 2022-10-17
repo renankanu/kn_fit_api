@@ -55,7 +55,7 @@ class MuscleGroupController {
   }
 
   @Route.get('/<id|[0-9]+>')
-  Future<Response> getById(Request request, String id) async {
+  Future<Response> getDetail(Request request, String id) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
         final muscleGroup = await muscleGroupService.getById(int.parse(id));

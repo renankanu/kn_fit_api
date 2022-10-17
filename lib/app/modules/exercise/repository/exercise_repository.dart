@@ -103,39 +103,4 @@ class ExerciseRepository implements IExerciseRepository {
       await conn?.close();
     }
   }
-
-  @override
-  Future<List<ExerciseModel>> getByMuscleGroup(int id) async {
-    MySqlConnection? conn;
-    try {
-      conn = await connection.openConnection();
-      const query = 'select * from exercise where muscle_group_id = ?';
-      final results = await conn.query(query, [id]);
-      if (results.isNotEmpty) {
-        return results
-            .map(
-              (exerciseSqlData) => ExerciseModel(
-                id: exerciseSqlData['id'],
-                name: exerciseSqlData['name'],
-                description: exerciseSqlData['description'],
-                imageUrl: exerciseSqlData['image_url'],
-                videoUrl: exerciseSqlData['video_url'],
-              ),
-            )
-            .toList();
-      } else {
-        throw UserNotFoundException(
-          message: 'Exercício não encontrado',
-        );
-      }
-    } on MySqlException catch (e, s) {
-      log.error('Erro ao buscar o Exercício', e, s);
-      throw DatabaseException(
-        message: 'Erro ao buscar o Exercício',
-        exception: e,
-      );
-    } finally {
-      await conn?.close();
-    }
-  }
 }
