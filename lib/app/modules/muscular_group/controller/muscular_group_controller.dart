@@ -6,6 +6,8 @@ import '../../../core/core.dart';
 import '../../../models/models.dart';
 import '../service/i_muscular_group_service.dart';
 
+part 'muscular_group_controller.g.dart';
+
 @Injectable()
 class MuscularGroupController {
   final IMuscularGroupService muscularGroupService;
@@ -34,4 +36,6 @@ class MuscularGroupController {
       log: log,
     );
   }
+
+  Router get router => _$MuscularGroupControllerRouter(this);
 }
