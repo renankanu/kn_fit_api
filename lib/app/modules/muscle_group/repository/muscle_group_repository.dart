@@ -63,4 +63,32 @@ class MuscleGroupRepository implements IMuscleGroupRepository {
       await conn?.close();
     }
   }
+
+  @override
+  Future<MuscleGroupModel> getById(int id) async {
+    MySqlConnection? conn;
+    try {
+      conn = await connection.openConnection();
+      final result = await conn.query(
+        'select * from muscle_group where id = ?',
+        [id],
+      );
+      return result
+          .map(
+            (row) => MuscleGroupModel(
+              id: row['id'],
+              name: row['name'],
+            ),
+          )
+          .first;
+    } on MySqlException catch (e, s) {
+      log.error('Erro ao buscar o Grupo Muscular', e, s);
+      throw DatabaseException(
+        message: 'Erro ao buscar o Grupo Muscular',
+        exception: e,
+      );
+    } finally {
+      await conn?.close();
+    }
+  }
 }

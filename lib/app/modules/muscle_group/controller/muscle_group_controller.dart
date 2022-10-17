@@ -54,5 +54,22 @@ class MuscleGroupController {
     );
   }
 
+  @Route.get('/<id|[0-9]+>')
+  Future<Response> getById(Request request, String id) async {
+    return ResponseHelper.makeResponse(
+      handlerResponse: () async {
+        final muscleGroup = await muscleGroupService.getById(int.parse(id));
+        return ResponseHelper.baseResponse(
+          200,
+          responseModel: ResponseModel(
+            data: muscleGroup,
+            message: 'Grupo Muscular buscado com sucesso',
+          ),
+        );
+      },
+      log: log,
+    );
+  }
+
   Router get router => _$MuscleGroupControllerRouter(this);
 }
