@@ -1,5 +1,6 @@
 import '../../../models/models.dart';
 
 abstract class IMuscularGroupService {
-  Future<void> createMuscularGroup(MuscularGroupModel muscularGroup);
+  Future<void> create(MuscularGroupModel muscularGroup);
+  Future<List<MuscularGroupModel>> getAll();
 }

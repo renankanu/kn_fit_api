@@ -13,7 +13,8 @@ class MuscularGroupModel extends BaseModel {
 
   MuscularGroupModel({
     required this.name,
-  });
+    int? id,
+  }) : super(id: id);
 
   factory MuscularGroupModel.fromJson(Map<String, dynamic> json) =>
       _$MuscularGroupModelFromJson(json);

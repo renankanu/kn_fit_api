@@ -8,6 +8,7 @@ part of 'muscular_group_controller.dart';
 
 Router _$MuscularGroupControllerRouter(MuscularGroupController service) {
   final router = Router();
-  router.add('POST', r'/', service.listAllMuscularGroup);
+  router.add('POST', r'/', service.create);
+  router.add('GET', r'/', service.listAll);
   return router;
 }

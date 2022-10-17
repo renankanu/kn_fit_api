@@ -16,7 +16,12 @@ class MuscularGroupService implements IMuscularGroupService {
   });
 
   @override
-  Future<void> createMuscularGroup(MuscularGroupModel muscularGroup) async {
-    return muscularGroupRepository.createMuscularGroup(muscularGroup);
+  Future<void> create(MuscularGroupModel muscularGroup) async {
+    return muscularGroupRepository.create(muscularGroup);
+  }
+
+  @override
+  Future<List<MuscularGroupModel>> getAll() {
+    return muscularGroupRepository.getAll();
   }
 }

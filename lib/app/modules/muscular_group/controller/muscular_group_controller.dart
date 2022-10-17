@@ -19,17 +19,34 @@ class MuscularGroupController {
   });
 
   @Route.post('/')
-  Future<Response> listAllMuscularGroup(Request request) async {
+  Future<Response> create(Request request) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
         final body = await request.readAsString();
         final muscularGroup = MuscularGroupModel.requestMapping(body);
-        await muscularGroupService.createMuscularGroup(muscularGroup);
+        await muscularGroupService.create(muscularGroup);
         return ResponseHelper.baseResponse(
           201,
           responseModel: ResponseModel(
             data: null,
-            message: 'Personal Training criado com sucesso.',
+            message: 'Grupo Muscular criado com sucesso',
+          ),
+        );
+      },
+      log: log,
+    );
+  }
+
+  @Route.get('/')
+  Future<Response> listAll(Request request) async {
+    return ResponseHelper.makeResponse(
+      handlerResponse: () async {
+        final muscularGroups = await muscularGroupService.getAll();
+        return ResponseHelper.baseResponse(
+          200,
+          responseModel: ResponseModel(
+            data: muscularGroups,
+            message: 'Grupos Musculares buscados com sucesso',
           ),
         );
       },
