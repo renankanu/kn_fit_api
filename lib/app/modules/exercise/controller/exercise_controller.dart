@@ -82,22 +82,5 @@ class ExerciseController {
     );
   }
 
-  @Route.get('/muscleGroup/<id|[0-9]+>')
-  Future<Response> getByMuscleGroup(Request request, String id) async {
-    return ResponseHelper.makeResponse(
-      handlerResponse: () async {
-        final exercise = await exerciseService.getByMuscleGroup(int.parse(id));
-        return ResponseHelper.baseResponse(
-          200,
-          responseModel: ResponseModel(
-            data: exercise,
-            message: 'Exercício retornado com sucesso.',
-          ),
-        );
-      },
-      log: log,
-    );
-  }
-
   Router get router => _$ExerciseControllerRouter(this);
 }

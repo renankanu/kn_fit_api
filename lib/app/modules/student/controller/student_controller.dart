@@ -136,7 +136,7 @@ class StudentController {
         return ResponseHelper.baseResponse(
           200,
           responseModel: ResponseModel(
-            data: null,
+            data: studentUpdated.toJson(),
             message: 'Aluno atualizado com sucesso.',
           ),
         );

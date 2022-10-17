@@ -141,7 +141,7 @@ class PersonalTrainingController {
         return ResponseHelper.baseResponse(
           200,
           responseModel: ResponseModel(
-            data: null,
+            data: personalTrainingUpdated.toJson(),
             message: 'Personal Training atualizado com sucesso.',
           ),
         );
