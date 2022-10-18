@@ -26,7 +26,7 @@ class MuscleGroupService implements IMuscleGroupService {
   }
 
   @override
-  Future<MuscleGroupModel> getById(int id) async {
-    return muscleGroupRepository.getById(id);
+  Future<MuscleGroupModel> getDetail(int id) async {
+    return muscleGroupRepository.getDetail(id);
   }
 }

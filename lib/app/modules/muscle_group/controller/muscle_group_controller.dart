@@ -6,7 +6,7 @@ import '../../../core/core.dart';
 import '../../../models/models.dart';
 import '../service/i_muscle_group_service.dart';
 
-part './muscle_group_controller.g.dart';
+part 'muscle_group_controller.g.dart';
 
 @Injectable()
 class MuscleGroupController {
@@ -58,7 +58,7 @@ class MuscleGroupController {
   Future<Response> getDetail(Request request, String id) async {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
-        final muscleGroup = await muscleGroupService.getById(int.parse(id));
+        final muscleGroup = await muscleGroupService.getDetail(int.parse(id));
         return ResponseHelper.baseResponse(
           200,
           responseModel: ResponseModel(

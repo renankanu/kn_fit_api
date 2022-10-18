@@ -65,7 +65,7 @@ class MuscleGroupRepository implements IMuscleGroupRepository {
   }
 
   @override
-  Future<MuscleGroupModel> getById(int id) async {
+  Future<MuscleGroupModel> getDetail(int id) async {
     MySqlConnection? conn;
     try {
       conn = await connection.openConnection();
