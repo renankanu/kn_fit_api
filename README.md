@@ -1,1 +1,4 @@
-A web server built using [Shelf](https://pub.dev/packages/shelf).
+# Kn Fit Api
+Api para o aplicativo KNFit, feito com dart e shelf;
+
+[Shelf](https://pub.dev/packages/shelf).
