@@ -23,6 +23,15 @@ class MuscleGroupController {
     return ResponseHelper.makeResponse(
       handlerResponse: () async {
         final body = await request.readAsString();
+        if (body.isEmpty) {
+          return ResponseHelper.baseResponse(
+            415,
+            responseModel: ResponseModel(
+              data: null,
+              message: 'Informe o grupo muscular.',
+            ),
+          );
+        }
         final muscleGroup = MuscleGroupModel.requestMapping(body);
         await muscleGroupService.create(muscleGroup);
         return ResponseHelper.baseResponse(
