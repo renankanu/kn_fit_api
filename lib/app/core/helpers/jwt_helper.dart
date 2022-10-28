@@ -31,7 +31,6 @@ class JwtHelper {
     final token = jwt.sign(
       SecretKey(_secret),
       expiresIn: expiry,
-      notBefore: const Duration(seconds: 3600),
     );
     return token;
   }
