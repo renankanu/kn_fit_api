@@ -14,7 +14,7 @@ class JwtHelper {
     required String email,
     required String fullName,
     required TokenType tokenType,
-    Duration expiry = const Duration(hours: 1),
+    Duration expiry = const Duration(days: 7),
   }) {
     final jwt = JWT(
       {
@@ -31,6 +31,7 @@ class JwtHelper {
     final token = jwt.sign(
       SecretKey(_secret),
       expiresIn: expiry,
+      notBefore: const Duration(seconds: 3600),
     );
     return token;
   }
