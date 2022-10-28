@@ -10,7 +10,6 @@ MuscleGroupModel _$MuscleGroupModelFromJson(Map<String, dynamic> json) =>
     MuscleGroupModel(
       name: json['name'] as String,
       id: json['id'] as int?,
-      isBlocked: json['isBlocked'] as bool?,
     );
 
 Map<String, dynamic> _$MuscleGroupModelToJson(MuscleGroupModel instance) {
@@ -23,7 +22,6 @@ Map<String, dynamic> _$MuscleGroupModelToJson(MuscleGroupModel instance) {
   }
 
   writeNotNull('id', instance.id);
-  writeNotNull('isBlocked', instance.isBlocked);
   val['name'] = instance.name;
   return val;
 }

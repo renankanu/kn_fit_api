@@ -21,7 +21,7 @@ class MuscleGroupRepository implements IMuscleGroupRepository {
     MySqlConnection? conn;
     try {
       conn = await connection.openConnection();
-      const query = 'insert into muscle_group (name, ) values (?)';
+      const query = 'insert into muscle_group (name) values (?)';
       await conn.query(
         query,
         [
@@ -44,7 +44,8 @@ class MuscleGroupRepository implements IMuscleGroupRepository {
     MySqlConnection? conn;
     try {
       conn = await connection.openConnection();
-      final result = await conn.query('select * from muscle_group');
+      final result =
+          await conn.query('select * from muscle_group where blocked=0');
       return result
           .map(
             (row) => MuscleGroupModel(
