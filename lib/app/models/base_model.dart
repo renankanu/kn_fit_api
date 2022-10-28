@@ -10,11 +10,14 @@ class BaseModel {
   final DateTime? createTime;
   @JsonKey(includeIfNull: false)
   final DateTime? updateTime;
+  @JsonKey(includeIfNull: false)
+  final bool? isBlocked;
 
   BaseModel({
     this.id,
     this.createTime,
     this.updateTime,
+    this.isBlocked,
   });
 
   factory BaseModel.fromJson(Map<String, dynamic> json) =>

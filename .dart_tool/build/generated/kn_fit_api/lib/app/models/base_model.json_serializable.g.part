@@ -10,6 +10,7 @@ BaseModel _$BaseModelFromJson(Map<String, dynamic> json) => BaseModel(
       updateTime: json['updateTime'] == null
           ? null
           : DateTime.parse(json['updateTime'] as String),
+      isBlocked: json['isBlocked'] as bool?,
     );
 
 Map<String, dynamic> _$BaseModelToJson(BaseModel instance) {
@@ -24,5 +25,6 @@ Map<String, dynamic> _$BaseModelToJson(BaseModel instance) {
   writeNotNull('id', instance.id);
   writeNotNull('createTime', instance.createTime?.toIso8601String());
   writeNotNull('updateTime', instance.updateTime?.toIso8601String());
+  writeNotNull('isBlocked', instance.isBlocked);
   return val;
 }
