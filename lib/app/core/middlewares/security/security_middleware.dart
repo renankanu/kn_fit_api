@@ -14,6 +14,7 @@ class SecurityMiddleware extends BaseMiddleware {
     SecuritySkipUrl(url: '/student/login', method: 'POST'),
     SecuritySkipUrl(url: '/personal-training/login', method: 'POST'),
     SecuritySkipUrl(url: '/health', method: 'GET'),
+    SecuritySkipUrl(url: '/documentation/', method: 'GET'),
   ];
 
   SecurityMiddleware(this.log);

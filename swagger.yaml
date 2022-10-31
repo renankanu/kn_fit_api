@@ -24,12 +24,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/User'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/User'
+          
       responses:
         default:
           description: successful operation
@@ -37,9 +32,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/User'
+            
 
 components:
   schemas:
@@ -66,5 +59,4 @@ components:
           type: integer
           format: int32
           description: User Status
-      xml:
-        name: User
+      
