@@ -9,6 +9,7 @@ class CustomServer {
     required int port,
   }) async {
     final server = await io.serve(handler, address, port);
+    const path = 'specs/swagger.yaml';
     print('Serving at http://${server.address.host}:${server.port}');
   }
 }
