@@ -8,6 +8,6 @@ part of 'documentation_controller.dart';
 
 Router _$DocumentationControllerRouter(DocumentationController service) {
   final router = Router();
-  router.add('POST', r'/**', service.swaggerDoc);
+  router.add('POST', r'/', service.swaggerDoc);
   return router;
 }

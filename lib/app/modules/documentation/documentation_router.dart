@@ -4,11 +4,11 @@ import 'package:shelf_router/shelf_router.dart';
 import '../../core/routers/i_router.dart';
 import 'controller/documentation_controller.dart';
 
-class StudentRouter implements IRouter {
+class DocumentationRouter implements IRouter {
   @override
   void configure(Router router) {
-    final studentController = GetIt.I.get<DocumentationController>();
+    final documentationController = GetIt.I.get<DocumentationController>();
 
-    router.mount('/documentation', studentController.router);
+    router.mount('/documentation', documentationController.router);
   }
 }

@@ -1,4 +1,4 @@
-.PHONY: help f_pub_runner
+.PHONY: help pub_runner
 
 help: ## This help dialog.
 	@IFS=$$'\n' ; \
@@ -11,7 +11,7 @@ help: ## This help dialog.
 		printf "%-30s %s\n" $$help_command $$help_info ; \
 	done
 
-f_pub_runner: ## This is flutter pub run build_runner step.
+pub_runner: ## This is flutter pub run build_runner step.
 	@echo "⊢ Running flutter pub run build_runner ⊣"
 	@flutter pub run build_runner build --delete-conflicting-outputs
 	@echo "Done ✅"
