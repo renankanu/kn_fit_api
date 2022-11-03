@@ -14,13 +14,15 @@ class SecurityMiddleware extends BaseMiddleware {
     SecuritySkipUrl(url: '/student/login', method: 'POST'),
     SecuritySkipUrl(url: '/personal-training/login', method: 'POST'),
     SecuritySkipUrl(url: '/health', method: 'GET'),
-    SecuritySkipUrl(url: '/documentation', method: 'GET'),
   ];
 
   SecurityMiddleware(this.log);
 
   @override
   Future<Response> execute(Request request) async {
+    if (request.url.path.startsWith('documentation')) {
+      return innerHandler(request);
+    }
     try {
       final isSkipUrl = skipUrl.contains(
         SecuritySkipUrl(url: '/${request.url.path}', method: request.method),

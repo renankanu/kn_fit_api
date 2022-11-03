@@ -4,6 +4,6 @@
 
 Router _$DocumentationControllerRouter(DocumentationController service) {
   final router = Router();
-  router.add('POST', r'/', service.swaggerDoc);
+  router.add('GET', r'/<ignored|.*>', service.swaggerDoc);
   return router;
 }
