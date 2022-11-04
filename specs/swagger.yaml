@@ -1,29 +1,29 @@
 openapi: 3.0.0
 info:
-  description: "API system"
+  description: "API KN Fit"
   version: "1.0.0"
-  title: "Swagger Test"
+  title: "Swagger KN Fit"
 servers:
-  - url: http://localhost:4466
+  - url: http://localhost:8080
     description: Remote server
 tags:
-- name: "user"
-  description: "Access to User"
+- name: "student"
+  description: "Access to Student"
 
 paths:
-  /user:
+  /student:
     post:
       tags:
-        - user
-      summary: Create user
-      description: This can only be done by the logged in user.
-      operationId: createUser
+        - student
+      summary: Create student
+      description: This can only be done by the logged in student.
+      operationId: createStudent
       requestBody:
-        description: Created user object
+        description: Created student object
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/Student'
           
       responses:
         default:
@@ -31,18 +31,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/Student'
             
 
 components:
   schemas:
-    User:
+    Student:
       type: object
       properties:
         id:
           type: integer
           format: int64
-        username:
+        studentName:
           type: string
         firstName:
           type: string
@@ -55,8 +55,8 @@ components:
           format: password
         phone:
           type: string
-        userStatus:
+        studentStatus:
           type: integer
           format: int32
-          description: User Status
+          description: Student Status
       
