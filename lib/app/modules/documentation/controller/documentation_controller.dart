@@ -9,7 +9,7 @@ part 'documentation_controller.g.dart';
 class DocumentationController {
   DocumentationController();
 
-  @Route.get('/')
+  @Route.all('/')
   Future<Response> swaggerDoc(Request request) async {
     const path = 'specs/swagger.yaml';
     final handlerSwagger = SwaggerUI(

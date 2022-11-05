@@ -8,6 +8,6 @@ part of 'documentation_controller.dart';
 
 Router _$DocumentationControllerRouter(DocumentationController service) {
   final router = Router();
-  router.add('GET', r'/', service.swaggerDoc);
+  router.all(r'/', service.swaggerDoc);
   return router;
 }
