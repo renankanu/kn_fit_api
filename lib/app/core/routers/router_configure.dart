@@ -1,6 +1,5 @@
 import 'package:shelf_router/shelf_router.dart';
 
-import '../../modules/documentation/documentation_router.dart';
 import '../../modules/exercise/exercise_router.dart';
 import '../../modules/media/media_router.dart';
 import '../../modules/muscle_group/muscle_group_router.dart';
@@ -16,7 +15,6 @@ class RouterConfigure {
     MuscleGroupRouter(),
     StudentRouter(),
     PersonalTrainingRouter(),
-    DocumentationRouter(),
   ];
 
   RouterConfigure(this._router);
