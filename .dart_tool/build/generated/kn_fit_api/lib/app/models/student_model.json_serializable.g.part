@@ -35,7 +35,7 @@ Map<String, dynamic> _$StudentModelToJson(StudentModel instance) {
   val['fullName'] = instance.fullName;
   val['email'] = instance.email;
   val['calledBy'] = instance.calledBy;
-  val['gender'] = _$GenderEnumMap[instance.gender];
+  val['gender'] = _$GenderEnumMap[instance.gender]!;
   writeNotNull('password', BaseModel.toNull(instance.password));
   val['personalTrainingId'] = instance.personalTrainingId;
   return val;

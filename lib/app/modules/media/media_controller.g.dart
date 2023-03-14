@@ -8,7 +8,15 @@ part of 'media_controller.dart';
 
 Router _$MediaControllerRouter(MediaController service) {
   final router = Router();
-  router.add('POST', r'/image/upload', service.uploadAvatar);
-  router.add('GET', r'/image/<image>', service.getAvatar);
+  router.add(
+    'POST',
+    r'/image/upload',
+    service.uploadAvatar,
+  );
+  router.add(
+    'GET',
+    r'/image/<image>',
+    service.getAvatar,
+  );
   return router;
 }
